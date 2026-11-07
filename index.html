@@ -1,271 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Design your Egypt journey with Vayana. Private tours, stays, transfers and unforgettable experiences in Luxor.">
-<title>Vayana — Travel Your Way</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build a personal Luxor journey with Vayana. Explore private and shared tours, historic temples and royal tombs.">
+<title>Vayana — Luxor, Your Way</title>
 <style>
-:root{
-  --ink:#111318; --muted:#6e737d; --line:#e7e8eb; --paper:#fff;
-  --red:#e63946; --blue:#8ecdf5; --green:#8ccf9b; --pink:#f2a9c2;
-  --navy:#14243a; --soft:#f5f7fa; --radius:24px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;letter-spacing:-.025em}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6.2%;position:sticky;top:0;background:rgba(255,255,255,.86);backdrop-filter:blur(18px);z-index:10;border-bottom:1px solid rgba(0,0,0,.05)}
-.brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:700;letter-spacing:-.06em}
-.mark{width:35px;height:35px;border-radius:12px;background:conic-gradient(from 210deg,var(--red),var(--pink),var(--blue),var(--green),var(--red));position:relative}
-.mark:after{content:"";position:absolute;inset:7px;background:white;border-radius:8px;transform:rotate(45deg)}
-.brand small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:-2px}
-.navlinks{display:flex;gap:34px;align-items:center;font-size:13px;color:#414650}
-.navlinks a:hover{color:#000}
-.nav-cta,.btn{border:0;border-radius:999px;padding:13px 21px;background:#111;color:white;font-weight:600;font-size:13px;cursor:pointer;transition:.2s}
-.nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0002}
-.menu{display:none;background:none;border:0;font-size:24px}
-.hero{min-height:660px;padding:92px 7% 80px;position:relative;overflow:hidden;background:linear-gradient(115deg,#f7f9fc 0%,#f4f7fa 45%,#e7f2f8 100%);display:flex;align-items:center}
-.hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;right:-80px;top:-110px;background:radial-gradient(circle at 35% 35%,#fff 0 10%,#d9eaf2 38%,#a9c6d4 62%,#8fa9b4 100%);opacity:.9}
-.hero:after{content:"";position:absolute;width:500px;height:210px;right:2%;bottom:0;background:linear-gradient(160deg,transparent 30%,#d5e0df 30% 40%,#9aafa9 41% 100%);clip-path:polygon(0 75%,25% 45%,45% 66%,70% 10%,100% 55%,100% 100%,0 100%);opacity:.45}
-.hero-copy{max-width:610px;position:relative;z-index:2}
-.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#65717d;font-weight:700;margin-bottom:22px}
-h1{font-size:clamp(52px,7vw,88px);line-height:.98;letter-spacing:-.075em;margin:0 0 24px;font-weight:700}
-.hero p{font-size:19px;line-height:1.55;color:#5e6670;max-width:490px;margin:0 0 32px}
-.hero-actions{display:flex;gap:13px;align-items:center}
-.btn.secondary{background:#fff;color:#17191e;border:1px solid #dfe3e7}
-.hero-note{margin-top:34px;font-size:12px;color:#7c838b}
-.hero-note span{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:8px}
-.float-tag{position:absolute;z-index:3;right:12%;top:22%;padding:13px 17px;border:1px solid #ffffffaa;background:#ffffffb8;backdrop-filter:blur(12px);border-radius:18px;font-size:12px;box-shadow:0 12px 35px #32485b18}
-.float-tag b{display:block;font-size:16px;margin-bottom:3px}
-.section{padding:95px 7%}
-.section-head{text-align:center;max-width:700px;margin:0 auto 44px}
-.section-head .eyebrow{margin-bottom:14px}
-h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin:0 0 15px}
-.section-head p{color:var(--muted);font-size:16px;line-height:1.6;margin:0}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1160px;margin:auto}
-.feature{border:1px solid var(--line);border-radius:22px;padding:27px;background:#fff;min-height:190px}
-.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:20px;margin-bottom:23px}
-.icon.red{background:#fff0f1;color:var(--red)}.icon.blue{background:#edf7ff;color:#3189c5}.icon.green{background:#eff9f0;color:#3e9c58}
-.feature h3{font-size:18px;margin:0 0 8px;letter-spacing:-.04em}.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
-.customize{background:#f6f7f9;padding:100px 5%}
-.form-shell{max-width:1080px;margin:auto;background:white;border:1px solid #e9eaed;border-radius:30px;padding:clamp(22px,4vw,48px);box-shadow:0 18px 60px #1b273510}
-.form-title{text-align:center;margin-bottom:35px}
-.form-title h2{font-size:42px}
-.form-title p{color:var(--muted);margin:0}
-.step{margin:32px 0}
-.step-label{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.step-number{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#111;color:#fff;font-size:11px}
-.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.choice{border:1px solid #dfe2e7;border-radius:17px;padding:18px 16px;text-align:left;cursor:pointer;background:#fff;min-height:91px;transition:.18s;position:relative}
-.choice:hover{border-color:#a7b1bd;transform:translateY(-1px)}
-.choice.active{border:1.5px solid #111;background:#fafbfc;box-shadow:0 0 0 3px #11110a}
-.choice strong{display:block;font-size:14px;margin-bottom:5px}
-.choice small{color:var(--muted);font-size:12px;line-height:1.4}
-.choice .emoji{font-size:20px;display:block;margin-bottom:10px}
-.choice.active:after{content:"✓";position:absolute;right:12px;top:11px;background:#111;color:white;width:20px;height:20px;border-radius:50%;font-size:12px;display:grid;place-items:center}
-.budget .choice:nth-child(1){border-top:3px solid var(--red)}.budget .choice:nth-child(2){border-top:3px solid var(--blue)}.budget .choice:nth-child(3){border-top:3px solid var(--green)}
-.field-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.field label{display:block;font-size:12px;font-weight:650;margin:0 0 8px;color:#444b55}
-.field input,.field select,.field textarea{width:100%;padding:14px 15px;border:1px solid #dfe2e7;border-radius:13px;background:#fff;outline:none;color:#17191e}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:#777;box-shadow:0 0 0 3px #11110c}
-.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.extra{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e2e5e9;border-radius:16px;padding:15px}
-.extra b{display:block;font-size:13px}.extra small{color:var(--muted);font-size:11px}
-.switch{appearance:none;width:42px;height:25px;border-radius:99px;background:#d6d9de;position:relative;cursor:pointer;flex:none;transition:.2s}
-.switch:checked{background:#111}
-.switch:before{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;box-shadow:0 1px 3px #0003}
-.switch:checked:before{left:20px}
-.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}
-.submit-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
-.submit-row p{font-size:12px;color:var(--muted);margin:0;max-width:450px;line-height:1.5}
-.submit{background:#111;color:white;border:0;border-radius:999px;padding:16px 28px;font-weight:650;cursor:pointer;white-space:nowrap}
-.submit:hover{background:#30343b}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-.split-art{min-height:390px;border-radius:28px;background:linear-gradient(145deg,#d9eaf0,#f7e7d8 55%,#c5d4c6);position:relative;overflow:hidden}
-.split-art:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:#fff8;top:35px;left:50%;transform:translateX(-50%)}
-.split-art:after{content:"LUXOR";position:absolute;bottom:24px;left:28px;color:#fff;font-weight:700;font-size:44px;letter-spacing:.18em;text-shadow:0 2px 15px #0004}
-.split-copy p{color:var(--muted);line-height:1.7;font-size:16px}
-.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.pill{padding:9px 13px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:#4d5560}
-.footer{padding:42px 7%;background:#11151b;color:white;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.footer p{color:#aeb4bd;font-size:12px;margin:6px 0 0}.footer-links{display:flex;gap:22px;color:#c9cdd3;font-size:12px}
-.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#15191f;color:white;padding:14px 20px;border-radius:14px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90%;text-align:center}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.hidden{display:none!important}
-@media(max-width:800px){
- .nav{padding:0 5%;height:66px}.navlinks{display:none}.menu{display:block}
- .hero{min-height:610px;padding:75px 6% 65px;align-items:flex-start}.hero:before{width:430px;height:430px;right:-170px;top:220px}.float-tag{right:6%;top:auto;bottom:55px}
- .section{padding:72px 6%}.features{grid-template-columns:1fr}.feature{min-height:0}
- .customize{padding:70px 4%}.choice-grid{grid-template-columns:1fr}.choice{min-height:75px}
- .extras{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}
- .submit-row{align-items:stretch;flex-direction:column}.submit{width:100%}
- .split{grid-template-columns:1fr}.split-art{min-height:280px}
- .footer{flex-direction:column;align-items:flex-start}.footer-links{flex-wrap:wrap}
-}
+:root{--ink:#111318;--muted:#6e737d;--line:#e7e8eb;--paper:#fff;--soft:#f5f6f7;--sand:#e9dfd0;--gold:#b38b54;--radius:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;letter-spacing:-.02em}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+header{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid #0000000d;z-index:20}
+.brand{font-size:27px;font-weight:750;letter-spacing:-.07em;display:flex;align-items:center;gap:11px}.brandmark{width:27px;height:27px;background:#111;border-radius:8px 8px 8px 2px;display:inline-block;position:relative;transform:rotate(-8deg)}.brandmark:after{content:"";position:absolute;width:13px;height:6px;background:#111;right:-3px;top:-5px;border-radius:100%}
+.brand small{display:block;font-size:8px;letter-spacing:.2em;color:#777;font-weight:600;margin-top:-3px}.navlinks{display:flex;gap:27px;font-size:13px;color:#4d5159}.navcta,.btn{background:#111;color:white;border:0;border-radius:99px;padding:13px 21px;font-weight:650;font-size:13px;cursor:pointer}
+.hero{min-height:590px;padding:90px 7%;display:flex;align-items:center;position:relative;overflow:hidden;background:linear-gradient(110deg,#f8f8f6,#e9e1d4)}.hero:after{content:"";position:absolute;width:590px;height:590px;border-radius:50%;right:-40px;top:-70px;background:radial-gradient(circle at 40% 40%,#fff9,#c8b59b 65%,#88775f);opacity:.72}
+.hero-copy{max-width:650px;position:relative;z-index:1}.eyebrow{text-transform:uppercase;letter-spacing:.17em;font-size:10px;font-weight:750;color:#8a6a43;margin-bottom:16px}.hero h1{font-size:clamp(54px,8vw,100px);line-height:.91;letter-spacing:-.085em;margin:0 0 23px}.hero p{font-size:18px;line-height:1.65;color:#555b63;max-width:510px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn.light{background:white;color:#111;border:1px solid #ddd}.hero-note{font-size:11px;color:#656565;margin-top:35px;letter-spacing:.04em}
+section{padding:82px 7%}.section-head{text-align:center;max-width:760px;margin:0 auto 40px}.section-head h2{font-size:clamp(34px,5vw,58px);letter-spacing:-.07em;line-height:1.02;margin:0 0 15px}.section-head p{color:var(--muted);line-height:1.7;margin:0}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin:auto}.intro-card{border:1px solid var(--line);border-radius:19px;padding:25px}.intro-card b{display:block;margin-bottom:9px}.intro-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+#packages{background:#f6f5f2}.package-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1180px;margin:auto}.pkg{background:white;border:1px solid #e5e1da;border-radius:22px;overflow:hidden;display:flex;flex-direction:column}.pkg.selected{outline:2px solid #111;box-shadow:0 12px 35px #00000012}.pkg-top{padding:24px 25px 12px}.pkg-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#9b784e;font-weight:750}.pkg h3{font-size:25px;letter-spacing:-.05em;margin:8px 0}.pkg-desc{font-size:13px;color:var(--muted);line-height:1.6;margin:0}.pkg-body{padding:0 25px 23px;display:flex;flex-direction:column;gap:14px;flex:1}.pkg-points{font-size:12px;color:#555;line-height:1.65;padding-left:18px;margin:0}.pkg-foot{padding:18px 25px 24px;border-top:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:12px}.pkg-foot small{color:var(--muted);font-size:11px;line-height:1.4}.choose{border:0;background:#111;color:white;padding:12px 18px;border-radius:99px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.package-note{max-width:1180px;margin:20px auto 0;padding:17px 20px;border-radius:14px;background:#eee9e1;color:#5c5143;font-size:12px;line-height:1.6}
+#customize{background:white}.builder{max-width:1050px;margin:auto;border:1px solid var(--line);border-radius:26px;padding:clamp(20px,4vw,42px);box-shadow:0 18px 55px #00000008}.builder h3{font-size:20px;margin:0 0 16px;letter-spacing:-.04em}.field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:7px;color:#41464f}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe1e5;border-radius:12px;padding:13px 14px;background:#fff;outline:none}.field textarea{min-height:110px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#777;box-shadow:0 0 0 3px #1111110b}
+.divider{height:1px;background:#eceef0;margin:27px 0}.checkrow{display:flex;align-items:flex-start;gap:10px;border:1px solid #e5e6e8;border-radius:13px;padding:12px;font-size:13px}.checkrow input{margin-top:2px;accent-color:#111}.checkrow small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+#selectedPackage{padding:15px;border-radius:15px;background:#f6f5f2;font-size:13px;color:#45484d;line-height:1.65;display:none}.place-editor{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:13px}.place-option{display:flex;align-items:flex-start;gap:9px;border:1px solid #e6e7e9;border-radius:12px;padding:11px;font-size:12px}.place-option input{margin-top:2px;accent-color:#111}.replace-row{margin-top:12px;padding:13px;border:1px dashed #cfc8bd;border-radius:13px}.replace-row label{font-size:12px;font-weight:700;display:block;margin-bottom:7px}.replace-row select{width:100%;padding:11px;border:1px solid #ddd;border-radius:10px;background:white}
+.policy{font-size:11px;color:#69645d;line-height:1.6;margin-top:12px}.summary{padding:16px;background:#f7f7f7;border-radius:13px;font-size:13px;line-height:1.6;margin-top:15px}.submitrow{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:22px;flex-wrap:wrap}.submitrow p{font-size:11px;color:var(--muted);line-height:1.5;max-width:560px}.submit{border:0;border-radius:99px;background:#111;color:white;padding:15px 23px;font-weight:700;cursor:pointer}
+#places{background:#f7f6f3}.place-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1180px;margin:auto}.place-card{background:white;border-radius:20px;overflow:hidden;border:1px solid #e9e5de}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:3px;height:230px;background:#ddd}.gallery img{width:100%;height:100%;object-fit:cover;min-width:0}.place-info{padding:22px}.place-info h3{font-size:22px;margin:0 0 7px;letter-spacing:-.04em}.place-info p{font-size:12px;line-height:1.65;color:#62666d;margin:0 0 12px}.place-info details{border-top:1px solid #eee;padding-top:12px;font-size:12px}.place-info summary{font-weight:750;cursor:pointer}.place-info ul{padding-left:18px;line-height:1.7;color:#555}
+.balloon{background:#16191e;color:white;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.balloon h2{font-size:clamp(36px,5vw,60px);line-height:1;letter-spacing:-.07em;margin:0 0 15px}.balloon p{color:#c2c5ca;line-height:1.7;font-size:14px}.balloon-art{height:300px;border-radius:22px;background:linear-gradient(180deg,#a9c6d7,#e9d7b5 70%,#9a8667);display:grid;place-items:center;font-size:110px}
+footer{background:#101216;color:white;padding:42px 7%;display:flex;justify-content:space-between;gap:20px;align-items:center}footer p{color:#aeb2b9;font-size:11px}.footerlinks{display:flex;gap:20px;font-size:11px;color:#c7c9cd;flex-wrap:wrap}
+@media(max-width:800px){.navlinks{display:none}.hero{min-height:570px;padding:70px 6%}.hero:after{right:-240px;top:230px;width:450px;height:450px}.intro-grid,.package-grid,.place-grid{grid-template-columns:1fr}.field-grid,.place-editor,.balloon{grid-template-columns:1fr}.gallery{height:210px}section{padding:65px 5%}.pkg-foot{align-items:flex-start;flex-direction:column}.choose{width:100%}footer{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
-<header class="nav">
-  <a class="brand" href="#home" aria-label="Vayana home"><span class="mark"></span><span>Vayana<small>TRAVEL YOUR WAY</small></span></a>
-  <nav class="navlinks"><a href="#experiences">Experiences</a><a href="#customize">Customize</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-  <a class="nav-cta" href="#customize">Create your journey ↗</a>
-  <button class="menu" onclick="document.getElementById('customize').scrollIntoView({behavior:'smooth'})" aria-label="Open menu">☰</button>
-</header>
-
+<header><a class="brand" href="#home"><i class="brandmark"></i><span>Vayana<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a href="#packages">Packages</a><a href="#places">Explore Luxor</a><a href="#customize">Create your journey</a><a href="#contact">Contact</a></nav><a class="navcta" href="#customize">Plan your visit ↗</a></header>
 <main id="home">
-<section class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow">A more personal way to discover Egypt</div>
-    <h1>Egypt.<br>On your terms.</h1>
-    <p>From the first sunrise in Luxor to the last moment of your journey, make every detail feel like yours.</p>
-    <div class="hero-actions"><a class="btn" href="#customize">Design your journey&nbsp; ↗</a><a class="btn secondary" href="#experiences">Explore experiences</a></div>
-    <div class="hero-note"><span></span>Thoughtfully planned. Personally experienced.</div>
-  </div>
-  <div class="float-tag"><b>One destination. Endless ways.</b>Made around you, not a fixed package.</div>
+<section class="hero"><div class="hero-copy"><div class="eyebrow">Private journeys • Shared experiences • Luxor, Egypt</div><h1>Discover Luxor.<br>Your way.</h1><p>Choose the places that move you, shape your own itinerary, and let Vayana take care of the details — from expert guiding to a journey at your pace.</p><div class="hero-actions"><a class="btn" href="#packages">Explore packages ↗</a><a class="btn light" href="#customize">Create your journey</a></div><div class="hero-note">Thoughtfully planned. Personally experienced.</div></div></section>
+<section><div class="section-head"><div class="eyebrow">The Vayana approach</div><h2>Not a fixed tour.<br>A journey that feels yours.</h2><p>Start with one of our curated packages or build a custom itinerary. You can tell us exactly what to include, remove or replace.</p></div><div class="intro-grid"><article class="intro-card"><b>Choose your pace</b><p>Private experiences, shared visits, or a full East & West Bank journey in one or two days.</p></article><article class="intro-card"><b>Make it personal</b><p>Pick your hotel category, guide language, preferred stops and any special requests.</p></article><article class="intro-card"><b>Clear quotation</b><p>Send a request — our team checks availability and confirms the final itinerary and price before booking.</p></article></div></section>
+<section id="packages"><div class="section-head"><div class="eyebrow">Curated experiences</div><h2>Explore our Luxor packages.</h2><p>Choose a starting point. Every package can be adjusted according to the same-bank replacement rules.</p></div>
+<div class="package-grid">
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">West Bank · Private</div><h3>Royal West Bank</h3><p class="pkg-desc">A day among royal tombs, monumental architecture and one of the best-preserved mortuary temples.</p></div><div class="pkg-body"><ul class="pkg-points"><li>Valley of the Kings</li><li>Temple of Hatshepsut</li><li>Medinet Habu</li></ul><div class="pkg-foot"><small>Suggested duration: 5–7 hours<br>Private vehicle and guide on request</small><button class="choose" data-package="royal">Choose package</button></div></div></article>
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">West Bank · Private</div><h3>Queens & Nobles</h3><p class="pkg-desc">Discover royal family tombs and the richly decorated burial chapels of Theban officials.</p></div><div class="pkg-body"><ul class="pkg-points"><li>Valley of the Queens</li><li>Valley of the Nobles</li><li>Medinet Habu</li></ul><div class="pkg-foot"><small>Suggested duration: 5–7 hours<br>Access to special tombs subject to ticketing</small><button class="choose" data-package="queens">Choose package</button></div></div></article>
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">West Bank · Private</div><h3>Artisans & Ramesses II</h3><p class="pkg-desc">A quieter route into the lives of the craftsmen who decorated the royal tombs, followed by the Ramesseum.</p></div><div class="pkg-body"><ul class="pkg-points"><li>Deir el-Medina</li><li>The Ramesseum</li><li>Medinet Habu</li></ul><div class="pkg-foot"><small>Suggested duration: 4–6 hours<br>Great for history and archaeology lovers</small><button class="choose" data-package="artisans">Choose package</button></div></div></article>
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">East Bank · Private</div><h3>Temples & Museum</h3><p class="pkg-desc">Explore Luxor’s great religious centre and finish with masterpieces of ancient Egyptian art.</p></div><div class="pkg-body"><ul class="pkg-points"><li>Karnak Temple</li><li>Luxor Temple</li><li>Luxor Museum</li></ul><div class="pkg-foot"><small>Suggested duration: 4–6 hours<br>Flexible order and stop duration</small><button class="choose" data-package="east">Choose package</button></div></div></article>
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">East + West Bank · Shared</div><h3>Luxor Highlights — Shared</h3><p class="pkg-desc">A shared visit combining selected highlights from both banks. This package is for sightseeing visits only.</p></div><div class="pkg-body"><ul class="pkg-points"><li>West Bank highlights</li><li>East Bank highlights</li><li>Shared group experience</li></ul><div class="pkg-foot"><small>Stops and group schedule confirmed before booking<br>No hotel package included</small><button class="choose" data-package="shared">Choose package</button></div></div></article>
+<article class="pkg"><div class="pkg-top"><div class="pkg-kicker">East + West Bank · Private</div><h3>Complete Luxor — Private</h3><p class="pkg-desc">A comprehensive private journey across both banks, with the choice to experience it in one full day or split it over two days.</p></div><div class="pkg-body"><ul class="pkg-points"><li>Valley of the Kings</li><li>Temple of Hatshepsut</li><li>Medinet Habu</li><li>Karnak Temple and Luxor Temple</li></ul><div class="pkg-foot"><small>Choose one day or two days<br>Luxor Museum can be added on request</small><button class="choose" data-package="complete">Choose package</button></div></div></article>
+</div><div class="package-note"><b>How changes affect your quote:</b> Removing a stop without replacing it can reduce the quoted price. Replacing a stop with another eligible attraction on the same bank keeps the package price unchanged. West Bank stops can only be replaced by West Bank options; East Bank stops by East Bank options. Any final price is confirmed in your written quotation.</div>
 </section>
-
-<section class="section" id="experiences">
-  <div class="section-head"><div class="eyebrow">The Vayana approach</div><h2>Travel should feel like you.</h2><p>Choose what matters. Leave the details to us. A thoughtful journey, shaped around your pace, interests and budget.</p></div>
-  <div class="features">
-    <article class="feature"><div class="icon red">✦</div><h3>Your journey, your choice</h3><p>Choose the experiences, comfort level and pace that feel right for you.</p></article>
-    <article class="feature"><div class="icon blue">⌁</div><h3>Local knowledge</h3><p>Discover the stories, places and details that make Egypt unforgettable.</p></article>
-    <article class="feature"><div class="icon green">♡</div><h3>Personal support</h3><p>One point of contact to help coordinate the details before and during your trip.</p></article>
-  </div>
-</section>
-
-<section class="customize" id="customize">
-<div class="form-shell">
-  <div class="form-title"><div class="eyebrow">Start with what you love</div><h2>Customize your journey.</h2><p>Your adventure. Your choices. Your Vayana.</p></div>
-  <form id="journeyForm">
-    <div class="step">
-      <div class="step-label"><span class="step-number">1</span> What are you looking for?</div>
-      <div class="choice-grid" data-group="package">
-        <button type="button" class="choice active" data-value="Stay + Tours + Flights"><span class="emoji">✈</span><strong>Stay + Tours + Flights</strong><small>Accommodation, tours and flights</small></button>
-        <button type="button" class="choice" data-value="Stay + Tours"><span class="emoji">⌂</span><strong>Stay + Tours</strong><small>Accommodation and experiences</small></button>
-        <button type="button" class="choice" data-value="Tours Only"><span class="emoji">◈</span><strong>Tours Only</strong><small>Excursions and day tours</small></button>
-      </div>
-      <p class="note" id="pickupNote">Complimentary pickup in Luxor on arrival is included with stay packages, subject to confirmation.</p>
-    </div>
-    <div class="step">
-      <div class="step-label"><span class="step-number">2</span> Choose your comfort level</div>
-      <div class="choice-grid budget" data-group="budget">
-        <button type="button" class="choice" data-value="Prestige / Luxury"><span class="emoji">✧</span><strong>Prestige / Luxury</strong><small>Premium stays and experiences</small></button>
-        <button type="button" class="choice active" data-value="Medium"><span class="emoji">☆</span><strong>Medium</strong><small>Comfort and great value</small></button>
-        <button type="button" class="choice" data-value="Standard"><span class="emoji">❋</span><strong>Standard</strong><small>Simple, comfortable and affordable</small></button>
-      </div>
-      <div class="field" style="max-width:430px;margin-top:16px"><label for="budgetAmount">Or enter your total budget (optional)</label><input id="budgetAmount" type="number" min="0" placeholder="e.g. 800 (USD)"></div>
-    </div>
-    <div class="step">
-      <div class="step-label"><span class="step-number">3</span> Choose your Luxor program</div>
-      <div class="choice-grid" data-group="program">
-        <button type="button" class="choice active" data-value="East Bank Only"><span class="emoji">▤</span><strong>East Bank</strong><small>Karnak, Luxor Temple and more</small></button>
-        <button type="button" class="choice" data-value="West Bank Only"><span class="emoji">▥</span><strong>West Bank</strong><small>Valley of the Kings and more</small></button>
-        <button type="button" class="choice" data-value="East & West Bank"><span class="emoji">⌑</span><strong>East & West</strong><small>A fuller Luxor experience</small></button>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-label"><span class="step-number">4</span> Make it your experience</div>
-      <div class="extras">
-        <label class="extra"><span><b>English-speaking guide</b><small>Professional local guide</small></span><input class="switch" type="checkbox" id="guide"></label>
-        <label class="extra"><span><b>Shared tour</b><small>Join a small group</small></span><input class="switch" type="checkbox" id="shared"></label>
-        <label class="extra"><span><b>Hot air balloon</b><small>Sunrise over Luxor</small></span><input class="switch" type="checkbox" id="balloon"></label>
-      </div>
-      <p class="note">Guide, shared-tour and balloon availability and prices will be confirmed in your personal quote.</p>
-    </div>
-    <div class="step">
-      <div class="step-label"><span class="step-number">5</span> A few details</div>
-      <div class="field-row">
-        <div class="field"><label for="name">Your name</label><input id="name" required placeholder="Full name"></div>
-        <div class="field"><label for="email">Email address</label><input id="email" type="email" required placeholder="you@example.com"></div>
-        <div class="field"><label for="whatsapp">WhatsApp number</label><input id="whatsapp" placeholder="Include country code"></div>
-        <div class="field"><label for="date">Arrival date</label><input id="date" type="date"></div>
-        <div class="field"><label for="guests">Number of guests</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
-        <div class="field"><label for="notes">Anything else? (optional)</label><input id="notes" placeholder="Interests, hotel preferences..."></div>
-      </div>
-    </div>
-    <div class="submit-row">
-      <p>Submitting this form is a quote request, not a confirmed booking. Our team will review your preferences and contact you with availability and a clear price.</p>
-      <button class="submit" type="submit">Request my journey&nbsp; ↗</button>
-    </div>
-  </form>
-</div>
-</section>
-
-<section class="section" id="about">
-  <div class="split">
-    <div class="split-art" aria-label="Abstract Luxor landscape illustration"></div>
-    <div class="split-copy"><div class="eyebrow">A different kind of travel</div><h2>Not a fixed package. A journey that fits.</h2><p>Vayana brings together local experiences and thoughtful planning, giving you the freedom to shape your time in Egypt. Tell us what you have in mind and we’ll help make it happen.</p><div class="pills"><span class="pill">Luxor, Egypt</span><span class="pill">Private experiences</span><span class="pill">Made around you</span></div></div>
-  </div>
-</section>
+<section id="customize"><div class="section-head"><div class="eyebrow">Build it your way</div><h2>Create your journey.</h2><p>Choose a package or start from scratch. Tell us every detail — including things that are not listed here.</p></div>
+<div class="builder"><form id="journeyForm">
+<h3>1. Your trip style</h3><div class="field-grid">
+<div class="field"><label for="tripType">Journey type</label><select id="tripType"><option value="Custom itinerary">Custom itinerary</option><option value="Private tour package">Private tour package</option><option value="Shared sightseeing package">Shared sightseeing package</option><option value="Hotel + tours">Hotel + tours</option><option value="Hotel + tours + flights">Hotel + tours + flights</option></select></div>
+<div class="field"><label for="hotelStars">Hotel category</label><select id="hotelStars"><option value="No hotel needed">No hotel needed</option><option>3-star</option><option>4-star</option><option>5-star</option><option value="Luxury / boutique — please recommend">Luxury / boutique — please recommend</option></select></div>
+<div class="field"><label for="guide">Guide language</label><select id="guide"><option>No guide requested</option><option>English-speaking guide</option><option>French-speaking guide</option><option>English or French — whichever is available</option></select></div>
+<div class="field"><label for="duration">Tour duration</label><select id="duration"><option>Flexible / please advise</option><option>One day</option><option>Two days</option><option>More than two days</option></select></div></div>
+<div class="divider"></div><h3>2. Choose a package to customize</h3>
+<div class="field"><label for="packageSelect">Starting package</label><select id="packageSelect"><option value="">Start from scratch — no package</option><option value="royal">Royal West Bank — Private</option><option value="queens">Queens & Nobles — Private</option><option value="artisans">Artisans & Ramesses II — Private</option><option value="east">Temples & Museum — East Bank Private</option><option value="shared">Luxor Highlights — Shared East + West</option><option value="complete">Complete Luxor — Private East + West</option></select></div>
+<div id="selectedPackage"><b id="packageTitle"></b><div id="placeEditor" class="place-editor"></div><div id="replaceEditor"></div><div class="policy">You may remove any stop. If you remove a stop and do not replace it, the quotation may be reduced. If you replace it with an attraction on the same bank, the package price remains unchanged. Cross-bank replacements are not allowed in this package editor.</div></div>
+<div class="divider"></div><h3>3. Extra experience</h3><div class="checkrow"><input type="checkbox" id="balloon"><div><b>Hot Air Balloon at sunrise</b><small>Add a sunrise balloon experience over Luxor. Availability, flight operator and price will be confirmed separately.</small></div></div>
+<div class="divider"></div><h3>4. Tell us anything else</h3><div class="field"><label for="specialNotes">Your requests, preferred places, replacements, interests, accessibility needs, restaurant requests or any other notes</label><textarea id="specialNotes" placeholder="Write anything you want us to know. You can describe your ideal day in your own words..."></textarea></div>
+<div class="divider"></div><h3>5. Your details</h3><div class="field-grid">
+<div class="field"><label for="name">Full name *</label><input id="name" required placeholder="Your name"></div>
+<div class="field"><label for="email">Email *</label><input id="email" type="email" required placeholder="you@example.com"></div>
+<div class="field"><label for="whatsapp">WhatsApp</label><input id="whatsapp" placeholder="Include country code"></div>
+<div class="field"><label for="arrival">Arrival / tour date</label><input id="arrival" type="date"></div>
+<div class="field"><label for="guests">Number of guests</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+<div class="field"><label for="budget">Approximate budget (optional)</label><input id="budget" placeholder="Your preferred budget and currency"></div></div>
+<div class="summary" id="summary">Your selected itinerary will appear here.</div>
+<div class="submitrow"><p>This is a request for a quotation, not a confirmed booking. We will review your preferences, availability and any ticket restrictions, then send you the proposed itinerary and final price.</p><button class="submit" type="submit">Request my journey ↗</button></div>
+</form></div></section>
+<section id="places"><div class="section-head"><div class="eyebrow">A little context before you go</div><h2>Explore the places.</h2><p>Discover what makes each monument special and the tombs worth asking your guide about. Access to individual tombs can change and may require separate tickets.</p></div>
+<div class="place-grid">
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Valley_of_the_Kings_%289794988313%29.jpg/1280px-Valley_of_the_Kings_%289794988313%29.jpg" alt="Valley of the Kings landscape"><img loading="lazy" src="https://www.dynamics-travel.com/storage/valley-of-the-kings-1771145047g39gc.jpg" alt="Royal tomb entrance in Valley of the Kings"></div><div class="place-info"><h3>Valley of the Kings</h3><p>The New Kingdom royal necropolis, cut into the desert cliffs on Luxor’s West Bank. More than sixty tombs are known, with richly decorated corridors and burial chambers.</p><details><summary>Highlights & tombs to know</summary><ul><li>KV2 — Ramesses IV: long corridors and astronomical decoration.</li><li>KV9 — Ramesses V & VI: celebrated ceiling scenes; separate ticket may apply.</li><li>KV17 — Seti I: exceptionally extensive decoration; separate ticket.</li><li>KV62 — Tutankhamun: famous discovery by Howard Carter in 1922; separate ticket.</li><li>KV11 — Ramesses III and KV6 — Ramesses IX are also notable where open.</li></ul><p><b>Visit summary:</b> Choose from the tombs open on the day. Your guide can explain royal burial beliefs, the Book of the Dead and the symbolism of the painted walls.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Valley_of_the_Queens.jpg/1280px-Valley_of_the_Queens.jpg" alt="Valley of the Queens landscape"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Tomb_of_Amenherkhepshef.jpg/1280px-Tomb_of_Amenherkhepshef.jpg" alt="Painted tomb in Valley of the Queens"></div><div class="place-info"><h3>Valley of the Queens</h3><p>Known in antiquity as Ta-Set-Neferu, this necropolis held queens, royal children and other members of the royal family.</p><details><summary>Highlights & tombs to know</summary><ul><li>QV66 — Nefertari: renowned for exceptionally vivid wall paintings; special access and ticketing apply.</li><li>QV55 — Prince Amenherkhepshef: scenes of the prince with his father Ramesses III.</li><li>QV44 — Prince Khaemwaset: another important royal prince’s tomb.</li><li>QV52 — Queen Tyti is another notable tomb reference.</li></ul><p><b>Visit summary:</b> A focused visit to royal family burial art. Which tombs are open is subject to conservation and site rules.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://images.squarespace-cdn.com/content/v1/606320cca282f254332cbbf3/1623228821777-776978OKEMC5X4I5VBDB/Deir%2BEl-Medina.JPG" alt="Deir el Medina archaeological village"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg/1280px-%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg" alt="Medinet Habu temple courtyard"></div><div class="place-info"><h3>Deir el-Medina</h3><p>The workers’ village of the artisans who built and decorated royal tombs. Its remains and nearby private tombs offer a rare look at everyday life, family and craft in ancient Thebes.</p><details><summary>Famous tombs & visit summary</summary><ul><li>TT1 — Sennedjem: celebrated painted burial chamber.</li><li>TT3 — Pashedu: known for its colourful decoration.</li><li>TT359 — Inherkhau (Inherkhâouy): an important Ramesside tomb with decorated chambers.</li><li>TT2 — Khabekhnet and TT4 — Qen are other notable names.</li></ul><p><b>Visit summary:</b> Explore the village remains, the small temple area and selected artisan tombs if open. The site is especially rewarding for visitors interested in the people behind royal monuments.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://undiscoveredfrontiers.com/medias/791/resize/2650x0/Luxor-1.webp" alt="Ramesseum temple statues"><img loading="lazy" src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/0a/2e/d6/33.jpg" alt="Ramesseum colonnade"></div><div class="place-info"><h3>The Ramesseum</h3><p>The mortuary temple of Ramesses II, famous for its monumental scale, fallen colossal statue and reliefs commemorating the Battle of Kadesh.</p><details><summary>What you will see</summary><ul><li>First and second courtyards and surviving Osiride columns.</li><li>Hypostyle hall and decorated walls.</li><li>Reliefs of royal ceremonies and the Battle of Kadesh.</li><li>Remains of the colossal statue of Ramesses II.</li></ul><p><b>Visit summary:</b> A rewarding stop for architecture, royal propaganda and the legacy of Ramesses the Great. Allow time to appreciate the details rather than only photographing the facade.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg/1280px-%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg" alt="Medinet Habu entrance"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg/1280px-%D9%85%D8%B9%D8%A8%D8%AF_%D9%85%D8%AF%D9%8A%D9%86%D8%A9_%D9%87%D8%A7%D8%A8%D9%88_5.jpg" alt="Medinet Habu relief covered walls"></div><div class="place-info"><h3>Medinet Habu</h3><p>The mortuary temple of Ramesses III, one of the best-preserved temple complexes on the West Bank, with massive gateways and extensive battle reliefs.</p><details><summary>What you will see</summary><ul><li>The fortified entrance and high gate.</li><li>Large courtyards, halls and richly carved walls.</li><li>Reliefs depicting campaigns against the Sea Peoples and Libyans.</li><li>Religious scenes connected with Amun and royal funerary worship.</li></ul><p><b>Visit summary:</b> An excellent place to understand the military and religious story of Ramesses III. Look closely at the carved details across the pylons and inner courts.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://archaeologicalpaths.com/web/images/uploaded/shutterstock_1183948168.jpg" alt="Hatshepsut temple terraces"><img loading="lazy" src="https://archaeologicalpaths.com/web/images/uploaded/shutterstock_1183948168.jpg" alt="Hatshepsut temple colonnade"></div><div class="place-info"><h3>Temple of Hatshepsut</h3><p>Djeser-Djeseru, the “Holy of Holies”, rises in terraces against the cliffs of Deir el-Bahari. It was built for the female pharaoh Hatshepsut and designed by Senenmut.</p><details><summary>Itinerary & highlights</summary><ul><li>Lower, middle and upper terraces linked by ramps.</li><li>Colonnades and reliefs showing the divine birth and the expedition to Punt.</li><li>Sanctuaries associated with Amun, Hathor and Anubis.</li></ul><p><b>Visit summary:</b> A striking combination of architecture and landscape. Your guide can explain Hatshepsut’s reign and the stories carved into the temple walls.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/KarnakVisitorCenterModel.jpg/1280px-KarnakVisitorCenterModel.jpg" alt="Karnak complex model"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/KarnakVisitorCenterModel.jpg/1280px-KarnakVisitorCenterModel.jpg" alt="Karnak temple precinct model"></div><div class="place-info"><h3>Karnak Temple</h3><p>A vast complex of temples and chapels dedicated principally to Amun. Its Great Hypostyle Hall is a forest of 134 monumental columns.</p><details><summary>Itinerary & highlights</summary><ul><li>Great Hypostyle Hall and its towering columns.</li><li>Obelisks of Hatshepsut and the sacred lake.</li><li>Precinct of Amun and the processional axis toward Luxor Temple.</li><li>Open-air museum, subject to ticket and opening arrangements.</li></ul><p><b>Visit summary:</b> Allow generous time: Karnak is a complex rather than a single building, and its history spans many dynasties.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://sonyaandtravis.com/images/egypt-2011/egypt-luxor-temple-m-papyrus-bud-columns.jpg" alt="Luxor Temple illuminated columns"><img loading="lazy" src="https://sonyaandtravis.com/images/egypt-2011/egypt-luxor-temple-m-papyrus-bud-columns.jpg" alt="Luxor Temple colonnade at night"></div><div class="place-info"><h3>Luxor Temple</h3><p>A monumental temple largely developed under Amenhotep III and Ramesses II, linked to Karnak by the Avenue of Sphinxes and central to the Opet Festival.</p><details><summary>Itinerary & highlights</summary><ul><li>Ramesses II’s pylon and statues.</li><li>Great Colonnade and Amenhotep III’s court.</li><li>Reliefs connected with the Opet Festival and divine kingship.</li><li>Later Roman-period traces within the complex.</li></ul><p><b>Visit summary:</b> Especially atmospheric in the late afternoon or evening, subject to opening hours and your schedule.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://egyptseraitravel.com/cdn/shop/products/the-luxor-museum-of-ancient-egyptian-art.jpg?v=1666263060&width=1946" alt="Luxor Museum statue gallery"><img loading="lazy" src="https://egyptseraitravel.com/cdn/shop/products/the-luxor-museum-of-ancient-egyptian-art.jpg?v=1666263060&width=1946" alt="Luxor Museum ancient sculpture"></div><div class="place-info"><h3>Luxor Museum</h3><p>A carefully curated museum displaying sculpture, royal objects and finds from the Theban area. It offers a quieter, focused complement to the open-air temples.</p><details><summary>Visit summary</summary><ul><li>Statues and objects from temples and tombs around Luxor.</li><li>Royal and religious sculpture with clear presentation.</li><li>A useful stop to connect the monuments with the objects found within them.</li></ul><p><b>Planning note:</b> Museum hours and ticketing may differ from temple sites; we confirm before the tour.</p></details></div></article>
+<article class="place-card"><div class="gallery"><img loading="lazy" src="https://images.squarespace-cdn.com/content/v1/606320cca282f254332cbbf3/1623228821777-776978OKEMC5X4I5VBDB/Deir%2BEl-Medina.JPG" alt="Theban hills and West Bank"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Valley_of_the_Kings_%289794988313%29.jpg/1280px-Valley_of_the_Kings_%289794988313%29.jpg" alt="Theban necropolis landscape"></div><div class="place-info"><h3>Valley of the Nobles</h3><p>A broad name for private tomb cemeteries of officials, priests and administrators around the Theban necropolis. These tombs preserve vivid scenes of daily life, work, banquets and religious ritual.</p><details><summary>Famous tombs to ask about</summary><ul><li>TT52 — Nakht: celebrated scenes of agriculture, music and offerings.</li><li>TT100 — Rekhmire: important scenes of administration, crafts and tribute.</li><li>TT55 — Ramose: elegant reliefs and an unfinished tomb chapel.</li><li>TT69 — Menna: well-known agricultural and family scenes.</li></ul><p><b>Visit summary:</b> The exact tombs available vary. Your guide can recommend those open and best suited to your interests.</p></details></div></article>
+</div></section>
+<section class="balloon"><div><div class="eyebrow">A sunrise to remember</div><h2>See Luxor<br>from the sky.</h2><p>Add a hot air balloon flight over the West Bank at sunrise. This is a separate optional experience and will be arranged only after checking weather, operator availability, safety requirements and the final price.</p><a class="btn light" href="#customize">Add balloon to my request ↗</a></div><div class="balloon-art" aria-label="Hot air balloon illustration">🎈</div></section>
 </main>
-
-<footer class="footer" id="contact">
-  <div><div class="brand"><span class="mark"></span><span>Vayana<small style="color:#aeb4bd">TRAVEL YOUR WAY</small></span></div><p>Discover Egypt, your way.</p></div>
-  <div class="footer-links"><a href="#experiences">Experiences</a><a href="#customize">Customize</a><a href="mailto:hello@vayana.com">Email us</a><span>© <span id="year"></span> Vayana</span></div>
-</footer>
-<div class="toast" id="toast" role="status"></div>
+<footer id="contact"><div><div class="brand"><i class="brandmark" style="background:white"></i><span>Vayana<small style="color:#aeb2b9">TRAVEL YOUR WAY</small></span></div><p>Discover Luxor, your way.</p></div><div class="footerlinks"><a href="#packages">Packages</a><a href="#places">Explore Luxor</a><a href="#customize">Create your journey</a><a href="mailto:hello@vayana.com">Email us</a><span>© 2026 Vayana</span></div></footer>
 <script>
-const selections={package:"Stay + Tours + Flights",budget:"Medium",program:"East Bank Only"};
-document.querySelectorAll("[data-group]").forEach(group=>{
-  group.querySelectorAll(".choice").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      group.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-      selections[group.dataset.group]=btn.dataset.value;
-      if(group.dataset.group==="package"){
-        document.getElementById("pickupNote").textContent =
-          btn.dataset.value==="Tours Only"
-          ? "Pickup can be added to your tour request and will be confirmed with your quote."
-          : "Complimentary pickup in Luxor on arrival is included with stay packages, subject to confirmation.";
-      }
-    });
-  });
-});
-document.getElementById("year").textContent=new Date().getFullYear();
+const packages={
+ royal:{title:"Royal West Bank — Private",bank:"west",places:["Valley of the Kings","Temple of Hatshepsut","Medinet Habu"]},
+ queens:{title:"Queens & Nobles — Private",bank:"west",places:["Valley of the Queens","Valley of the Nobles","Medinet Habu"]},
+ artisans:{title:"Artisans & Ramesses II — Private",bank:"west",places:["Deir el-Medina","The Ramesseum","Medinet Habu"]},
+ east:{title:"Temples & Museum — East Bank Private",bank:"east",places:["Karnak Temple","Luxor Temple","Luxor Museum"]},
+ shared:{title:"Luxor Highlights — Shared East + West",bank:"both",places:["West Bank sightseeing highlights","East Bank sightseeing highlights"]},
+ complete:{title:"Complete Luxor — Private East + West",bank:"both",places:["Valley of the Kings","Temple of Hatshepsut","Medinet Habu","Karnak Temple","Luxor Temple"]}
+};
+const alternatives={
+ west:["Valley of the Kings","Valley of the Queens","Valley of the Nobles","Deir el-Medina","The Ramesseum","Medinet Habu","Temple of Hatshepsut"],
+ east:["Karnak Temple","Luxor Temple","Luxor Museum"]
+};
+let selectedPackage="";
+const packageSelect=document.getElementById("packageSelect");
+const editor=document.getElementById("selectedPackage");
+function renderPackage(key){
+ selectedPackage=key;packageSelect.value=key;
+ document.querySelectorAll(".pkg").forEach(c=>c.classList.remove("selected"));
+ if(key){document.querySelectorAll("[data-package='"+key+"']")[0]?.closest(".pkg").classList.add("selected");}
+ if(!key){editor.style.display="none";updateSummary();return;}
+ const p=packages[key];editor.style.display="block";document.getElementById("packageTitle").textContent=p.title+" — select the stops you want:";
+ const placeEditor=document.getElementById("placeEditor");placeEditor.innerHTML="";
+ p.places.forEach((place,i)=>{
+  const row=document.createElement("label");row.className="place-option";
+  row.innerHTML=`<input type="checkbox" checked data-stop="${i}"><span>${place}</span>`;
+  placeEditor.appendChild(row);
+ });
+ const repl=document.getElementById("replaceEditor");repl.innerHTML="";
+ const bank=p.bank==="both"?"west":p.bank;
+ const note=document.createElement("div");note.className="replace-row";
+ note.innerHTML=`<label for="replacement">Optional replacement attraction (${bank==="west"?"West Bank":"East Bank"} only)</label><select id="replacement"><option value="">No replacement — remove a stop</option>${alternatives[bank].map(x=>`<option>${x}</option>`).join("")}</select><div class="policy">Choose a replacement from the same bank. If you remove a stop without replacing it, the quote may decrease. A same-bank replacement keeps the package price unchanged.</div>`;
+ repl.appendChild(note);
+ updateSummary();
+}
+document.querySelectorAll("[data-package]").forEach(btn=>btn.addEventListener("click",()=>{renderPackage(btn.dataset.package);document.getElementById("customize").scrollIntoView({behavior:"smooth"});}));
+packageSelect.addEventListener("change",e=>renderPackage(e.target.value));
+document.getElementById("placeEditor").addEventListener("change",updateSummary);
+document.getElementById("replacement").addEventListener("change",updateSummary);
+function itineraryText(){
+ if(!selectedPackage)return "Custom itinerary — details will be planned from your notes.";
+ const p=packages[selectedPackage],checks=[...document.querySelectorAll("[data-stop]")];
+ let stops=checks.filter(c=>c.checked).map(c=>c.parentElement.innerText.trim());
+ const replacement=document.getElementById("replacement")?.value;
+ if(replacement && stops.length)stops[0]=stops[0]+" (replace with "+replacement+")";
+ return p.title+": "+(stops.length?stops.join(", "):"No stops selected")+".";
+}
+function updateSummary(){document.getElementById("summary").textContent=itineraryText()+" Final price is confirmed in your Vayana quotation.";}
 document.getElementById("journeyForm").addEventListener("submit",e=>{
-  e.preventDefault();
-  const data={
-    name:document.getElementById("name").value,
-    email:document.getElementById("email").value,
-    whatsapp:document.getElementById("whatsapp").value,
-    arrival:document.getElementById("date").value,
-    guests:document.getElementById("guests").value,
-    package:selections.package,budget:selections.budget,
-    budgetAmount:document.getElementById("budgetAmount").value,
-    program:selections.program,
-    guide:document.getElementById("guide").checked,
-    sharedTour:document.getElementById("shared").checked,
-    balloon:document.getElementById("balloon").checked,
-    notes:document.getElementById("notes").value
-  };
-  const subject=encodeURIComponent("New Vayana journey request — "+data.name);
-  const body=encodeURIComponent(
-`New journey request
-
-Name: ${data.name}
-Email: ${data.email}
-WhatsApp: ${data.whatsapp}
-Arrival: ${data.arrival}
-Guests: ${data.guests}
-
-Package: ${data.package}
-Comfort level: ${data.budget}
-Entered budget: ${data.budgetAmount || "Not specified"}
-Luxor program: ${data.program}
-English-speaking guide: ${data.guide ? "Yes" : "No"}
-Shared tour: ${data.sharedTour ? "Yes" : "No"}
-Hot air balloon: ${data.balloon ? "Yes" : "No"}
-
-Additional notes: ${data.notes}
-
-Please review availability and send a quotation.`
-  );
-  document.getElementById("toast").textContent="Your email app will open with the request prepared. Connect your business email before launch.";
-  document.getElementById("toast").classList.add("show");
-  setTimeout(()=>document.getElementById("toast").classList.remove("show"),5000);
-  window.location.href=`mailto:hello@vayana.com?subject=${subject}&body=${body}`;
+ e.preventDefault();
+ const data={
+ name:document.getElementById("name").value,email:document.getElementById("email").value,
+ whatsapp:document.getElementById("whatsapp").value,date:document.getElementById("arrival").value,
+ guests:document.getElementById("guests").value,budget:document.getElementById("budget").value,
+ type:document.getElementById("tripType").value,hotel:document.getElementById("hotelStars").value,
+ guide:document.getElementById("guide").value,duration:document.getElementById("duration").value,
+ package:itineraryText(),balloon:document.getElementById("balloon").checked?"Yes":"No",
+ notes:document.getElementById("specialNotes").value
+ };
+ const subject=encodeURIComponent("Vayana journey request — "+data.name);
+ const body=encodeURIComponent(`NEW VAYANA JOURNEY REQUEST\n\nName: ${data.name}\nEmail: ${data.email}\nWhatsApp: ${data.whatsapp}\nDate: ${data.date}\nGuests: ${data.guests}\n\nJourney type: ${data.type}\nHotel category: ${data.hotel}\nGuide: ${data.guide}\nDuration: ${data.duration}\nPackage / itinerary: ${data.package}\nHot air balloon: ${data.balloon}\nBudget: ${data.budget}\n\nCUSTOM REQUESTS / NOTES:\n${data.notes}\n\nPlease review availability, ticket conditions and send a quotation.`);
+ window.location.href=`mailto:hello@vayana.com?subject=${subject}&body=${body}`;
 });
 </script>
-</body>
-</html>
+</body></html>
