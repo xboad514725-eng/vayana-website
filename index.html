@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Design your Egypt journey with Vayana. Private tours, stays, transfers and unforgettable experiences in Luxor.">
+<title>Vayana — Travel Your Way</title>
+<style>
+:root{
+  --ink:#111318; --muted:#6e737d; --line:#e7e8eb; --paper:#fff;
+  --red:#e63946; --blue:#8ecdf5; --green:#8ccf9b; --pink:#f2a9c2;
+  --navy:#14243a; --soft:#f5f7fa; --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;letter-spacing:-.025em}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6.2%;position:sticky;top:0;background:rgba(255,255,255,.86);backdrop-filter:blur(18px);z-index:10;border-bottom:1px solid rgba(0,0,0,.05)}
+.brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:700;letter-spacing:-.06em}
+.mark{width:35px;height:35px;border-radius:12px;background:conic-gradient(from 210deg,var(--red),var(--pink),var(--blue),var(--green),var(--red));position:relative}
+.mark:after{content:"";position:absolute;inset:7px;background:white;border-radius:8px;transform:rotate(45deg)}
+.brand small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:-2px}
+.navlinks{display:flex;gap:34px;align-items:center;font-size:13px;color:#414650}
+.navlinks a:hover{color:#000}
+.nav-cta,.btn{border:0;border-radius:999px;padding:13px 21px;background:#111;color:white;font-weight:600;font-size:13px;cursor:pointer;transition:.2s}
+.nav-cta:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px #0002}
+.menu{display:none;background:none;border:0;font-size:24px}
+.hero{min-height:660px;padding:92px 7% 80px;position:relative;overflow:hidden;background:linear-gradient(115deg,#f7f9fc 0%,#f4f7fa 45%,#e7f2f8 100%);display:flex;align-items:center}
+.hero:before{content:"";position:absolute;width:620px;height:620px;border-radius:50%;right:-80px;top:-110px;background:radial-gradient(circle at 35% 35%,#fff 0 10%,#d9eaf2 38%,#a9c6d4 62%,#8fa9b4 100%);opacity:.9}
+.hero:after{content:"";position:absolute;width:500px;height:210px;right:2%;bottom:0;background:linear-gradient(160deg,transparent 30%,#d5e0df 30% 40%,#9aafa9 41% 100%);clip-path:polygon(0 75%,25% 45%,45% 66%,70% 10%,100% 55%,100% 100%,0 100%);opacity:.45}
+.hero-copy{max-width:610px;position:relative;z-index:2}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#65717d;font-weight:700;margin-bottom:22px}
+h1{font-size:clamp(52px,7vw,88px);line-height:.98;letter-spacing:-.075em;margin:0 0 24px;font-weight:700}
+.hero p{font-size:19px;line-height:1.55;color:#5e6670;max-width:490px;margin:0 0 32px}
+.hero-actions{display:flex;gap:13px;align-items:center}
+.btn.secondary{background:#fff;color:#17191e;border:1px solid #dfe3e7}
+.hero-note{margin-top:34px;font-size:12px;color:#7c838b}
+.hero-note span{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:8px}
+.float-tag{position:absolute;z-index:3;right:12%;top:22%;padding:13px 17px;border:1px solid #ffffffaa;background:#ffffffb8;backdrop-filter:blur(12px);border-radius:18px;font-size:12px;box-shadow:0 12px 35px #32485b18}
+.float-tag b{display:block;font-size:16px;margin-bottom:3px}
+.section{padding:95px 7%}
+.section-head{text-align:center;max-width:700px;margin:0 auto 44px}
+.section-head .eyebrow{margin-bottom:14px}
+h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin:0 0 15px}
+.section-head p{color:var(--muted);font-size:16px;line-height:1.6;margin:0}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1160px;margin:auto}
+.feature{border:1px solid var(--line);border-radius:22px;padding:27px;background:#fff;min-height:190px}
+.icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:20px;margin-bottom:23px}
+.icon.red{background:#fff0f1;color:var(--red)}.icon.blue{background:#edf7ff;color:#3189c5}.icon.green{background:#eff9f0;color:#3e9c58}
+.feature h3{font-size:18px;margin:0 0 8px;letter-spacing:-.04em}.feature p{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+.customize{background:#f6f7f9;padding:100px 5%}
+.form-shell{max-width:1080px;margin:auto;background:white;border:1px solid #e9eaed;border-radius:30px;padding:clamp(22px,4vw,48px);box-shadow:0 18px 60px #1b273510}
+.form-title{text-align:center;margin-bottom:35px}
+.form-title h2{font-size:42px}
+.form-title p{color:var(--muted);margin:0}
+.step{margin:32px 0}
+.step-label{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.step-number{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#111;color:#fff;font-size:11px}
+.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.choice{border:1px solid #dfe2e7;border-radius:17px;padding:18px 16px;text-align:left;cursor:pointer;background:#fff;min-height:91px;transition:.18s;position:relative}
+.choice:hover{border-color:#a7b1bd;transform:translateY(-1px)}
+.choice.active{border:1.5px solid #111;background:#fafbfc;box-shadow:0 0 0 3px #11110a}
+.choice strong{display:block;font-size:14px;margin-bottom:5px}
+.choice small{color:var(--muted);font-size:12px;line-height:1.4}
+.choice .emoji{font-size:20px;display:block;margin-bottom:10px}
+.choice.active:after{content:"✓";position:absolute;right:12px;top:11px;background:#111;color:white;width:20px;height:20px;border-radius:50%;font-size:12px;display:grid;place-items:center}
+.budget .choice:nth-child(1){border-top:3px solid var(--red)}.budget .choice:nth-child(2){border-top:3px solid var(--blue)}.budget .choice:nth-child(3){border-top:3px solid var(--green)}
+.field-row{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field label{display:block;font-size:12px;font-weight:650;margin:0 0 8px;color:#444b55}
+.field input,.field select,.field textarea{width:100%;padding:14px 15px;border:1px solid #dfe2e7;border-radius:13px;background:#fff;outline:none;color:#17191e}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:#777;box-shadow:0 0 0 3px #11110c}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.extra{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #e2e5e9;border-radius:16px;padding:15px}
+.extra b{display:block;font-size:13px}.extra small{color:var(--muted);font-size:11px}
+.switch{appearance:none;width:42px;height:25px;border-radius:99px;background:#d6d9de;position:relative;cursor:pointer;flex:none;transition:.2s}
+.switch:checked{background:#111}
+.switch:before{content:"";position:absolute;width:19px;height:19px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;box-shadow:0 1px 3px #0003}
+.switch:checked:before{left:20px}
+.note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px}
+.submit-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+.submit-row p{font-size:12px;color:var(--muted);margin:0;max-width:450px;line-height:1.5}
+.submit{background:#111;color:white;border:0;border-radius:999px;padding:16px 28px;font-weight:650;cursor:pointer;white-space:nowrap}
+.submit:hover{background:#30343b}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.split-art{min-height:390px;border-radius:28px;background:linear-gradient(145deg,#d9eaf0,#f7e7d8 55%,#c5d4c6);position:relative;overflow:hidden}
+.split-art:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:#fff8;top:35px;left:50%;transform:translateX(-50%)}
+.split-art:after{content:"LUXOR";position:absolute;bottom:24px;left:28px;color:#fff;font-weight:700;font-size:44px;letter-spacing:.18em;text-shadow:0 2px 15px #0004}
+.split-copy p{color:var(--muted);line-height:1.7;font-size:16px}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.pill{padding:9px 13px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:#4d5560}
+.footer{padding:42px 7%;background:#11151b;color:white;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.footer p{color:#aeb4bd;font-size:12px;margin:6px 0 0}.footer-links{display:flex;gap:22px;color:#c9cdd3;font-size:12px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#15191f;color:white;padding:14px 20px;border-radius:14px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+@media(max-width:800px){
+ .nav{padding:0 5%;height:66px}.navlinks{display:none}.menu{display:block}
+ .hero{min-height:610px;padding:75px 6% 65px;align-items:flex-start}.hero:before{width:430px;height:430px;right:-170px;top:220px}.float-tag{right:6%;top:auto;bottom:55px}
+ .section{padding:72px 6%}.features{grid-template-columns:1fr}.feature{min-height:0}
+ .customize{padding:70px 4%}.choice-grid{grid-template-columns:1fr}.choice{min-height:75px}
+ .extras{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}
+ .submit-row{align-items:stretch;flex-direction:column}.submit{width:100%}
+ .split{grid-template-columns:1fr}.split-art{min-height:280px}
+ .footer{flex-direction:column;align-items:flex-start}.footer-links{flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home" aria-label="Vayana home"><span class="mark"></span><span>Vayana<small>TRAVEL YOUR WAY</small></span></a>
+  <nav class="navlinks"><a href="#experiences">Experiences</a><a href="#customize">Customize</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <a class="nav-cta" href="#customize">Create your journey ↗</a>
+  <button class="menu" onclick="document.getElementById('customize').scrollIntoView({behavior:'smooth'})" aria-label="Open menu">☰</button>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">A more personal way to discover Egypt</div>
+    <h1>Egypt.<br>On your terms.</h1>
+    <p>From the first sunrise in Luxor to the last moment of your journey, make every detail feel like yours.</p>
+    <div class="hero-actions"><a class="btn" href="#customize">Design your journey&nbsp; ↗</a><a class="btn secondary" href="#experiences">Explore experiences</a></div>
+    <div class="hero-note"><span></span>Thoughtfully planned. Personally experienced.</div>
+  </div>
+  <div class="float-tag"><b>One destination. Endless ways.</b>Made around you, not a fixed package.</div>
+</section>
+
+<section class="section" id="experiences">
+  <div class="section-head"><div class="eyebrow">The Vayana approach</div><h2>Travel should feel like you.</h2><p>Choose what matters. Leave the details to us. A thoughtful journey, shaped around your pace, interests and budget.</p></div>
+  <div class="features">
+    <article class="feature"><div class="icon red">✦</div><h3>Your journey, your choice</h3><p>Choose the experiences, comfort level and pace that feel right for you.</p></article>
+    <article class="feature"><div class="icon blue">⌁</div><h3>Local knowledge</h3><p>Discover the stories, places and details that make Egypt unforgettable.</p></article>
+    <article class="feature"><div class="icon green">♡</div><h3>Personal support</h3><p>One point of contact to help coordinate the details before and during your trip.</p></article>
+  </div>
+</section>
+
+<section class="customize" id="customize">
+<div class="form-shell">
+  <div class="form-title"><div class="eyebrow">Start with what you love</div><h2>Customize your journey.</h2><p>Your adventure. Your choices. Your Vayana.</p></div>
+  <form id="journeyForm">
+    <div class="step">
+      <div class="step-label"><span class="step-number">1</span> What are you looking for?</div>
+      <div class="choice-grid" data-group="package">
+        <button type="button" class="choice active" data-value="Stay + Tours + Flights"><span class="emoji">✈</span><strong>Stay + Tours + Flights</strong><small>Accommodation, tours and flights</small></button>
+        <button type="button" class="choice" data-value="Stay + Tours"><span class="emoji">⌂</span><strong>Stay + Tours</strong><small>Accommodation and experiences</small></button>
+        <button type="button" class="choice" data-value="Tours Only"><span class="emoji">◈</span><strong>Tours Only</strong><small>Excursions and day tours</small></button>
+      </div>
+      <p class="note" id="pickupNote">Complimentary pickup in Luxor on arrival is included with stay packages, subject to confirmation.</p>
+    </div>
+    <div class="step">
+      <div class="step-label"><span class="step-number">2</span> Choose your comfort level</div>
+      <div class="choice-grid budget" data-group="budget">
+        <button type="button" class="choice" data-value="Prestige / Luxury"><span class="emoji">✧</span><strong>Prestige / Luxury</strong><small>Premium stays and experiences</small></button>
+        <button type="button" class="choice active" data-value="Medium"><span class="emoji">☆</span><strong>Medium</strong><small>Comfort and great value</small></button>
+        <button type="button" class="choice" data-value="Standard"><span class="emoji">❋</span><strong>Standard</strong><small>Simple, comfortable and affordable</small></button>
+      </div>
+      <div class="field" style="max-width:430px;margin-top:16px"><label for="budgetAmount">Or enter your total budget (optional)</label><input id="budgetAmount" type="number" min="0" placeholder="e.g. 800 (USD)"></div>
+    </div>
+    <div class="step">
+      <div class="step-label"><span class="step-number">3</span> Choose your Luxor program</div>
+      <div class="choice-grid" data-group="program">
+        <button type="button" class="choice active" data-value="East Bank Only"><span class="emoji">▤</span><strong>East Bank</strong><small>Karnak, Luxor Temple and more</small></button>
+        <button type="button" class="choice" data-value="West Bank Only"><span class="emoji">▥</span><strong>West Bank</strong><small>Valley of the Kings and more</small></button>
+        <button type="button" class="choice" data-value="East & West Bank"><span class="emoji">⌑</span><strong>East & West</strong><small>A fuller Luxor experience</small></button>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-label"><span class="step-number">4</span> Make it your experience</div>
+      <div class="extras">
+        <label class="extra"><span><b>English-speaking guide</b><small>Professional local guide</small></span><input class="switch" type="checkbox" id="guide"></label>
+        <label class="extra"><span><b>Shared tour</b><small>Join a small group</small></span><input class="switch" type="checkbox" id="shared"></label>
+        <label class="extra"><span><b>Hot air balloon</b><small>Sunrise over Luxor</small></span><input class="switch" type="checkbox" id="balloon"></label>
+      </div>
+      <p class="note">Guide, shared-tour and balloon availability and prices will be confirmed in your personal quote.</p>
+    </div>
+    <div class="step">
+      <div class="step-label"><span class="step-number">5</span> A few details</div>
+      <div class="field-row">
+        <div class="field"><label for="name">Your name</label><input id="name" required placeholder="Full name"></div>
+        <div class="field"><label for="email">Email address</label><input id="email" type="email" required placeholder="you@example.com"></div>
+        <div class="field"><label for="whatsapp">WhatsApp number</label><input id="whatsapp" placeholder="Include country code"></div>
+        <div class="field"><label for="date">Arrival date</label><input id="date" type="date"></div>
+        <div class="field"><label for="guests">Number of guests</label><select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+        <div class="field"><label for="notes">Anything else? (optional)</label><input id="notes" placeholder="Interests, hotel preferences..."></div>
+      </div>
+    </div>
+    <div class="submit-row">
+      <p>Submitting this form is a quote request, not a confirmed booking. Our team will review your preferences and contact you with availability and a clear price.</p>
+      <button class="submit" type="submit">Request my journey&nbsp; ↗</button>
+    </div>
+  </form>
+</div>
+</section>
+
+<section class="section" id="about">
+  <div class="split">
+    <div class="split-art" aria-label="Abstract Luxor landscape illustration"></div>
+    <div class="split-copy"><div class="eyebrow">A different kind of travel</div><h2>Not a fixed package. A journey that fits.</h2><p>Vayana brings together local experiences and thoughtful planning, giving you the freedom to shape your time in Egypt. Tell us what you have in mind and we’ll help make it happen.</p><div class="pills"><span class="pill">Luxor, Egypt</span><span class="pill">Private experiences</span><span class="pill">Made around you</span></div></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer" id="contact">
+  <div><div class="brand"><span class="mark"></span><span>Vayana<small style="color:#aeb4bd">TRAVEL YOUR WAY</small></span></div><p>Discover Egypt, your way.</p></div>
+  <div class="footer-links"><a href="#experiences">Experiences</a><a href="#customize">Customize</a><a href="mailto:hello@vayana.com">Email us</a><span>© <span id="year"></span> Vayana</span></div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const selections={package:"Stay + Tours + Flights",budget:"Medium",program:"East Bank Only"};
+document.querySelectorAll("[data-group]").forEach(group=>{
+  group.querySelectorAll(".choice").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      group.querySelectorAll(".choice").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      selections[group.dataset.group]=btn.dataset.value;
+      if(group.dataset.group==="package"){
+        document.getElementById("pickupNote").textContent =
+          btn.dataset.value==="Tours Only"
+          ? "Pickup can be added to your tour request and will be confirmed with your quote."
+          : "Complimentary pickup in Luxor on arrival is included with stay packages, subject to confirmation.";
+      }
+    });
+  });
+});
+document.getElementById("year").textContent=new Date().getFullYear();
+document.getElementById("journeyForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const data={
+    name:document.getElementById("name").value,
+    email:document.getElementById("email").value,
+    whatsapp:document.getElementById("whatsapp").value,
+    arrival:document.getElementById("date").value,
+    guests:document.getElementById("guests").value,
+    package:selections.package,budget:selections.budget,
+    budgetAmount:document.getElementById("budgetAmount").value,
+    program:selections.program,
+    guide:document.getElementById("guide").checked,
+    sharedTour:document.getElementById("shared").checked,
+    balloon:document.getElementById("balloon").checked,
+    notes:document.getElementById("notes").value
+  };
+  const subject=encodeURIComponent("New Vayana journey request — "+data.name);
+  const body=encodeURIComponent(
+`New journey request
+
+Name: ${data.name}
+Email: ${data.email}
+WhatsApp: ${data.whatsapp}
+Arrival: ${data.arrival}
+Guests: ${data.guests}
+
+Package: ${data.package}
+Comfort level: ${data.budget}
+Entered budget: ${data.budgetAmount || "Not specified"}
+Luxor program: ${data.program}
+English-speaking guide: ${data.guide ? "Yes" : "No"}
+Shared tour: ${data.sharedTour ? "Yes" : "No"}
+Hot air balloon: ${data.balloon ? "Yes" : "No"}
+
+Additional notes: ${data.notes}
+
+Please review availability and send a quotation.`
+  );
+  document.getElementById("toast").textContent="Your email app will open with the request prepared. Connect your business email before launch.";
+  document.getElementById("toast").classList.add("show");
+  setTimeout(()=>document.getElementById("toast").classList.remove("show"),5000);
+  window.location.href=`mailto:hello@vayana.com?subject=${subject}&body=${body}`;
+});
+</script>
+</body>
+</html>
