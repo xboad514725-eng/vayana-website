@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vayana | Admin Login</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 22px;
+      box-shadow: 0 12px 45px rgba(0,0,0,.06);
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .logo span {
+      color: #e63946;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 35px;
+      font-size: 14px;
+    }
+
+    h2 {
+      font-size: 23px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #e63946;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .5;
+    }
+
+    #message {
+      margin-top: 18px;
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .success {
+      color: #25834a;
+    }
+
+    .error {
+      color: #e63946;
+    }
+
+    #logout {
+      margin-top: 12px;
+      background: #eee;
+      color: #111;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #aaa;
+      font-size: 11px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <div class="logo">VA<span>Y</span>ANA</div>
+    <div class="subtitle">Administration Portal</div>
+
+    <h2>Welcome Back</h2>
+    <p class="description">Sign in to your Vayana administrator account.</p>
+
+    <form id="loginForm">
+
+      <label>Email Address</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Admin email"
+        required
+      >
+
+      <label>Password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Your password"
+        required
+      >
+
+      <button type="submit" id="loginBtn">
+        Sign In
+      </button>
+
+    </form>
+
+    <div id="message"></div>
+
+    <button id="logout" style="display:none">
+      Sign Out
+    </button>
+
+    <div class="footer">
+      VAYANA © 2026 — PRIVATE ADMIN ACCESS
+    </div>
+
+  </div>
+
+  <script type="module">
+
+    import { createClient }
+      from "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL =
+      "https://dmkxyfvmyemovuhcyuop.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_wujNpox7yzgtSQMludA2qA_6cu2tDHZ";
+
+    const ADMIN_ID =
+      "844e0479-b45c-465f-bc4a-8f42334d673b";
+
+    const supabase = createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logout");
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = type;
+    }
+
+    async function checkSession() {
+
+      const { data } = await supabase.auth.getSession();
+      const session = data.session;
+
+      if (!session) return;
+
+      if (session.user.id !== ADMIN_ID) {
+        await supabase.auth.signOut();
+        showMessage("This account is not authorized.", "error");
+        return;
+      }
+
+      form.style.display = "none";
+      logoutBtn.style.display = "block";
+
+      showMessage(
+        "Administrator authenticated successfully. Admin dashboard is the next stage.",
+        "success"
+      );
+    }
+
+    form.addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+      loginBtn.disabled = true;
+      loginBtn.textContent = "Signing in...";
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      const { data, error } =
+        await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      loginBtn.disabled = false;
+      loginBtn.textContent = "Sign In";
+
+      if (error) {
+        showMessage(error.message, "error");
+        return;
+      }
+
+      if (data.user.id !== ADMIN_ID) {
+        await supabase.auth.signOut();
+        showMessage("Unauthorized administrator account.", "error");
+        return;
+      }
+
+      await checkSession();
+
+    });
+
+    logoutBtn.addEventListener("click", async () => {
+
+      await supabase.auth.signOut();
+
+      form.style.display = "block";
+      logoutBtn.style.display = "none";
+
+      showMessage("Signed out successfully.", "success");
+
+    });
+
+    checkSession();
+
+  </script>
+
+</body>
+  </html>
