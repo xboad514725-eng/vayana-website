@@ -1,278 +1,2409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vayana | Admin Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vayana | Admin Dashboard</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+:root{
+  --bg:#f5f6f8;
+  --card:#fff;
+  --dark:#151515;
+  --muted:#8a8f98;
+  --red:#e63946;
+  --green:#168653;
+  --orange:#d88722;
+  --border:#eceef1;
+  --sidebar:250px;
+}
 
-    body {
-      min-height: 100vh;
-      background: #f7f7f7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 
-    .login-card {
-      width: 100%;
-      max-width: 420px;
-      background: white;
-      padding: 40px 30px;
-      border-radius: 22px;
-      box-shadow: 0 12px 45px rgba(0,0,0,.06);
-    }
+body{background:var(--bg);color:var(--dark);min-height:100vh}
 
-    .logo {
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      text-align: center;
-      margin-bottom: 8px;
-    }
+button,input,select,textarea{font:inherit}
 
-    .logo span {
-      color: #e63946;
-    }
+button{cursor:pointer}
 
-    .subtitle {
-      text-align: center;
-      color: #888;
-      margin-bottom: 35px;
-      font-size: 14px;
-    }
+.hidden{display:none!important}
 
-    h2 {
-      font-size: 23px;
-      margin-bottom: 10px;
-    }
+/* LOGIN */
 
-    .description {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
+.login-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    label {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
+.login-card{
+  background:white;
+  width:100%;
+  max-width:420px;
+  padding:40px 30px;
+  border-radius:20px;
+  box-shadow:0 12px 45px rgba(0,0,0,.06);
+}
 
-    input {
-      width: 100%;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      outline: none;
-      font-size: 15px;
-    }
+.logo{
+  font-size:30px;
+  font-weight:bold;
+  letter-spacing:3px;
+  text-align:center;
+}
 
-    input:focus {
-      border-color: #e63946;
-    }
+.logo span{color:var(--red)}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      background: #111;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.login-subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin:10px 0 35px;
+  font-size:13px;
+}
 
-    button:disabled {
-      opacity: .5;
-    }
+.login-card h2{margin-bottom:10px}
 
-    #message {
-      margin-top: 18px;
-      font-size: 13px;
-      text-align: center;
-      line-height: 1.6;
-    }
+.login-card p.description{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:25px;
+}
 
-    .success {
-      color: #25834a;
-    }
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
 
-    .error {
-      color: #e63946;
-    }
+input,select,textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  outline:none;
+  background:white;
+}
 
-    #logout {
-      margin-top: 12px;
-      background: #eee;
-      color: #111;
-    }
+input:focus,select:focus,textarea:focus{
+  border-color:var(--red);
+}
 
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #aaa;
-      font-size: 11px;
-    }
-  </style>
+.login-card input{margin-bottom:20px;padding:15px}
+
+.primary-btn{
+  background:var(--dark);
+  color:white;
+  border:0;
+  padding:13px 18px;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+.primary-btn:disabled{opacity:.5}
+
+#loginBtn{width:100%;padding:15px}
+
+#loginMessage{
+  margin-top:15px;
+  font-size:13px;
+  text-align:center;
+  line-height:1.6;
+}
+
+.success{color:var(--green)}
+.error{color:var(--red)}
+
+.login-footer{
+  text-align:center;
+  margin-top:30px;
+  color:#aaa;
+  font-size:11px;
+}
+
+/* DASHBOARD LAYOUT */
+
+.dashboard{
+  display:flex;
+  min-height:100vh;
+}
+
+.sidebar{
+  width:var(--sidebar);
+  background:#151515;
+  color:white;
+  position:fixed;
+  inset:0 auto 0 0;
+  padding:25px 16px;
+  display:flex;
+  flex-direction:column;
+  z-index:20;
+  overflow-y:auto;
+}
+
+.sidebar .logo{
+  text-align:left;
+  padding:0 12px;
+  margin-bottom:8px;
+}
+
+.sidebar-subtitle{
+  color:#858585;
+  font-size:11px;
+  padding:0 12px;
+  margin-bottom:35px;
+  letter-spacing:1px;
+}
+
+.nav-label{
+  color:#777;
+  font-size:10px;
+  font-weight:bold;
+  letter-spacing:1.5px;
+  padding:12px;
+}
+
+.nav-btn{
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:#bcbcbc;
+  padding:13px 12px;
+  border-radius:9px;
+  margin-bottom:4px;
+  font-size:13px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.nav-btn:hover,.nav-btn.active{
+  background:#292929;
+  color:white;
+}
+
+.nav-btn.active{border-left:3px solid var(--red)}
+
+.nav-icon{
+  width:20px;
+  text-align:center;
+  font-size:16px;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+  border-top:1px solid #333;
+  padding-top:15px;
+}
+
+.admin-label{
+  color:#aaa;
+  font-size:11px;
+  padding:10px 12px;
+  overflow-wrap:anywhere;
+}
+
+.logout-btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#292929;
+  color:white;
+  text-align:left;
+}
+
+.main{
+  margin-left:var(--sidebar);
+  width:calc(100% - var(--sidebar));
+  min-width:0;
+}
+
+.topbar{
+  background:white;
+  height:75px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.topbar h2{font-size:19px}
+
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.status-indicator{
+  font-size:12px;
+  color:var(--green);
+  background:#e9f7ef;
+  padding:8px 12px;
+  border-radius:30px;
+}
+
+.refresh-btn{
+  border:1px solid var(--border);
+  background:white;
+  padding:9px 13px;
+  border-radius:9px;
+}
+
+.content{padding:30px}
+
+.page-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.page-header h1{font-size:24px;margin-bottom:7px}
+
+.page-header p{color:var(--muted);font-size:13px}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  margin-bottom:25px;
+}
+
+.stat-card{
+  background:white;
+  padding:22px;
+  border-radius:14px;
+  border:1px solid var(--border);
+}
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.stat-icon{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:#fff0f0;
+  font-size:18px;
+}
+
+.stat-card h3{
+  font-size:27px;
+  margin-bottom:5px;
+}
+
+.stat-card p{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  margin-bottom:22px;
+  overflow:hidden;
+}
+
+.panel-header{
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid var(--border);
+}
+
+.panel-header h3{font-size:15px}
+
+.panel-body{padding:20px}
+
+.table-wrap{overflow-x:auto}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:700px;
+}
+
+th{
+  text-align:left;
+  padding:14px 15px;
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  background:#fafafa;
+  border-bottom:1px solid var(--border);
+}
+
+td{
+  padding:15px;
+  font-size:12px;
+  border-bottom:1px solid var(--border);
+  vertical-align:middle;
+}
+
+tr:last-child td{border-bottom:0}
+
+.muted{color:var(--muted)}
+
+.badge{
+  display:inline-block;
+  padding:6px 9px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:bold;
+  background:#f0f1f3;
+  color:#555;
+}
+
+.badge.pending{background:#fff4df;color:#b87916}
+.badge.confirmed,.badge.paid,.badge.completed{background:#e5f7ed;color:#168653}
+.badge.cancelled,.badge.rejected{background:#ffebeb;color:#d33b3b}
+.badge.in_progress{background:#eaf1ff;color:#3569bb}
+.badge.open{background:#e5f7ed;color:#168653}
+.badge.closed{background:#eee;color:#666}
+
+.small-btn{
+  border:1px solid var(--border);
+  background:white;
+  padding:8px 10px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.small-btn:hover{border-color:var(--red)}
+
+.danger-btn{
+  background:#fff0f0;
+  color:#c93636;
+  border:0;
+  padding:9px 12px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.green-btn{
+  background:#e8f7ef;
+  color:#168653;
+  border:0;
+  padding:9px 12px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.filters select,.filters input{
+  width:auto;
+  min-width:150px;
+  font-size:12px;
+  padding:10px;
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:35px 15px;
+  font-size:13px;
+}
+
+.loading{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.notice{
+  padding:13px 15px;
+  border-radius:9px;
+  margin-bottom:15px;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.notice.warning{background:#fff6e7;color:#98651c}
+.notice.error{background:#fff0f0;color:#b92e2e}
+.notice.success{background:#e9f7ef;color:#168653}
+
+.status-select{
+  min-width:125px;
+  padding:8px;
+  font-size:11px;
+}
+
+.action-cell{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.search-input{max-width:250px}
+
+.detail-box{
+  background:#fafafa;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:15px;
+  font-size:12px;
+  line-height:1.8;
+  overflow-wrap:anywhere;
+}
+
+.chat-layout{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr);
+  min-height:480px;
+}
+
+.chat-list{
+  border-right:1px solid var(--border);
+  max-height:600px;
+  overflow-y:auto;
+}
+
+.chat-item{
+  padding:16px;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+}
+
+.chat-item:hover,.chat-item.selected{background:#fff5f5}
+
+.chat-item strong{font-size:12px}
+
+.chat-item p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:6px;
+}
+
+.chat-window{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.chat-messages{
+  flex:1;
+  min-height:350px;
+  max-height:480px;
+  overflow-y:auto;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.message{
+  max-width:80%;
+  padding:12px;
+  border-radius:12px;
+  background:#f0f1f3;
+  font-size:12px;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+
+.message.admin{
+  background:#202020;
+  color:white;
+  align-self:flex-end;
+}
+
+.message small{
+  display:block;
+  opacity:.6;
+  margin-top:7px;
+  font-size:9px;
+}
+
+.chat-compose{
+  border-top:1px solid var(--border);
+  padding:15px;
+  display:flex;
+  gap:10px;
+}
+
+.chat-compose input{flex:1;min-width:0}
+
+.chat-compose button{
+  border:0;
+  background:#151515;
+  color:white;
+  padding:0 20px;
+  border-radius:9px;
+}
+
+.mobile-menu{display:none}
+
+#toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#171717;
+  color:white;
+  padding:14px 18px;
+  border-radius:10px;
+  font-size:12px;
+  z-index:100;
+  display:none;
+  max-width:90%;
+}
+
+@media(max-width:1100px){
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:750px){
+  :root{--sidebar:0px}
+
+  .sidebar{
+    width:250px;
+    transform:translateX(-100%);
+    transition:.25s;
+  }
+
+  .sidebar.open{transform:translateX(0)}
+
+  .main{margin-left:0;width:100%}
+
+  .topbar{padding:0 15px;height:65px}
+
+  .topbar h2{font-size:16px}
+
+  .mobile-menu{
+    display:block;
+    border:0;
+    background:#f1f1f1;
+    padding:9px 12px;
+    border-radius:8px;
+    margin-right:10px;
+  }
+
+  .topbar-left{display:flex;align-items:center}
+
+  .content{padding:18px 12px}
+
+  .stats-grid{gap:10px}
+
+  .stat-card{padding:15px}
+
+  .stat-card h3{font-size:23px}
+
+  .stat-card p{font-size:10px}
+
+  .chat-layout{grid-template-columns:1fr}
+
+  .chat-list{
+    border-right:0;
+    border-bottom:1px solid var(--border);
+    max-height:220px;
+  }
+
+  .chat-messages{min-height:250px}
+
+  .search-input{max-width:100%}
+
+  .topbar-right .status-indicator{display:none}
+}
+
+</style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+
+<section class="login-screen" id="loginScreen">
+
   <div class="login-card">
 
     <div class="logo">VA<span>Y</span>ANA</div>
-    <div class="subtitle">Administration Portal</div>
+    <div class="login-subtitle">ADMINISTRATION PORTAL</div>
 
     <h2>Welcome Back</h2>
-    <p class="description">Sign in to your Vayana administrator account.</p>
+
+    <p class="description">
+      Sign in to your Vayana administrator account.
+    </p>
 
     <form id="loginForm">
 
       <label>Email Address</label>
-      <input
-        type="email"
-        id="email"
-        placeholder="Admin email"
-        required
-      >
+      <input type="email" id="email" placeholder="Admin email" required>
 
       <label>Password</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Your password"
-        required
-      >
+      <input type="password" id="password" placeholder="Your password" required>
 
-      <button type="submit" id="loginBtn">
+      <button type="submit" class="primary-btn" id="loginBtn">
         Sign In
       </button>
 
     </form>
 
-    <div id="message"></div>
+    <div id="loginMessage"></div>
 
-    <button id="logout" style="display:none">
-      Sign Out
-    </button>
-
-    <div class="footer">
+    <div class="login-footer">
       VAYANA © 2026 — PRIVATE ADMIN ACCESS
     </div>
 
   </div>
 
-  <script type="module">
+</section>
 
-    import { createClient }
-      from "https://esm.sh/@supabase/supabase-js@2";
 
-    const SUPABASE_URL =
-      "https://dmkxyfvmyemovuhcyuop.supabase.co";
+<!-- DASHBOARD -->
 
-    const SUPABASE_KEY =
-      "sb_publishable_wujNpox7yzgtSQMludA2qA_6cu2tDHZ";
+<div class="dashboard hidden" id="dashboard">
 
-    const ADMIN_ID =
-      "844e0479-b45c-465f-bc4a-8f42334d673b";
+  <aside class="sidebar" id="sidebar">
 
-    const supabase = createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+    <div class="logo">VA<span>Y</span>ANA</div>
+    <div class="sidebar-subtitle">ADMINISTRATION SYSTEM</div>
+
+    <div class="nav-label">MAIN MENU</div>
+
+    <button class="nav-btn active" data-page="overview">
+      <span class="nav-icon">▦</span> Overview
+    </button>
+
+    <button class="nav-btn" data-page="tour">
+      <span class="nav-icon">✈</span> Tour Requests
+    </button>
+
+    <button class="nav-btn" data-page="transportation">
+      <span class="nav-icon">🚘</span> Transportation
+    </button>
+
+    <button class="nav-btn" data-page="felucca">
+      <span class="nav-icon">⛵</span> Felucca
+    </button>
+
+    <button class="nav-btn" data-page="customer_service">
+      <span class="nav-icon">♧</span> Customer Service
+    </button>
+
+    <div class="nav-label">MANAGEMENT</div>
+
+    <button class="nav-btn" data-page="customers">
+      <span class="nav-icon">♙</span> Customers
+    </button>
+
+    <button class="nav-btn" data-page="payments">
+      <span class="nav-icon">＄</span> Payment Verification
+    </button>
+
+    <button class="nav-btn" data-page="chats">
+      <span class="nav-icon">✉</span> Customer Chats
+    </button>
+
+    <div class="sidebar-bottom">
+
+      <div class="admin-label" id="adminEmail">Administrator</div>
+
+      <button class="logout-btn" id="logoutBtn">
+        ↪ &nbsp; Sign Out
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+        <button class="mobile-menu" id="mobileMenu">☰</button>
+        <h2 id="pageTitle">Overview</h2>
+      </div>
+
+      <div class="topbar-right">
+        <span class="status-indicator">● System Connected</span>
+        <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+      </div>
+
+    </header>
+
+
+    <section class="content" id="pageContent">
+
+      <div class="loading">Loading dashboard...</div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<div id="toast"></div>
+
+
+<script type="module">
+
+import { createClient }
+from "https://esm.sh/@supabase/supabase-js@2";
+
+
+/* =====================================================
+   CONFIGURATION
+===================================================== */
+
+const SUPABASE_URL =
+"https://dmkxyfvmyemovuhcyuop.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_wujNpox7yzgtSQMludA2qA_6cu2tDHZ";
+
+const API_URL =
+"https://dmkxyfvmyemovuhcyuop.supabase.co/functions/v1/vayana-api";
+
+const ADMIN_ID =
+"844e0479-b45c-465f-bc4a-8f42334d673b";
+
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loginScreen = document.getElementById("loginScreen");
+const dashboard = document.getElementById("dashboard");
+const loginForm = document.getElementById("loginForm");
+const loginBtn = document.getElementById("loginBtn");
+const loginMessage = document.getElementById("loginMessage");
+const pageContent = document.getElementById("pageContent");
+const pageTitle = document.getElementById("pageTitle");
+const sidebar = document.getElementById("sidebar");
+
+let currentSession = null;
+let currentPage = "overview";
+let currentChatId = null;
+let currentChatStatus = "open";
+let cachedStats = {};
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+
+}
+
+
+function showToast(message){
+
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.style.display = "block";
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(()=>{
+    toast.style.display = "none";
+  },3500);
+
+}
+
+
+function showLoginMessage(message,type="error"){
+
+  loginMessage.textContent = message;
+  loginMessage.className = type;
+
+}
+
+
+function dateFormat(value){
+
+  if(!value) return "—";
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())) return escapeHTML(value);
+
+  return date.toLocaleString("en-GB",{
+    dateStyle:"medium",
+    timeStyle:"short"
+  });
+
+}
+
+
+function dateOnly(value){
+
+  if(!value) return "—";
+
+  const date = new Date(value+"T00:00:00");
+
+  if(Number.isNaN(date.getTime())) return escapeHTML(value);
+
+  return date.toLocaleDateString("en-GB");
+
+}
+
+
+function badge(status){
+
+  const value = String(status || "unknown").toLowerCase();
+
+  return `
+    <span class="badge ${escapeHTML(value)}">
+      ${escapeHTML(value.replaceAll("_"," "))}
+    </span>
+  `;
+
+}
+
+
+function statusOptions(current){
+
+  const statuses = [
+    "pending",
+    "confirmed",
+    "in_progress",
+    "completed",
+    "cancelled",
+    "rejected"
+  ];
+
+  return statuses.map(status=>`
+    <option value="${status}" ${status===current?"selected":""}>
+      ${status.replaceAll("_"," ")}
+    </option>
+  `).join("");
+
+}
+
+
+function customerName(row){
+
+  return row.customers?.full_name || row.full_name || "Unknown";
+
+}
+
+
+function customerEmail(row){
+
+  return row.customers?.email || row.email || "—";
+
+}
+
+
+function customerPhone(row){
+
+  return row.customers?.phone || row.phone || "—";
+
+}
+
+
+function showLoading(){
+
+  pageContent.innerHTML = `
+    <div class="loading">Loading data...</div>
+  `;
+
+}
+
+
+function showError(message){
+
+  pageContent.innerHTML = `
+    <div class="notice error">
+      ${escapeHTML(message)}
+    </div>
+  `;
+
+}
+
+
+function renderTable(headers,rows){
+
+  if(!rows.length){
+
+    return `
+      <div class="empty">No records found.</div>
+    `;
+
+  }
+
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr>
+        </thead>
+        <tbody>${rows.join("")}</tbody>
+      </table>
+    </div>
+  `;
+
+}
+
+
+/* =====================================================
+   API REQUESTS
+===================================================== */
+
+async function api(action,data={}){
+
+  if(!currentSession?.access_token){
+
+    throw new Error("Your login session has expired. Please sign in again.");
+
+  }
+
+  const response = await fetch(API_URL,{
+
+    method:"POST",
+
+    headers:{
+      "Content-Type":"application/json",
+      "apikey":SUPABASE_KEY,
+      "Authorization":"Bearer "+currentSession.access_token
+    },
+
+    body:JSON.stringify({
+      action,
+      ...data
+    })
+
+  });
+
+  const result = await response.json();
+
+  if(!response.ok || result.status==="error"){
+
+    throw new Error(result.message || "API request failed.");
+
+  }
+
+  return result;
+
+}
+
+
+/* =====================================================
+   AUTHENTICATION
+===================================================== */
+
+async function checkSession(){
+
+  const {data,error} = await supabase.auth.getSession();
+
+  if(error || !data.session){
+
+    showLogin();
+    return;
+
+  }
+
+  currentSession = data.session;
+
+  if(currentSession.user.id !== ADMIN_ID){
+
+    await supabase.auth.signOut();
+
+    showLoginMessage(
+      "This account is not authorized.",
+      "error"
     );
 
-    const form = document.getElementById("loginForm");
-    const message = document.getElementById("message");
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logout");
+    return;
 
-    function showMessage(text, type) {
-      message.textContent = text;
-      message.className = type;
-    }
+  }
 
-    async function checkSession() {
+  await openDashboard();
 
-      const { data } = await supabase.auth.getSession();
-      const session = data.session;
+}
 
-      if (!session) return;
 
-      if (session.user.id !== ADMIN_ID) {
-        await supabase.auth.signOut();
-        showMessage("This account is not authorized.", "error");
-        return;
-      }
+function showLogin(){
 
-      form.style.display = "none";
-      logoutBtn.style.display = "block";
+  loginScreen.classList.remove("hidden");
+  dashboard.classList.add("hidden");
 
-      showMessage(
-        "Administrator authenticated successfully. Admin dashboard is the next stage.",
-        "success"
-      );
-    }
+}
 
-    form.addEventListener("submit", async (e) => {
 
-      e.preventDefault();
+async function openDashboard(){
 
-      loginBtn.disabled = true;
-      loginBtn.textContent = "Signing in...";
+  const {data,error} = await supabase.auth.getSession();
 
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+  if(error || !data.session){
 
-      const { data, error } =
-        await supabase.auth.signInWithPassword({
-          email,
-          password
-        });
+    showLogin();
+    return;
 
-      loginBtn.disabled = false;
-      loginBtn.textContent = "Sign In";
+  }
 
-      if (error) {
-        showMessage(error.message, "error");
-        return;
-      }
+  currentSession = data.session;
 
-      if (data.user.id !== ADMIN_ID) {
-        await supabase.auth.signOut();
-        showMessage("Unauthorized administrator account.", "error");
-        return;
-      }
+  loginScreen.classList.add("hidden");
+  dashboard.classList.remove("hidden");
 
-      await checkSession();
+  document.getElementById("adminEmail").textContent =
+    currentSession.user.email || "Administrator";
 
+  await loadPage("overview");
+
+}
+
+
+loginForm.addEventListener("submit",async event=>{
+
+  event.preventDefault();
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Signing in...";
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  try{
+
+    const {data,error} = await supabase.auth.signInWithPassword({
+      email,
+      password
     });
 
-    logoutBtn.addEventListener("click", async () => {
+    if(error) throw error;
+
+    if(data.user.id !== ADMIN_ID){
 
       await supabase.auth.signOut();
 
-      form.style.display = "block";
-      logoutBtn.style.display = "none";
+      throw new Error("Unauthorized administrator account.");
 
-      showMessage("Signed out successfully.", "success");
+    }
+
+    currentSession = data.session;
+
+    showLoginMessage("Login successful.","success");
+
+    await openDashboard();
+
+  }catch(error){
+
+    showLoginMessage(error.message,"error");
+
+  }finally{
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Sign In";
+
+  }
+
+});
+
+
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+
+  await supabase.auth.signOut();
+
+  currentSession = null;
+
+  dashboard.classList.add("hidden");
+  loginScreen.classList.remove("hidden");
+
+  loginForm.reset();
+
+  showLoginMessage("Signed out successfully.","success");
+
+});
+
+
+supabase.auth.onAuthStateChange((event,session)=>{
+
+  if(event==="SIGNED_OUT"){
+
+    currentSession = null;
+
+    dashboard.classList.add("hidden");
+    loginScreen.classList.remove("hidden");
+
+  }
+
+});
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+const pageNames = {
+
+  overview:"Overview",
+  tour:"Tour Requests",
+  transportation:"Transportation Requests",
+  felucca:"Felucca Requests",
+  customer_service:"Customer Service",
+  customers:"Customers",
+  payments:"Payment Verification",
+  chats:"Customer Chats"
+
+};
+
+
+document.querySelectorAll(".nav-btn").forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    sidebar.classList.remove("open");
+
+    loadPage(button.dataset.page);
+
+  });
+
+});
+
+
+document.getElementById("mobileMenu").addEventListener("click",()=>{
+
+  sidebar.classList.toggle("open");
+
+});
+
+
+document.getElementById("refreshBtn").addEventListener("click",()=>{
+
+  loadPage(currentPage);
+
+});
+
+
+async function loadPage(page){
+
+  currentPage = page;
+
+  pageTitle.textContent = pageNames[page] || "Dashboard";
+
+  showLoading();
+
+  try{
+
+    switch(page){
+
+      case "overview":
+        await renderOverview();
+        break;
+
+      case "tour":
+        await renderRequests("tour");
+        break;
+
+      case "transportation":
+        await renderRequests("transportation");
+        break;
+
+      case "felucca":
+        await renderRequests("felucca");
+        break;
+
+      case "customer_service":
+        await renderRequests("customer_service");
+        break;
+
+      case "customers":
+        await renderCustomers();
+        break;
+
+      case "payments":
+        await renderPayments();
+        break;
+
+      case "chats":
+        await renderChats();
+        break;
+
+      default:
+        showError("Page not found.");
+
+    }
+
+  }catch(error){
+
+    showError(error.message);
+
+  }
+
+}
+
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+async function renderOverview(){
+
+  const result = await api("dashboard_stats");
+
+  cachedStats = result.dashboard || {};
+
+  const s = cachedStats;
+
+  const statCards = [
+
+    ["Total Tour Requests",s.tour_requests_total || 0,"✈"],
+
+    ["Transportation",s.transportation_requests_total || 0,"🚘"],
+
+    ["Felucca (Legacy)",s.felucca_requests_total || 0,"⛵"],
+
+    ["Customer Service",s.service_requests_total || 0,"♧"],
+
+    ["Total Customers",s.customers_total || 0,"♙"],
+
+    ["Pending Payments",s.pending_payment_verifications || 0,"＄"],
+
+    ["Paid Bookings",s.paid_booking_verifications || 0,"✓"],
+
+    ["Open Chats",s.open_chats || 0,"✉"]
+
+  ];
+
+  const cards = statCards.map(([title,value,icon])=>`
+
+    <div class="stat-card">
+
+      <div class="stat-top">
+        <span class="muted">${escapeHTML(title)}</span>
+        <span class="stat-icon">${icon}</span>
+      </div>
+
+      <h3>${Number(value)}</h3>
+
+      <p>Current database records</p>
+
+    </div>
+
+  `).join("");
+
+
+  let warning = "";
+
+  if(result.count_errors && Object.keys(result.count_errors).length){
+
+    warning = `
+      <div class="notice warning">
+        Some statistics could not be loaded. This may happen when an optional database table has not been created.
+      </div>
+    `;
+
+  }
+
+
+  pageContent.innerHTML = `
+
+    <div class="page-header">
+      <div>
+        <h1>Dashboard Overview</h1>
+        <p>Monitor Vayana website activity and customer requests.</p>
+      </div>
+    </div>
+
+    ${warning}
+
+    <div class="stats-grid">
+      ${cards}
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h3>Request Management</h3>
+      </div>
+
+      <div class="panel-body">
+
+        <p class="muted" style="font-size:13px;line-height:1.8">
+          Use the left navigation to view individual requests,
+          manage customers, review payments and communicate with customers.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="notice warning">
+      Felucca note: New Felucca submissions are stored inside
+      transportation_requests. The Felucca section separates those
+      records using service_type = "felucca".
+    </div>
+
+  `;
+
+
+  // Count current Felucca records from the actual transportation table.
+
+  try{
+
+    const transport = await api("list_requests",{
+      request_type:"transportation",
+      limit:100,
+      offset:0
+    });
+
+    const feluccaCount = (transport.requests || []).filter(row=>
+      String(row.service_type || "").toLowerCase().includes("felucca")
+    ).length;
+
+    const feluccaCard = [...pageContent.querySelectorAll(".stat-card")]
+      .find(card=>card.textContent.includes("Felucca (Legacy)"));
+
+    if(feluccaCard){
+
+      feluccaCard.querySelector("h3").textContent = feluccaCount;
+
+      feluccaCard.querySelector("p").textContent =
+        "New Felucca transportation records";
+
+      feluccaCard.querySelector(".stat-card span");
+
+    }
+
+  }catch(error){
+
+    console.warn("Felucca count unavailable:",error.message);
+
+  }
+
+}
+
+
+/* =====================================================
+   REQUESTS
+===================================================== */
+
+async function renderRequests(type){
+
+  let result;
+
+  if(type==="felucca"){
+
+    result = await api("list_requests",{
+      request_type:"transportation",
+      limit:100,
+      offset:0
+    });
+
+    result.requests = (result.requests || []).filter(row=>
+      String(row.service_type || "").toLowerCase().includes("felucca")
+    );
+
+  }else{
+
+    result = await api("list_requests",{
+      request_type:type,
+      limit:100,
+      offset:0
+    });
+
+  }
+
+
+  const requests = result.requests || [];
+
+  const title = pageNames[type];
+
+  let rows = requests.map(row=>{
+
+    let details = "—";
+
+    if(type==="tour"){
+
+      details = `
+        ${escapeHTML(row.package_name || "—")}
+        <br>
+        <span class="muted">
+          Arrival: ${dateOnly(row.arrival_date)}
+          <br>
+          Departure: ${dateOnly(row.departure_date)}
+          <br>
+          Tour: ${dateOnly(row.preferred_tour_date)}
+        </span>
+      `;
+
+    }
+
+    if(type==="transportation"){
+
+      details = `
+        ${escapeHTML(row.service_type || "—")}
+        <br>
+        <span class="muted">
+          ${escapeHTML(row.pickup_location || "—")}
+          → ${escapeHTML(row.dropoff_location || "—")}
+          <br>
+          Pickup: ${dateOnly(row.pickup_date)}
+        </span>
+      `;
+
+    }
+
+    if(type==="felucca"){
+
+      details = `
+        Felucca
+        <br>
+        <span class="muted">
+          Date: ${dateOnly(row.pickup_date)}
+          <br>
+          Passengers: ${Number(row.passengers || 0)}
+        </span>
+      `;
+
+    }
+
+    if(type==="customer_service"){
+
+      details = `
+        ${Number(row.service_days || 0)} days
+        <br>
+        <span class="muted">
+          Start: ${dateOnly(row.service_start_date)}
+          <br>
+          Payment: ${escapeHTML(row.payment_status || "—")}
+        </span>
+      `;
+
+    }
+
+
+    const updateType = type==="felucca" ? "transportation" : type;
+
+    return `
+
+      <tr>
+
+        <td>
+          <strong>${escapeHTML(customerName(row))}</strong>
+          <br>
+          <span class="muted">${escapeHTML(customerEmail(row))}</span>
+          <br>
+          <span class="muted">${escapeHTML(customerPhone(row))}</span>
+        </td>
+
+        <td>${details}</td>
+
+        <td>${badge(row.status)}</td>
+
+        <td>${dateFormat(row.created_at)}</td>
+
+        <td>
+
+          <div class="action-cell">
+
+            <select
+              class="status-select"
+              data-status-id="${escapeHTML(row.id)}"
+              data-status-type="${escapeHTML(updateType)}"
+            >
+              ${statusOptions(row.status)}
+            </select>
+
+            <button
+              class="small-btn"
+              data-update-status="${escapeHTML(row.id)}"
+              data-update-type="${escapeHTML(updateType)}"
+            >
+              Update
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+
+  pageContent.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h1>${escapeHTML(title)}</h1>
+        <p>Manage and update customer requests.</p>
+      </div>
+
+      <div class="filters">
+
+        <select id="requestFilter">
+          <option value="">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="in_progress">In Progress</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+          <option value="rejected">Rejected</option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <h3>${requests.length} Requests Loaded</h3>
+
+        <span class="muted" style="font-size:11px">
+          Maximum 100 records
+        </span>
+
+      </div>
+
+      ${renderTable(
+        ["Customer","Request Details","Status","Created At","Actions"],
+        rows
+      )}
+
+    </div>
+
+  `;
+
+
+  document.getElementById("requestFilter").addEventListener("change",event=>{
+
+    const filter = event.target.value;
+
+    const filtered = requests.filter(row=>
+      !filter || row.status===filter
+    );
+
+    const newRows = filtered.map(row=>{
+
+      const tr = pageContent.querySelector(
+        `[data-update-status="${row.id}"]`
+      )?.closest("tr");
+
+      return tr ? tr.outerHTML : "";
 
     });
 
-    checkSession();
+    const tbody = pageContent.querySelector("tbody");
 
-  </script>
+    if(tbody){
+
+      tbody.innerHTML = newRows.filter(Boolean).length
+        ? newRows.filter(Boolean).join("")
+        : `<tr><td colspan="5" class="empty">No matching requests.</td></tr>`;
+
+    }
+
+  });
+
+
+  pageContent.querySelectorAll("[data-update-status]").forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      const id = button.dataset.updateStatus;
+      const requestType = button.dataset.updateType;
+
+      const select = pageContent.querySelector(
+        `[data-status-id="${id}"]`
+      );
+
+      const newStatus = select.value;
+
+      button.disabled = true;
+      button.textContent = "Saving...";
+
+      try{
+
+        await api("update_request_status",{
+          request_type:requestType,
+          request_id:id,
+          new_status:newStatus
+        });
+
+        showToast("Request status updated.");
+
+        await loadPage(currentPage);
+
+      }catch(error){
+
+        showToast(error.message);
+
+        button.disabled = false;
+        button.textContent = "Update";
+
+      }
+
+    });
+
+  });
+
+}
+
+
+/* =====================================================
+   CUSTOMERS
+===================================================== */
+
+async function renderCustomers(search=""){
+
+  const result = await api("list_customers",{
+    limit:100,
+    offset:0,
+    search
+  });
+
+  const customers = result.customers || [];
+
+  const rows = customers.map(customer=>`
+
+    <tr>
+
+      <td>
+        <strong>${escapeHTML(customer.full_name)}</strong>
+      </td>
+
+      <td>${escapeHTML(customer.email || "—")}</td>
+
+      <td>${escapeHTML(customer.phone || "—")}</td>
+
+      <td>${dateFormat(customer.created_at)}</td>
+
+      <td>${escapeHTML(customer.id)}</td>
+
+    </tr>
+
+  `);
+
+
+  pageContent.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h1>Customers</h1>
+        <p>View customer profiles and contact information.</p>
+      </div>
+
+      <input
+        id="customerSearch"
+        class="search-input"
+        placeholder="Search customer name..."
+        value="${escapeHTML(search)}"
+      >
+
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h3>${Number(result.total || 0)} Customers</h3>
+      </div>
+
+      ${renderTable(
+        ["Full Name","Email","Phone","Registered At","Customer ID"],
+        rows
+      )}
+
+    </div>
+
+  `;
+
+
+  let searchTimer;
+
+  document.getElementById("customerSearch").addEventListener("input",event=>{
+
+    clearTimeout(searchTimer);
+
+    searchTimer = setTimeout(()=>{
+
+      renderCustomers(event.target.value.trim()).catch(error=>{
+        showToast(error.message);
+      });
+
+    },500);
+
+  });
+
+}
+
+
+/* =====================================================
+   PAYMENTS
+===================================================== */
+
+async function renderPayments(){
+
+  const result = await api("list_bookings",{
+    limit:100,
+    offset:0
+  });
+
+  const bookings = result.bookings || [];
+
+  const rows = bookings.map(booking=>{
+
+    const customer = booking.customers || {};
+
+    return `
+
+      <tr>
+
+        <td>
+          <strong>${escapeHTML(customer.full_name || "Unknown")}</strong>
+          <br>
+          <span class="muted">${escapeHTML(customer.email || "—")}</span>
+        </td>
+
+        <td>
+          ${escapeHTML(booking.payment_method || booking.booking_source || "—")}
+        </td>
+
+        <td>
+          ${escapeHTML(booking.booking_code || "Not generated")}
+        </td>
+
+        <td>${badge(booking.payment_status)}</td>
+
+        <td>${dateFormat(booking.created_at)}</td>
+
+        <td>
+
+          <div class="action-cell">
+
+            ${
+              booking.payment_proof_path
+              ? `
+                <button
+                  class="small-btn"
+                  data-proof="${escapeHTML(booking.id)}"
+                >
+                  View Proof
+                </button>
+              `
+              : ""
+            }
+
+            ${
+              booking.payment_status==="pending"
+              ? `
+                <button
+                  class="green-btn"
+                  data-approve="${escapeHTML(booking.id)}"
+                >
+                  Approve
+                </button>
+
+                <button
+                  class="danger-btn"
+                  data-reject="${escapeHTML(booking.id)}"
+                >
+                  Reject
+                </button>
+              `
+              : ""
+            }
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+
+  pageContent.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h1>Payment Verification</h1>
+        <p>Review uploaded payment proofs and confirm bookings.</p>
+      </div>
+
+      <select id="paymentFilter" style="width:auto">
+        <option value="">All payments</option>
+        <option value="pending">Pending</option>
+        <option value="paid">Paid</option>
+        <option value="rejected">Rejected</option>
+      </select>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="panel-header">
+        <h3>${Number(result.total || 0)} Payment Records</h3>
+      </div>
+
+      ${renderTable(
+        ["Customer","Method","Booking Code","Payment Status","Submitted At","Actions"],
+        rows
+      )}
+
+    </div>
+
+  `;
+
+
+  document.getElementById("paymentFilter").addEventListener("change",async event=>{
+
+    try{
+
+      const filtered = await api("list_bookings",{
+        limit:100,
+        offset:0,
+        payment_status:event.target.value
+      });
+
+      renderPaymentRows(filtered);
+
+    }catch(error){
+
+      showToast(error.message);
+
+    }
+
+  });
+
+
+  pageContent.querySelectorAll("[data-proof]").forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      button.disabled = true;
+
+      try{
+
+        const response = await api("get_payment_proof_url",{
+          verification_id:button.dataset.proof
+        });
+
+        window.open(response.signed_url,"_blank","noopener");
+
+      }catch(error){
+
+        showToast(error.message);
+
+      }finally{
+
+        button.disabled = false;
+
+      }
+
+    });
+
+  });
+
+
+  pageContent.querySelectorAll("[data-approve]").forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      const notes = prompt("Optional review notes:") || "";
+
+      if(!confirm("Approve this payment and generate a booking code?")) return;
+
+      button.disabled = true;
+
+      try{
+
+        const response = await api("approve_payment",{
+          verification_id:button.dataset.approve,
+          review_notes:notes
+        });
+
+        showToast(
+          "Payment approved. Booking code: "+
+          (response.verification?.booking_code || "")
+        );
+
+        await loadPage("payments");
+
+      }catch(error){
+
+        showToast(error.message);
+        button.disabled = false;
+
+      }
+
+    });
+
+  });
+
+
+  pageContent.querySelectorAll("[data-reject]").forEach(button=>{
+
+    button.addEventListener("click",async()=>{
+
+      const notes = prompt("Reason for rejection:");
+
+      if(notes===null) return;
+
+      if(!confirm("Reject this payment proof?")) return;
+
+      button.disabled = true;
+
+      try{
+
+        await api("reject_payment",{
+          verification_id:button.dataset.reject,
+          review_notes:notes
+        });
+
+        showToast("Payment rejected.");
+
+        await loadPage("payments");
+
+      }catch(error){
+
+        showToast(error.message);
+        button.disabled = false;
+
+      }
+
+    });
+
+  });
+
+}
+
+
+function renderPaymentRows(result){
+
+  const rows = (result.bookings || []).map(booking=>{
+
+    const customer = booking.customers || {};
+
+    return `
+
+      <tr>
+
+        <td>
+          <strong>${escapeHTML(customer.full_name || "Unknown")}</strong>
+          <br>
+          <span class="muted">${escapeHTML(customer.email || "—")}</span>
+        </td>
+
+        <td>${escapeHTML(booking.payment_method || booking.booking_source || "—")}</td>
+
+        <td>${escapeHTML(booking.booking_code || "Not generated")}</td>
+
+        <td>${badge(booking.payment_status)}</td>
+
+        <td>${dateFormat(booking.created_at)}</td>
+
+        <td>
+          ${booking.payment_status==="pending"
+            ? `
+              <button class="small-btn" data-approve="${escapeHTML(booking.id)}">Review</button>
+            `
+            : "—"
+          }
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+  const table = pageContent.querySelector("tbody");
+
+  if(table){
+
+    table.innerHTML = rows.length
+      ? rows.join("")
+      : `<tr><td colspan="6" class="empty">No matching payments.</td></tr>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   CHATS
+===================================================== */
+
+async function renderChats(){
+
+  const result = await api("list_chats",{
+    limit:100,
+    offset:0
+  });
+
+  const conversations = result.conversations || [];
+
+  pageContent.innerHTML = `
+
+    <div class="page-header">
+
+      <div>
+        <h1>Customer Chats</h1>
+        <p>Read and respond to customer conversations.</p>
+      </div>
+
+      <select id="chatFilter" style="width:auto">
+        <option value="">All conversations</option>
+        <option value="open">Open</option>
+        <option value="closed">Closed</option>
+      </select>
+
+    </div>
+
+    <div class="panel">
+
+      <div class="chat-layout">
+
+        <div class="chat-list" id="chatList">
+
+          ${
+            conversations.length
+            ? conversations.map(chat=>`
+
+              <div
+                class="chat-item"
+                data-chat-id="${escapeHTML(chat.id)}"
+              >
+
+                <strong>
+                  ${escapeHTML(chat.customers?.full_name || "Unknown Customer")}
+                </strong>
+
+                <p>${escapeHTML(chat.chat_type || "Chat")}</p>
+
+                <p>
+                  ${badge(chat.status)}
+                  &nbsp; ${dateFormat(chat.created_at)}
+                </p>
+
+              </div>
+
+            `).join("")
+            : `<div class="empty">No conversations found.</div>`
+          }
+
+        </div>
+
+
+        <div class="chat-window">
+
+          <div class="panel-header">
+
+            <h3 id="chatTitle">Select a conversation</h3>
+
+            <button class="small-btn hidden" id="chatStatusBtn">
+              Close Chat
+            </button>
+
+          </div>
+
+          <div class="chat-messages" id="chatMessages">
+
+            <div class="empty">
+              Select a customer conversation to view messages.
+            </div>
+
+          </div>
+
+          <form class="chat-compose" id="chatForm">
+
+            <input
+              id="chatMessage"
+              placeholder="Write your reply..."
+              autocomplete="off"
+              disabled
+            >
+
+            <button type="submit" id="chatSendBtn" disabled>
+              Send
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  pageContent.querySelectorAll("[data-chat-id]").forEach(item=>{
+
+    item.addEventListener("click",()=>{
+
+      pageContent.querySelectorAll(".chat-item").forEach(chat=>{
+        chat.classList.remove("selected");
+      });
+
+      item.classList.add("selected");
+
+      loadChat(item.dataset.chatId);
+
+    });
+
+  });
+
+
+  document.getElementById("chatFilter").addEventListener("change",async event=>{
+
+    try{
+
+      const filtered = await api("list_chats",{
+        limit:100,
+        offset:0,
+        status:event.target.value
+      });
+
+      const list = document.getElementById("chatList");
+
+      list.innerHTML = (filtered.conversations || []).map(chat=>`
+
+        <div class="chat-item" data-chat-id="${escapeHTML(chat.id)}">
+
+          <strong>${escapeHTML(chat.customers?.full_name || "Unknown Customer")}</strong>
+
+          <p>${escapeHTML(chat.chat_type || "Chat")}</p>
+
+          <p>${badge(chat.status)} &nbsp; ${dateFormat(chat.created_at)}</p>
+
+        </div>
+
+      `).join("") || `<div class="empty">No conversations found.</div>`;
+
+      list.querySelectorAll("[data-chat-id]").forEach(item=>{
+
+        item.addEventListener("click",()=>{
+
+          list.querySelectorAll(".chat-item").forEach(chat=>{
+            chat.classList.remove("selected");
+          });
+
+          item.classList.add("selected");
+
+          loadChat(item.dataset.chatId);
+
+        });
+
+      });
+
+    }catch(error){
+
+      showToast(error.message);
+
+    }
+
+  });
+
+
+  document.getElementById("chatForm").addEventListener("submit",async event=>{
+
+    event.preventDefault();
+
+    if(!currentChatId) return;
+
+    const input = document.getElementById("chatMessage");
+    const message = input.value.trim();
+
+    if(!message) return;
+
+    const sendBtn = document.getElementById("chatSendBtn");
+
+    sendBtn.disabled = true;
+
+    try{
+
+      await api("reply_chat",{
+        conversation_id:currentChatId,
+        message
+      });
+
+      input.value = "";
+
+      await loadChat(currentChatId);
+
+      showToast("Reply sent.");
+
+    }catch(error){
+
+      showToast(error.message);
+
+    }finally{
+
+      sendBtn.disabled = false;
+
+    }
+
+  });
+
+
+  document.getElementById("chatStatusBtn").addEventListener("click",async()=>{
+
+    if(!currentChatId) return;
+
+    const newStatus = currentChatStatus==="open" ? "closed" : "open";
+
+    try{
+
+      await api("update_chat_status",{
+        conversation_id:currentChatId,
+        status:newStatus
+      });
+
+      showToast("Conversation status updated.");
+
+      await loadPage("chats");
+
+    }catch(error){
+
+      showToast(error.message);
+
+    }
+
+  });
+
+}
+
+
+async function loadChat(id){
+
+  currentChatId = id;
+
+  const messagesBox = document.getElementById("chatMessages");
+
+  messagesBox.innerHTML = `<div class="loading">Loading messages...</div>`;
+
+  try{
+
+    const result = await api("get_chat_messages",{
+      conversation_id:id
+    });
+
+    const conversation = result.conversation;
+
+    currentChatStatus = conversation.status;
+
+    document.getElementById("chatTitle").textContent =
+      conversation.chat_type || "Customer Conversation";
+
+    const statusButton = document.getElementById("chatStatusBtn");
+
+    statusButton.classList.remove("hidden");
+
+    statusButton.textContent =
+      currentChatStatus==="open" ? "Close Chat" : "Reopen Chat";
+
+
+    const messages = result.messages || [];
+
+    messagesBox.innerHTML = messages.length
+      ? messages.map(message=>`
+
+        <div class="message ${message.sender_type==="admin"?"admin":""}">
+
+          ${escapeHTML(message.message)}
+
+          <small>
+            ${escapeHTML(message.sender_type)}
+            · ${dateFormat(message.created_at)}
+          </small>
+
+        </div>
+
+      `).join("")
+      : `<div class="empty">No messages yet.</div>`;
+
+
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+
+    const input = document.getElementById("chatMessage");
+    const send = document.getElementById("chatSendBtn");
+
+    input.disabled = currentChatStatus!=="open";
+    send.disabled = currentChatStatus!=="open";
+
+    input.placeholder = currentChatStatus==="open"
+      ? "Write your reply..."
+      : "This conversation is closed.";
+
+  }catch(error){
+
+    messagesBox.innerHTML = `
+      <div class="notice error">
+        ${escapeHTML(error.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkSession();
+
+</script>
 
 </body>
-  </html>
+</html>
