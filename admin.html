@@ -634,8 +634,8 @@ tr:last-child td{border-bottom:0}
   .topbar-right .status-indicator{display:none}
 }
 
-</style>
-</head>
+.mark.bag-mark{animation:none!important;--bag-color:#111!important}.mark.bag-mark:before,.mark.bag-mark:after{border-color:#111!important}</style>
+<meta name="robots" content="noindex,nofollow"></head>
 
 <body>
 
@@ -705,6 +705,10 @@ tr:last-child td{border-bottom:0}
     <button class="nav-btn" data-page="felucca">
       <span class="nav-icon">⛵</span> Felucca
     </button>
+    <button class="nav-btn" data-page="flight"><span class="nav-icon">✈</span> Flight Requests</button>
+    <button class="nav-btn" data-page="stay"><span class="nav-icon">⌂</span> Stay Requests</button>
+    <button class="nav-btn" data-page="offers"><span class="nav-icon">✧</span> Offers</button>
+    <button class="nav-btn" data-page="gifts"><span class="nav-icon">🎁</span> Gift Requests</button>
 
     <button class="nav-btn" data-page="customer_service">
       <span class="nav-icon">♧</span> Customer Service
@@ -1180,6 +1184,10 @@ const pageNames = {
   tour:"Tour Requests",
   transportation:"Transportation Requests",
   felucca:"Felucca Requests",
+  flight:"Flight Requests",
+  stay:"Stay Requests",
+  offers:"Offer Bookings",
+  gifts:"Gift Requests",
   customer_service:"Customer Service",
   customers:"Customers",
   payments:"Payment Verification",
@@ -1248,6 +1256,18 @@ async function loadPage(page){
       case "felucca":
         await renderRequests("felucca");
         break;
+      case "flight":
+        await renderRequests("flight");
+        break;
+      case "stay":
+        await renderRequests("stay");
+        break;
+      case "offers":
+        await renderOfferRequests();
+        break;
+      case "gifts":
+        await renderGiftRequests();
+        break;
 
       case "customer_service":
         await renderRequests("customer_service");
@@ -1307,7 +1327,11 @@ async function renderOverview(){
 
     ["Paid Bookings",s.paid_booking_verifications || 0,"✓"],
 
-    ["Open Chats",s.open_chats || 0,"✉"]
+    ["Open Chats",s.open_chats || 0,"✉"],
+    ["Flight Requests",s.flight_requests_total || 0,"✈"],
+    ["Stay Requests",s.stay_requests_total || 0,"⌂"],
+    ["Offer Bookings",s.offer_requests_total || 0,"✧"],
+    ["Gift Requests",s.gift_requests_total || 0,"🎁"]
 
   ];
 
@@ -1469,7 +1493,7 @@ async function renderRequests(type){
           <br>
           Departure: ${dateOnly(row.departure_date)}
           <br>
-          Tour: ${dateOnly(row.preferred_tour_date)}
+          Tour: ${dateOnly(row.preferred_tour_date)}<br>Arrival Flight: ${dateOnly(row.arrival_flight_date)} · Departure Flight: ${dateOnly(row.departure_flight_date)}<br>Airport Transfer: ${escapeHTML(row.airport_transfer_type || "none")} · Pickup: ${dateOnly(row.airport_pickup_date)} · Drop-off: ${dateOnly(row.airport_dropoff_date)}
         </span>
       `;
 
@@ -1484,7 +1508,7 @@ async function renderRequests(type){
           ${escapeHTML(row.pickup_location || "—")}
           → ${escapeHTML(row.dropoff_location || "—")}
           <br>
-          Pickup: ${dateOnly(row.pickup_date)}
+          Pickup: ${dateOnly(row.pickup_date)} · Drop-off: ${dateOnly(row.dropoff_date)}
         </span>
       `;
 
@@ -1502,6 +1526,21 @@ async function renderRequests(type){
         </span>
       `;
 
+    }
+
+    if(type==="flight"){
+      details = `
+        ${escapeHTML(row.trip_type || "Flight enquiry")}
+        <br><span class="muted">${escapeHTML(row.departure_city || "—")} → ${escapeHTML(row.arrival_city || "—")}
+        <br>Arrival Flight: ${dateOnly(row.departure_date)} · Departure Flight: ${dateOnly(row.return_date)}
+        <br>Passengers: ${Number(row.passengers || 1)} · Cabin: ${escapeHTML(row.cabin_class || "economy")}</span>`;
+    }
+    if(type==="stay"){
+      details = `
+        ${escapeHTML(row.hotel_category || "Accommodation")}
+        <br><span class="muted">${escapeHTML(row.hotel_name || row.preferred_area || "Area not specified")}
+        <br>Check-in: ${dateOnly(row.check_in_date)} · Check-out: ${dateOnly(row.check_out_date)}
+        <br>Guests: ${Number(row.guests || 1)} · Rooms: ${Number(row.rooms || 1)} · Meal plan: ${escapeHTML(row.meal_plan || "—")}</span>`;
     }
 
     if(type==="customer_service"){
@@ -1692,6 +1731,38 @@ async function renderRequests(type){
 
 }
 
+
+/* =====================================================
+   OFFERS & GIFT REQUESTS
+===================================================== */
+async function renderOfferRequests(){
+  const result=await api("list_offer_requests",{limit:100,offset:0});
+  const rows=(result.offer_requests||[]).map(row=>{
+    const details=`${escapeHTML(row.offer_name||row.offer_type)}<br><span class="muted">Stay: ${dateOnly(row.arrival_date)} → ${dateOnly(row.departure_date)}<br>Transfer: ${escapeHTML(row.airport_transfer_type || "pickup")} · Pickup: ${dateOnly(row.pickup_date)} (${escapeHTML(row.pickup_location_type||"—")}) · Drop-off: ${dateOnly(row.dropoff_date)} (${escapeHTML(row.dropoff_location_type||"—")}) · Guests: ${Number(row.guests||1)} · Rooms: ${Number(row.rooms||1)}</span>`;
+    return `<tr><td><strong>${escapeHTML(row.full_name)}</strong><br><span class="muted">${escapeHTML(row.email)}<br>${escapeHTML(row.phone)}</span></td><td>${details}</td><td>${badge(row.status)}</td><td>${dateFormat(row.created_at)}</td><td><div class="action-cell"><select class="status-select" data-offer-status="${escapeHTML(row.id)}">${statusOptions(row.status)}</select><button class="small-btn" data-offer-update="${escapeHTML(row.id)}">Update</button></div></td></tr>`;
+  });
+  pageContent.innerHTML=`<div class="page-header"><div><h1>Offer Bookings</h1><p>Christmas, Winter and Solar Eclipse 2027 requests.</p></div></div><div class="panel"><div class="panel-header"><h3>${rows.length} Offer Requests Loaded</h3></div>${renderTable(["Customer","Offer & Dates","Status","Created At","Actions"],rows)}</div>`;
+  pageContent.querySelectorAll("[data-offer-update]").forEach(button=>button.addEventListener("click",async()=>{
+    const id=button.dataset.offerUpdate,select=pageContent.querySelector(`[data-offer-status="${id}"]`);
+    button.disabled=true;try{await api("update_offer_request_status",{request_id:id,new_status:select.value});showToast("Offer request updated.");await loadPage("offers");}catch(error){showToast(error.message);button.disabled=false;}
+  }));
+}
+async function renderGiftRequests(){
+  const result=await api("list_gift_requests",{limit:100,offset:0});
+  const rows=(result.gift_requests||[]).map(row=>{
+    const items=Array.isArray(row.selected_items)?row.selected_items:[];
+    const itemText=items.map(item=>{
+      const dates=Object.entries(item).filter(([key])=>key.endsWith("_date")||key==="experience_date"||key==="experience_time"||key==="guide_language"||key==="meal_plan").map(([key,value])=>`${escapeHTML(key.replaceAll("_"," "))}: ${escapeHTML(value)}`).join(" · ");
+      return `<div><strong>${escapeHTML(item.item||item.category)}</strong><br><span class="muted">${dates}</span></div>`;
+    }).join("<hr>");
+    return `<tr><td><strong>${escapeHTML(row.recipient_name)}</strong><br><span class="muted">From: ${escapeHTML(row.sender_name)}<br>${escapeHTML(row.email)}<br>${escapeHTML(row.phone)}</span></td><td>${itemText||"—"}<br>${escapeHTML(row.personal_message||"")}</td><td>${badge(row.status)}</td><td>${dateFormat(row.created_at)}</td><td><div class="action-cell"><select class="status-select" data-gift-status="${escapeHTML(row.id)}">${statusOptions(row.status)}</select><button class="small-btn" data-gift-update="${escapeHTML(row.id)}">Update</button></div></td></tr>`;
+  });
+  pageContent.innerHTML=`<div class="page-header"><div><h1>Gift Requests</h1><p>Review each gift, its selected experiences and individual dates.</p></div></div><div class="panel"><div class="panel-header"><h3>${rows.length} Gift Requests Loaded</h3></div>${renderTable(["Recipient / Sender","Selected Gifts & Dates","Status","Created At","Actions"],rows)}</div>`;
+  pageContent.querySelectorAll("[data-gift-update]").forEach(button=>button.addEventListener("click",async()=>{
+    const id=button.dataset.giftUpdate,select=pageContent.querySelector(`[data-gift-status="${id}"]`);
+    button.disabled=true;try{await api("update_gift_request_status",{request_id:id,new_status:select.value});showToast("Gift request updated.");await loadPage("gifts");}catch(error){showToast(error.message);button.disabled=false;}
+  }));
+}
 
 /* =====================================================
    CUSTOMERS
