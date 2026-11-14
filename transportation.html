@@ -333,7 +333,7 @@ function isValidVayanaDate(value){
  const now=new Date();now.setHours(0,0,0,0);return dt>=now;
 }
 async function submitVayanaRequest(data,button){
- const requiredDate=data._requiredDate||data.preferred_tour_date||data.pickup_date||data.arrival_date;
+ const requiredDate=data._requiredDate||data.preferred_tour_date||data.pickup_date||data.dropoff_date||data.arrival_date;
  if(!isValidVayanaDate(requiredDate)){showVayanaToast('A valid travel date (today or a future date) is required. No request was sent.');return null;}
  const payload={...data};delete payload._requiredDate;
  if(button){button.disabled=true;button.dataset.originalText=button.textContent;button.textContent="Sending request…";}
