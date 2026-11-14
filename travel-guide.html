@@ -770,7 +770,7 @@ async function sendAIChat(){
    if(!enteredEmail?.trim())return;
    email=enteredEmail.trim();
   }
-  if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
    window.alert('Please enter a valid email address.');
    return;
   }
