@@ -319,6 +319,77 @@ img{opacity:1!important}
 .home-offer-card.christmas .snow-layer,.home-offer-card.winter .snow-layer{display:block!important}
 @media(max-width:700px){.brand-gradient-wordmark{font-size:24px!important}.float-tag{right:6%!important;bottom:55px!important;max-width:88%;}}
 @media(prefers-reduced-motion:reduce){.float-tag,.home-offer-card .snow-layer{animation:none!important}}
+
+/* VAYANA visual repair — clearer seasonal snowfall and restored opaque AI chat */
+.home-offer-card{isolation:isolate!important}
+.home-offer-card:after{z-index:2!important}
+.home-offer-card>div{z-index:4!important}
+.home-offer-card .snow-layer{
+  display:block!important;position:absolute!important;inset:0!important;z-index:3!important;
+  overflow:hidden!important;pointer-events:none!important;opacity:1!important;
+  background:none!important
+}
+.home-offer-card .snow-layer:before,
+.home-offer-card .snow-layer:after{
+  content:"";position:absolute;inset:-45% 0 0;display:block;pointer-events:none;
+  background-repeat:repeat;background-size:180px 190px;
+}
+.home-offer-card .snow-layer:before{
+  background-image:
+    radial-gradient(3px 3px at 12px 18px,#fff 96%,transparent),
+    radial-gradient(2px 2px at 76px 58px,rgba(255,255,255,.95) 96%,transparent),
+    radial-gradient(3px 3px at 132px 112px,#fff 96%,transparent),
+    radial-gradient(2px 2px at 42px 154px,rgba(255,255,255,.9) 96%,transparent),
+    radial-gradient(1.5px 1.5px at 158px 32px,#fff 96%,transparent);
+  animation:vayanaSnowfall 7s linear infinite;
+}
+.home-offer-card .snow-layer:after{
+  background-image:
+    radial-gradient(1px 1px at 30px 42px,rgba(255,255,255,.85) 96%,transparent),
+    radial-gradient(2px 2px at 112px 18px,#fff 96%,transparent),
+    radial-gradient(1.5px 1.5px at 164px 142px,rgba(255,255,255,.9) 96%,transparent),
+    radial-gradient(2px 2px at 66px 118px,#fff 96%,transparent);
+  background-size:230px 240px;
+  opacity:.8;filter:drop-shadow(0 0 2px rgba(255,255,255,.45));
+  animation:vayanaSnowfall 11s linear infinite reverse;
+}
+@keyframes vayanaSnowfall{
+  from{transform:translate3d(0,-8%,0);background-position:0 0,0 0,0 0,0 0,0 0}
+  to{transform:translate3d(-12px,42%,0);background-position:0 190px,0 190px,0 190px,0 190px,0 190px}
+}
+/* Keep the AI Travel window solid and deliberately designed, not see-through. */
+#aiChatPanel.chat-panel{
+  background:#fff!important;opacity:1!important;
+  border:1px solid rgba(211,224,234,.95)!important;border-radius:22px!important;
+  box-shadow:0 24px 70px rgba(10,27,43,.28)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+#aiChatPanel .chat-head{
+  background:linear-gradient(120deg,#101923 0%,#1c3447 58%,#315d70 100%)!important;
+  color:#fff!important;border-bottom:1px solid rgba(255,255,255,.14)!important;
+  padding:17px 18px!important;
+}
+#aiChatPanel .chat-head b{font-size:14px!important;letter-spacing:.01em}
+#aiChatPanel .chat-head small{color:#d7e7ef!important;opacity:1!important}
+#aiChatPanel .chat-messages{
+  background:linear-gradient(180deg,#f4f8fb 0%,#edf3f7 100%)!important;
+}
+#aiChatPanel .chat-bubble{
+  background:#fff!important;color:#253746!important;
+  border:1px solid #e1eaf0!important;border-radius:15px 15px 15px 5px!important;
+  box-shadow:0 4px 14px rgba(25,52,72,.07)!important;
+}
+#aiChatPanel .chat-bubble.user{
+  background:linear-gradient(135deg,#e4f3fc,#d5eaf7)!important;
+  color:#18364a!important;border-color:#c8e1f0!important;
+  border-radius:15px 15px 5px 15px!important;
+}
+#aiChatPanel .chat-compose{background:#fff!important;border-top:1px solid #edf1f4!important}
+#aiChatPanel .chat-compose input{background:#f8fafc!important;color:#172b3a!important}
+@media(prefers-reduced-motion:reduce){
+  .home-offer-card .snow-layer:before,.home-offer-card .snow-layer:after{animation:none!important}
+}
+
 </style></head><body class="page-home"><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="brand-gradient-wordmark">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a class="active" href="index.html">Home</a><a class="" href="tours.html">Tours</a><a class="" href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a class="" href="stay.html">Stay – Accommodation</a><a class="" href="offers.html">Offers</a><a class="" href="gift.html">Gift</a></nav><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main><section class="hero">
 <div class="hero-copy">
 <div class="eyebrow">A more personal way to discover Egypt</div>
