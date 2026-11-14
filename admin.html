@@ -1738,7 +1738,7 @@ async function renderRequests(type){
 async function renderOfferRequests(){
   const result=await api("list_offer_requests",{limit:100,offset:0});
   const rows=(result.offer_requests||[]).map(row=>{
-    const details=`${escapeHTML(row.offer_name||row.offer_type)}<br><span class="muted">Stay: ${dateOnly(row.arrival_date)} → ${dateOnly(row.departure_date)}<br>Pickup: ${dateOnly(row.pickup_date)} · Guests: ${Number(row.guests||1)} · Rooms: ${Number(row.rooms||1)}</span>`;
+    const details=`${escapeHTML(row.offer_name||row.offer_type)}<br><span class="muted">Stay: ${dateOnly(row.arrival_date)} → ${dateOnly(row.departure_date)}<br>Transfer: ${escapeHTML(row.airport_transfer_type || "pickup")} · Pickup: ${dateOnly(row.pickup_date)} · Drop-off: ${dateOnly(row.dropoff_date)} · Guests: ${Number(row.guests||1)} · Rooms: ${Number(row.rooms||1)}</span>`;
     return `<tr><td><strong>${escapeHTML(row.full_name)}</strong><br><span class="muted">${escapeHTML(row.email)}<br>${escapeHTML(row.phone)}</span></td><td>${details}</td><td>${badge(row.status)}</td><td>${dateFormat(row.created_at)}</td><td><div class="action-cell"><select class="status-select" data-offer-status="${escapeHTML(row.id)}">${statusOptions(row.status)}</select><button class="small-btn" data-offer-update="${escapeHTML(row.id)}">Update</button></div></td></tr>`;
   });
   pageContent.innerHTML=`<div class="page-header"><div><h1>Offer Bookings</h1><p>Christmas, Winter and Solar Eclipse 2027 requests.</p></div></div><div class="panel"><div class="panel-header"><h3>${rows.length} Offer Requests Loaded</h3></div>${renderTable(["Customer","Offer & Dates","Status","Created At","Actions"],rows)}</div>`;
