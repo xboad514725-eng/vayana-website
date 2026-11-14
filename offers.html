@@ -313,6 +313,63 @@ img{opacity:1!important}
 .service-price{background:#f5f7fa!important;color:#111820!important;border-radius:12px!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;margin:12px 0!important}
 @media(max-width:650px){.chat-launchers{right:10px!important;bottom:12px!important}.chat-launcher{padding:11px 13px!important;font-size:11px!important}.chat-panel{right:10px!important;bottom:130px!important}}
 </style>
+
+<style id="home-identical-chat-window">
+/* Match the Home page chat windows exactly; force opaque surfaces on every page. */
+.chat-panel{
+ position:fixed!important;right:18px!important;bottom:145px!important;
+ width:min(360px,calc(100vw - 30px))!important;
+ background:#fff!important;background-color:#fff!important;
+ border:1px solid #e3e7eb!important;border-radius:20px!important;
+ box-shadow:0 20px 60px #0003!important;z-index:61!important;overflow:hidden!important;
+ opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+.chat-panel[hidden]{display:none!important}
+.chat-head{
+ padding:15px 17px!important;background:#111820!important;background-color:#111820!important;
+ color:#fff!important;display:flex!important;justify-content:space-between!important;align-items:center!important;
+ opacity:1!important;
+}
+.chat-head b,.chat-head small,.chat-close{color:#fff!important}
+.chat-head small{display:block!important;color:#c3ccd4!important;font-size:10px!important;margin-top:3px!important}
+.chat-close{background:none!important;border:0!important;color:#fff!important;font-size:22px!important;cursor:pointer!important}
+.chat-messages{
+ padding:15px!important;max-height:250px!important;overflow:auto!important;
+ background:#f7f8fa!important;background-color:#f7f8fa!important;opacity:1!important;
+}
+.chat-bubble{
+ background:#fff!important;background-color:#fff!important;border:1px solid #e7eaee!important;
+ border-radius:13px!important;padding:10px 12px!important;font-size:12px!important;
+ line-height:1.55!important;margin:0 0 9px!important;max-width:92%!important;color:#111820!important;
+}
+.chat-bubble.user{margin-left:auto!important;background:#eaf4fb!important;background-color:#eaf4fb!important}
+.chat-compose{
+ display:flex!important;gap:8px!important;padding:12px!important;
+ background:#fff!important;background-color:#fff!important;opacity:1!important;
+}
+.chat-compose input{
+ min-width:0!important;flex:1!important;background:#fff!important;background-color:#fff!important;
+ color:#111820!important;border:1px solid #dfe3e8!important;border-radius:99px!important;
+ padding:11px 13px!important;font-size:12px!important;opacity:1!important;
+}
+.chat-compose button,.chat-action{
+ border:0!important;border-radius:99px!important;background:#111820!important;background-color:#111820!important;
+ color:#fff!important;padding:10px 13px!important;font-size:11px!important;font-weight:700!important;cursor:pointer!important;
+}
+.service-chat-body{
+ padding:16px!important;background:#fff!important;background-color:#fff!important;
+ color:#111820!important;opacity:1!important;
+}
+.service-chat-body p{font-size:12px!important;line-height:1.6!important;color:#626b75!important}
+.service-chat-body label{display:block!important;font-size:11px!important;font-weight:700!important;margin:12px 0 6px!important;color:#111820!important}
+.service-chat-body input,.service-chat-body textarea,.service-chat-body select{
+ width:100%!important;background:#fff!important;background-color:#fff!important;color:#111820!important;
+ border:1px solid #dfe3e8!important;border-radius:10px!important;padding:10px!important;
+ font:inherit!important;font-size:12px!important;opacity:1!important;
+}
+.service-price{background:#f5f7fa!important;background-color:#f5f7fa!important;color:#111820!important;border-radius:12px!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;margin:12px 0!important}
+@media(max-width:650px){.chat-panel{right:10px!important;bottom:130px!important}}
+</style>
 </head><body class="page-offers"><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="vayana-word-only">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a class="" href="index.html">Home</a><a class="" href="tours.html">Tours</a><a class="" href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a class="" href="stay.html">Stay – Accommodation</a><a class="active" href="offers.html">Offers</a><a class="" href="gift.html">Gift</a></nav><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main><section class="standalone-hero offers-hero"><div class="eyebrow">A season worth travelling for</div><h1>Choose your<br>Luxor moment.</h1><p>Explore the VAYANA seasonal offers and open the experience that speaks to you.</p></section><section class="offer-picker-section"><div class="offer-picker-grid">
 <button id="christmas" class="offer-pick christmas-pick" type="button" onclick="chooseOffer('Christmas')"><img src="https://iegypttravels.com/storage/programs/PbxjsNOs78mnP6ufUPouW4cYvRBYwMJcn46Si8al.jpg" loading="lazy" alt="Christmas in Luxor"><span class="offer-snow"></span><span><small>BOOK BY 20 DEC 2026 · STAY 20 DEC 2026 – 7 JAN 2027</small><b>Christmas Offer</b><em>Celebrate Christmas in Luxor.</em><strong>Choose this offer ↗</strong></span></button>
 <button id="winter" class="offer-pick winter-pick" type="button" onclick="chooseOffer('Winter')"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Temple_of_Hatshepsut,_Deir_el-Bahari,_Luxor,_Egypt.jpg" alt="Winter in Luxor"><span class="offer-snow"></span><span><small>BOOK BY 20 FEB 2027 · STAY 1 DEC 2026 – 28 FEB 2027</small><b>Winter Offer</b><em>Discover Luxor in its beautiful winter season.</em><strong>Choose this offer ↗</strong></span></button>
