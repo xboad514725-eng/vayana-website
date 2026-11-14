@@ -811,4 +811,12 @@ document.getElementById('stayRequestForm')?.addEventListener('submit',async e=>{
  const result=await submitVayanaRequest({request_type:'stay',full_name:name,email,phone,hotel_category:category,hotel_name:v('stayArea')||null,preferred_area:v('stayArea')||null,comfort_level:v('stayComfort')||null,check_in_date:arrival,check_out_date:departure,guests:Number(v('stayGuests'))||2,rooms:Number(v('stayRooms'))||1,meal_plan:meal,notes:v('stayNotes')||null,_requiredDate:arrival},button);
  if(result?.database_saved===true)e.currentTarget.reset();
 });
-</script></body></html>
+</script>
+<style id="vayana-chat-final-override-v2">
+/* Final chat styling override: placed after page styles so page themes cannot override Home controls. */
+.chat-launchers > button.chat-launcher:not(.service){background:#111820!important;color:#fff!important;border:0!important;box-shadow:0 10px 28px #0003!important;border-radius:99px!important}
+.chat-launchers > button.chat-launcher.service{background:#fff!important;color:#111820!important;border:1px solid #dfe3e8!important;box-shadow:0 10px 28px #0002!important;border-radius:99px!important}
+.chat-launchers > button.chat-launcher{font-size:12px!important;font-weight:700!important;padding:13px 17px!important;cursor:pointer!important}
+@media(max-width:700px){.chat-launchers > button.chat-launcher{font-size:11px!important;padding:11px 13px!important}}
+</style>
+</body></html>
