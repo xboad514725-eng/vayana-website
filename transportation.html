@@ -232,7 +232,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 <div class="transport-tags"><span>Airport transfers</span><span>Private rides</span><span>City-to-city</span><span>Sunset felucca</span><span>Flight booking</span></div>
 </div>
 <div class="transport-form-shell">
-<div class="transport-form-heading"><div class="eyebrow">Transportation hub</div><h3>Choose your transport service</h3><p>All transportation requests, including flight booking assistance, are handled here.</p></div>
+<div class="transport-form-heading"><div class="eyebrow">Transportation hub</div><h3>Choose your transport service</h3><p>Airport transfers, private city transport, intercity transfers and Felucca sailing. Flight tickets are handled separately.</p></div>
 <div class="field">
 <label for="transportService">Choose a transportation service</label>
 <select id="transportService" onchange="updateTransportFields()">
@@ -240,7 +240,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 <option value="private">Private transport within a city</option>
 <option value="intercity">Transfer between cities</option>
 <option value="felucca">Felucca Sunset</option>
-<option value="flight">Flight booking assistance</option>
+
 </select>
 </div>
 <div class="transport-fields" id="airportFields">
@@ -270,14 +270,6 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 <div class="transport-fields hidden" id="feluccaFields">
 <div class="field"><label for="feluccaDate">Which day would you like to sail? *</label><input id="feluccaDate" required="" type="date"/></div>
 <div class="sunset-note"><span>☼</span><div><b>Sunset sailing</b><small>Just choose the date. We’ll arrange the felucca around the sunset time for that day.</small></div></div>
-</div>
-<div class="transport-fields hidden" id="flightFields">
-<div class="field"><label for="flightTripType">Flight type</label><select id="flightTripType" onchange="updateFlightFields()"><option value="oneway">One-way</option><option value="return">Return</option></select></div>
-<div class="field-row"><div class="field"><label for="flightFrom">Departure city / airport</label><input id="flightFrom" placeholder="e.g. Cairo (CAI)"/></div><div class="field"><label for="flightTo">Destination city / airport</label><input id="flightTo" placeholder="e.g. Luxor (LXR)"/></div></div>
-<div class="field-row" style="margin-top:12px"><div class="field"><label for="flightDepartureDate">Departure date *</label><input id="flightDepartureDate" required="" type="date"/></div><div class="field"><label for="flightDepartureTime">Preferred departure time</label><input id="flightDepartureTime" type="time"/></div></div>
-<div class="field-row hidden" id="flightReturnFields" style="margin-top:12px"><div class="field"><label for="flightReturnDate">Return date *</label><input id="flightReturnDate" type="date"/></div><div class="field"><label for="flightReturnTime">Preferred return time *</label><input id="flightReturnTime" type="time"/></div></div>
-<div class="field" style="margin-top:12px"><label for="flightAirline">Preferred airline (optional)</label><input id="flightAirline" placeholder="Any airline or your preferred airline"/></div>
-<p class="transport-hint">This is a flight-booking assistance request, not an issued ticket. Vayana will check available options and contact you before any booking is confirmed.</p>
 </div>
 <div class="field-row transport-contact">
 <div class="field"><label for="transportName">Your name *</label><input autocomplete="name" id="transportName" placeholder="Full name" required=""/></div>
@@ -473,13 +465,7 @@ function showDemoStatus(){
 
 function updateTransportFields(){
  const key=document.getElementById('transportService').value;
- ['airport','private','intercity','felucca','flight'].forEach(k=>document.getElementById(k+'Fields').classList.toggle('hidden',k!==key));
-}
-function updateFlightFields(){
- const isReturn=document.getElementById('flightTripType').value==='return';
- const wrap=document.getElementById('flightReturnFields');wrap.classList.toggle('hidden',!isReturn);
- document.getElementById('flightReturnDate').required=isReturn;
- document.getElementById('flightReturnTime').required=isReturn;
+ ['airport','private','intercity','felucca'].forEach(k=>document.getElementById(k+'Fields').classList.toggle('hidden',k!==key));
 }
 function updateAirportFields(){
  const type=document.getElementById('airportTransferType').value;
@@ -579,18 +565,7 @@ function sendTransportationRequest(){
   pickupDate=val('feluccaDate');
   if(!pickupDate){alert('Please select your preferred felucca date.');return;}
   notes+='Experience: Sunset felucca on the Nile. Timing to be arranged around sunset.\n';
- }else if(service==='flight'){
-  serviceType='flight_booking_assistance';
-  pickupLocation=val('flightFrom');
-  dropoffLocation=val('flightTo');
-  pickupDate=val('flightDepartureDate');
-  pickupTime=val('flightDepartureTime');
-  dropoffDate=val('flightReturnDate');
-  dropoffTime=val('flightReturnTime');
-  if(!required([pickupLocation,dropoffLocation,pickupDate],'Please enter departure city, destination and departure date.'))return;
-  if(document.getElementById('flightTripType').value==='return'&&!required([dropoffDate,dropoffTime],'Please enter the return date and preferred return time for a return flight.'))return;
-  if(dropoffDate&&dropoffDate<pickupDate){alert('Return date cannot be before departure date.');return;}
-  notes+=`Flight booking assistance. Preferred airline: ${val('flightAirline')||'No preference'}. This is an enquiry, not a confirmed ticket.\n`;
+ 
  }else{
   alert('Invalid transportation service.');return;
  }
