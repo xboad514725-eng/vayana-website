@@ -507,8 +507,8 @@ Restaurant preference: ${document.getElementById("restaurantNotes").value}
 Hot air balloon: ${document.getElementById("balloon").checked?"Requested":"No"}
 Budget: ${document.getElementById("budgetAmount").value}
 Duration: ${document.getElementById("days").value}
-Notes: ${document.getElementById("generalNotes").value}\nAirport transfer: ${transferType}\nAirport pickup date: ${airportPickupDate||"Not selected"}\nAirport drop-off date: ${airportDropoffDate||"Not selected"}`;
- await submitVayanaRequest({request_type:"tour",full_name:document.getElementById("name").value.trim(),email:document.getElementById("email").value.trim(),phone:document.getElementById("journeyPhone").value.trim(),package_name:selected("package"),guests:Number(document.getElementById("guests").value)||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:tourDate,arrival_flight_date:needsArrival?arrivalFlightDate:null,departure_flight_date:needsDeparture?departureFlightDate:null,flight_ticket_type:includeFlights?flightOption:"none",airport_transfer_type:transferType,airport_pickup_date:["pickup","both"].includes(transferType)?airportPickupDate:null,airport_dropoff_date:["dropoff","both"].includes(transferType)?airportDropoffDate:null,preferred_tour_time:"",hotel_category:selected("hotel"),comfort_level:selected("comfort"),notes},event.currentTarget);
+Notes: ${document.getElementById("generalNotes").value}\nAirport transfer: ${transferType}\nAirport pickup date: ${airportPickupDate||"Not selected"}\nAirport drop-off date: ${airportDropoffDate||"Not selected"}\nFlight ticket option: ${includeFlights?flightOption:"Not selected"}\nArrival flight date: ${needsArrival?arrivalFlightDate:"Not selected"}\nDeparture flight date: ${needsDeparture?departureFlightDate:"Not selected"}`;
+ await submitVayanaRequest({request_type:"tour",full_name:document.getElementById("name").value.trim(),email:document.getElementById("email").value.trim(),phone:document.getElementById("journeyPhone").value.trim(),package_name:selected("package"),guests:Number(document.getElementById("guests").value)||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:tourDate,arrival_flight_date:needsArrival?arrivalFlightDate:null,departure_flight_date:needsDeparture?departureFlightDate:null,airport_transfer_type:transferType,airport_pickup_date:["pickup","both"].includes(transferType)?airportPickupDate:null,airport_dropoff_date:["dropoff","both"].includes(transferType)?airportDropoffDate:null,preferred_tour_time:"",hotel_category:selected("hotel"),comfort_level:selected("comfort"),notes},event.currentTarget);
 });
 
 
@@ -851,16 +851,5 @@ if(document.getElementById("flightTripType"))updateFlightFields();
 })();
 
 
-document.getElementById("eclipseTourForm")?.addEventListener("submit",async e=>{
- e.preventDefault();const v=id=>document.getElementById(id).value.trim();
- const arrival=v("eclipseArrival"),departure=v("eclipseDeparture"),eclipseDate="2027-08-02";
- if(!isValidVayanaDate(arrival)||!isValidVayanaDate(departure)){alert("Please choose valid arrival and departure dates. Dates cannot be in the past.");return;}
- if(departure<arrival||arrival>eclipseDate||departure<eclipseDate){alert("Your stay dates must include 2 August 2027.");return;}
- const name=v("eclipseName"),email=v("eclipseEmail"),phone=v("eclipsePhone");
- if(!name||!email||!phone){alert("Full name, email and phone / WhatsApp are required.");return;}
- if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){alert("Please enter a valid email address.");return;}
- const button=e.currentTarget.querySelector('button[type="submit"]');
- const result=await submitVayanaRequest({request_type:"tour",full_name:name,email,phone,package_name:"Solar Eclipse 2027 · "+v("eclipseTourPackage"),guests:Number(v("eclipseGuests").replace("+",""))||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:eclipseDate,hotel_category:"",comfort_level:"",notes:"Dedicated Solar Eclipse 2027 tour request. "+v("eclipseNotes")},button);
- if(result?.database_saved===true)e.currentTarget.reset();
-});
+
 </script></body></html>
