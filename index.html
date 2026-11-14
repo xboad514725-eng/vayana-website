@@ -211,12 +211,41 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 @media(max-width:650px){#realLuxorMap{min-height:410px}.chat-launchers{right:10px;bottom:12px}.chat-launcher{padding:11px 13px;font-size:11px}.chat-panel{right:10px;bottom:130px}}
 </style>
 
+<style id="home-layout-correction">
+#balloon-experience,#discover,#experiences,#map,#local-experiences,#transportation,#before-you-go,#luxor-story,#customize,#about,#compare,#gift,#special-moments,#guest-stories,#request-tracker,#about-vayana{display:none!important}
+.home-offers,.home-services{padding:86px 6%;background:#fff}.home-section-heading{text-align:center;max-width:720px;margin:0 auto 34px}
+.home-section-heading>span,.home-guide>div>span{font-size:10px;font-weight:800;letter-spacing:.2em;color:#71808d}
+.home-section-heading h2,.home-guide h2{font-size:clamp(34px,4.5vw,56px);letter-spacing:-.065em;line-height:1.05;margin:12px 0}
+.home-section-heading p,.home-guide p{color:#6e737d;line-height:1.65;margin:0}
+.home-offer-grid,.home-service-grid{max-width:1220px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.home-offer-card{height:370px;position:relative;overflow:hidden;border-radius:24px;color:#fff;background:#14243a;box-shadow:0 18px 45px #14243a18}
+.home-offer-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#07111bf0,transparent 78%)}
+.home-offer-card>img,.home-service-card>img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s}
+.home-offer-card:hover>img,.home-service-card:hover>img{transform:scale(1.055)}
+.home-offer-copy{position:absolute;z-index:2;left:22px;right:22px;bottom:22px}
+.home-offer-copy small,.home-service-card small{font-size:9px;letter-spacing:.16em;font-weight:800}
+.home-offer-copy h3{font-size:29px;letter-spacing:-.045em;margin:9px 0}.home-offer-copy p{font-size:13px;color:#e0e6ed;margin:0 0 15px}
+.home-offer-copy b,.home-service-card b{font-size:12px}
+.home-card-snow{position:absolute;z-index:1;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 20% 20%,#fff 98%,transparent),radial-gradient(3px 3px at 70% 35%,#fff 98%,transparent),radial-gradient(1.5px 1.5px at 40% 65%,#fff 98%,transparent);background-size:170px 190px;animation:homeSnowfall 8s linear infinite}
+@keyframes homeSnowfall{from{background-position:0 -190px,0 -190px,0 -190px}to{background-position:0 190px,0 190px,0 190px}}
+.home-services{background:#f5f7fa}.home-service-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.home-service-card{min-height:350px;overflow:hidden;border-radius:22px;background:#fff;border:1px solid #e7e8eb;box-shadow:0 12px 32px #14243a0c;display:flex;flex-direction:column}
+.home-service-card>img{height:190px}.home-service-card>div{padding:20px;display:flex;flex:1;flex-direction:column;align-items:flex-start}
+.home-service-card small{color:#71808d}.home-service-card h3{font-size:20px;margin:8px 0}
+.home-service-card p{font-size:13px;line-height:1.6;color:#6e737d;margin:0 0 18px}.home-service-card b{margin-top:auto;color:#14243a}
+.home-guide{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:82px 7%;background:#101820;color:#fff}
+.home-guide h2{color:#fff}.home-guide p{color:#c3cbd3;max-width:470px;margin-bottom:22px}.home-guide a{display:inline-block;color:#9dc9e8;font-size:13px;font-weight:700}
+.home-guide img{width:100%;height:300px;object-fit:cover;border-radius:22px}
+@media(max-width:900px){.home-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.home-offers,.home-services{padding:66px 5%}.home-offer-grid,.home-service-grid{grid-template-columns:1fr}.home-offer-card{height:320px}.home-service-card{min-height:0}.home-service-card>img{height:210px}.home-guide{grid-template-columns:1fr;padding:66px 6%;gap:24px}.home-guide img{height:230px}}
+@media(prefers-reduced-motion:reduce){.home-card-snow{animation:none}.home-offer-card>img,.home-service-card>img{transition:none}}
+</style>
 </head>
 <body>
 <header class="nav">
   <a class="brand" href="index.html" aria-label="Vayana home"><span>Vayana</span></a>
   <nav class="navlinks"><a href="index.html" class="active">Home</a><a href="tours.html">Tours</a><a href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a></nav>
-  <a class="nav-cta" href="#customize">Create your journey ↗</a>
+  <a class="nav-cta" href="offers.html">Explore offers ↗</a>
   <button class="menu" onclick="document.getElementById('customize').scrollIntoView({behavior:'smooth'})" aria-label="Open menu">☰</button>
 </header>
 
@@ -226,7 +255,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
     <div class="eyebrow">A more personal way to discover Egypt</div>
     <h1>Egypt.<br>On your terms.</h1>
     <p>From the first sunrise in Luxor to the last moment of your journey, make every detail feel like yours.</p>
-    <div class="hero-actions"><a class="btn" href="#customize">Design your journey&nbsp; ↗</a><a class="btn secondary" href="#experiences">Explore experiences</a></div>
+    <div class="hero-actions"><a class="btn" href="offers.html">Explore offers&nbsp; ↗</a><a class="btn secondary" href="#home-services">Explore services</a></div>
     <div class="hero-note"><span></span>Thoughtfully planned. Personally experienced.</div>
   </div>
   <div class="hero-balloon-gallery" aria-label="Hot air balloon experiences in Luxor">
@@ -237,13 +266,26 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
   <div class="float-tag"><b>One destination. Endless ways.</b>Made around you, not a fixed package.</div>
 </section>
 
+<section class="home-offers" id="home-offers"><div class="home-section-heading"><span>SEASONAL EXPERIENCES</span><h2>Find your Luxor moment.</h2><p>Three special ways to experience Luxor with VAYANA.</p></div><div class="home-offer-grid">
+<a class="home-offer-card" href="offers.html#eclipse"><img src="https://traveltoegypt.co/_next/image/?q=75&url=%2Fmedia%2Fluxor-solar-eclipse%2Fluxor-temple-total-solar-eclipse.webp&w=3840" alt="Solar eclipse over Luxor"><div class="home-offer-copy"><small>02 AUGUST 2027 · LUXOR</small><h3>Solar Eclipse 2027</h3><p>Experience a rare celestial event in Luxor.</p><b>Explore offer ↗</b></div></a>
+<a class="home-offer-card" href="offers.html#christmas"><img src="https://iegypttravels.com/storage/programs/PbxjsNOs78mnP6ufUPouW4cYvRBYwMJcn46Si8al.jpg" alt="Christmas in Luxor"><span class="home-card-snow"></span><div class="home-offer-copy"><small>20 DEC 2026 – 7 JAN 2027</small><h3>Christmas Offer</h3><p>Celebrate Christmas with a festive Luxor escape.</p><b>Explore offer ↗</b></div></a>
+<a class="home-offer-card" href="offers.html#winter"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Temple_of_Hatshepsut,_Deir_el-Bahari,_Luxor,_Egypt.jpg" alt="Winter at Hatshepsut Temple"><span class="home-card-snow"></span><div class="home-offer-copy"><small>1 DEC 2026 – 28 FEB 2027</small><h3>Winter Offer</h3><p>Discover Luxor in its beautiful winter season.</p><b>Explore offer ↗</b></div></a>
+</div></section>
+<section class="home-services" id="home-services"><div class="home-section-heading"><span>EXPLORE VAYANA</span><h2>Experiences made around you.</h2><p>Choose a service to discover more and send your request.</p></div><div class="home-service-grid">
+<a class="home-service-card" href="tours.html#balloonOnlyDate"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Balloon_over_Luxor_-_Egypt.jpg" alt="Hot air balloons over Luxor"><div><small>ABOVE LUXOR</small><h3>Hot Air Balloon</h3><p>Watch the sunrise from above the West Bank.</p><b>Request Now ↗</b></div></a>
+<a class="home-service-card" href="tours.html#packagesPanel"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Forest_of_eternity._Temple_of_Karnak%2C_Egypt.jpg" alt="Karnak Temple"><div><small>DISCOVER THE HISTORY</small><h3>Tours</h3><p>Explore Luxor through private and shared experiences.</p><b>Request Now ↗</b></div></a>
+<a class="home-service-card" href="transportation.html"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Luxor_Nile_bridge.jpg" alt="Transportation in Luxor"><div><small>MOVE WITH EASE</small><h3>Transportation</h3><p>Arrange airport transfers and private transportation.</p><b>Request Now ↗</b></div></a>
+<a class="home-service-card" href="stay.html"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85" alt="Hotel accommodation"><div><small>YOUR PLACE IN LUXOR</small><h3>Stay Accommodation</h3><p>Find a comfortable stay for your time in Luxor.</p><b>Request Now ↗</b></div></a>
+</div></section>
+<section class="home-guide" id="home-guide"><div><span>PLAN WITH CONFIDENCE</span><h2>Before you travel.</h2><p>Useful information and local guidance to help you prepare for your time in Luxor.</p><a href="travel-guide.html">Explore Travel Guide ↗</a></div><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Luxor_Temple_at_night.jpg" alt="Luxor Temple at night"></section>
+
 
 <section class="balloon-experience" id="balloon-experience">
  <div class="balloon-experience-head">
   <div class="eyebrow">A different point of view</div>
   <h2>Wake up above<br><span>the wonders of Luxor.</span></h2>
   <p>As the sun rises over the Nile, watch the temples and the West Bank come to life from the sky.</p>
-  <a class="btn" href="#customize">Add a balloon experience ↗</a>
+  <a class="btn" href="tours.html#balloonOnlyDate">Request a balloon flight ↗</a>
  </div>
  <div class="balloon-mosaic">
   <figure class="balloon-shot balloon-shot-large"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Balloon_over_Luxor_-_Egypt.jpg" alt="Hot air balloons floating over Luxor at sunrise" loading="lazy"><figcaption>Sunrise over the West Bank</figcaption></figure>
@@ -279,7 +321,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
  <div class="section-head"><div class="eyebrow">Explore the city</div><h2>Two banks. A thousand stories.</h2><p>Explore the East and West Banks of Luxor. Select a landmark to discover what makes it special.</p></div>
  <div class="map-layout">
   <div id="realLuxorMap" class="map-art" role="application" aria-label="Interactive street map of Luxor and its main archaeological sites"><div class="map-loading">Loading the real Luxor map…</div></div>
-  <aside class="map-info"><div class="eyebrow">A closer look</div><h3 id="mapPlaceTitle">Discover Luxor</h3><p id="mapPlaceDescription">Choose any marked place on the map to see a short introduction and add it to your journey planning.</p><a class="btn" href="#customize">Plan a visit ↗</a><small>Illustrative map for discovery. Not a navigation or distance map.</small></aside>
+  <aside class="map-info"><div class="eyebrow">A closer look</div><h3 id="mapPlaceTitle">Discover Luxor</h3><p id="mapPlaceDescription">Choose any marked place on the map to see a short introduction and add it to your journey planning.</p><a class="btn" href="tours.html#packagesPanel">Explore tours ↗</a><small>Illustrative map for discovery. Not a navigation or distance map.</small></aside>
  </div>
 </section>
 
@@ -385,7 +427,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
   <div class="eyebrow">More than a destination</div>
   <h2>Find your own<br>way through Luxor.</h2>
   <p>Ancient landmarks, quiet Nile moments and unforgettable experiences — brought together in a journey shaped around you.</p>
-  <a class="btn" href="#customize">Create your journey ↗</a>
+  <a class="btn" href="offers.html">Explore offers ↗</a>
  </div>
  <div class="panorama-stamp">LUXOR <span>EGYPT</span></div>
 </section>
@@ -529,7 +571,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 
 <footer class="footer" id="contact">
   <div><div class="brand"><span>Vayana</span></div><p>Discover Egypt, your way.</p></div>
-  <div class="footer-links"><a href="#experiences">Experiences</a><a href="#customize">Customize</a><a href="mailto:xboad514725@gmail.com">Email us</a><span>© <span id="year"></span> Vayana</span></div>
+  <div class="footer-links"><a href="#experiences">Experiences</a><a href="offers.html">Offers</a><a href="mailto:xboad514725@gmail.com">Email us</a><span>© <span id="year"></span> Vayana</span></div>
 </footer>
 <div class="toast" id="toast" role="status"></div>
 
