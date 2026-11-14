@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">VAYANA Christmas wordmark</title><desc id="desc">A custom typographic VAYANA logo with a Christmas tree replacing the first A, a gift-wrapped Y, snow caps, evergreen garland and presents.</desc>
+<defs>
+ <linearGradient id="tree" x2="0" y2="1"><stop stop-color="#39b928"/><stop offset=".55" stop-color="#087c25"/><stop offset="1" stop-color="#06491c"/></linearGradient>
+ <linearGradient id="red" x2="0" y2="1"><stop stop-color="#ff4a42"/><stop offset=".5" stop-color="#d60016"/><stop offset="1" stop-color="#85000b"/></linearGradient>
+ <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fff0a1"/><stop offset=".55" stop-color="#e7a72d"/><stop offset="1" stop-color="#9d5c08"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dy="5"/><feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <g id="snow"><path d="M0 0 Q12 -19 27 -11 Q40 -31 57 -15 Q75 -29 91 -11 Q108 -25 123 -9 Q139 -20 151 -3 Q166 -13 181 3 Q194 12 183 22 L8 22 Q-9 14 0 0Z" fill="#fff" stroke="#e7edf3" stroke-width="4"/><path d="M8 9 Q35 2 53 12 T100 10 T175 11" fill="none" stroke="#f7fbff" stroke-width="6" stroke-linecap="round"/></g>
+</defs>
+<!-- New bold geometric letterform, deliberately not a copy of the reference artwork -->
+<g font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="300" letter-spacing="-20" filter="url(#shadow)" fill="#08090b">
+ <text x="28" y="332">V</text><text x="492" y="332" fill="#0a6c25">Y</text><text x="690" y="332">A</text><text x="884" y="332">N</text><text x="1060" y="332">A</text>
+</g>
+<!-- Christmas tree replaces the first A -->
+<g filter="url(#shadow)">
+ <path d="M315 80 L292 118 L306 115 L277 157 L295 152 L260 205 L286 198 L245 255 L285 245 L220 320 L405 320 L345 245 L385 255 L344 198 L370 205 L335 152 L353 157 L324 115 L338 118Z" fill="url(#tree)" stroke="#07551d" stroke-width="5"/>
+ <path d="M310 315 L310 350 L335 350 L335 315" fill="#75401c"/>
+ <path d="M270 207 Q315 240 360 207 M250 267 Q315 307 390 267" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+ <path d="M315 58 L327 88 L359 90 L334 109 L343 140 L315 122 L287 140 L296 109 L271 90 L303 88Z" fill="url(#gold)" stroke="#c77d0b" stroke-width="4"/>
+ <g fill="#e51c25" stroke="#a80011" stroke-width="3"><circle cx="297" cy="175" r="10"/><circle cx="345" cy="194" r="11"/><circle cx="278" cy="250" r="12"/><circle cx="353" cy="270" r="11"/><circle cx="315" cy="290" r="10"/></g>
+ <g fill="#ffdc68" stroke="#bb7b12" stroke-width="2"><circle cx="330" cy="155" r="8"/><circle cx="318" cy="224" r="9"/><circle cx="375" cy="237" r="8"/><circle cx="260" cy="291" r="8"/></g>
+ <path d="M315 180 C280 145 267 182 315 197 C363 182 350 145 315 180Z" fill="url(#red)"/><path d="M315 180 C278 198 289 218 315 190 C341 218 352 198 315 180Z" fill="#e60018"/>
+</g>
+<!-- Gift-wrap detail on the Y -->
+<g>
+ <path d="M558 92 L612 92 L710 225 L762 92 L818 92 L737 230 L737 332 L680 332 L680 230Z" fill="none" stroke="#0a4d1b" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M592 140 L644 140 L724 246 L772 140" fill="none" stroke="url(#red)" stroke-width="24" stroke-linecap="round"/>
+ <path d="M708 220 L708 333" stroke="url(#red)" stroke-width="24"/>
+ <path d="M705 153 C662 104 635 147 691 179 C652 205 678 230 710 190 C745 230 773 202 728 178 C785 143 750 103 713 153Z" fill="url(#red)" stroke="#a90010" stroke-width="5"/>
+ <circle cx="708" cy="184" r="15" fill="url(#gold)" stroke="#a66a0a" stroke-width="4"/>
+</g>
+<!-- Snow caps on the full wordmark -->
+<g filter="url(#shadow)">
+ <use href="#snow" x="24" y="45" transform="translate(24 45) scale(1.05 .82)"/>
+ <use href="#snow" x="485" y="42" transform="translate(485 42) scale(1.7 .8)"/>
+ <use href="#snow" x="687" y="45" transform="translate(687 45) scale(1.05 .82)"/>
+ <use href="#snow" x="878" y="45" transform="translate(878 45) scale(1.1 .82)"/>
+ <use href="#snow" x="1060" y="45" transform="translate(1060 45) scale(.9 .82)"/>
+</g>
+<!-- Evergreen base and ornaments -->
+<g fill="none" stroke-linecap="round">
+ <path d="M35 405 Q220 350 390 414 T760 408 T1165 408" stroke="#0b6c2b" stroke-width="13"/>
+ <path d="M55 420 l-40 -35 m40 35 l-25 34 m25 -34 l10 -42 M160 408 l-30 -37 m30 37 l-12 42 M1040 411 l30 -39 m-30 39 l15 42 M1140 409 l40 -34 m-40 34 l-5 38" stroke="#167b31" stroke-width="7"/>
+</g>
+<g fill="url(#gold)"><circle cx="110" cy="410" r="7"/><circle cx="185" cy="395" r="7"/><circle cx="415" cy="412" r="7"/><circle cx="810" cy="410" r="7"/><circle cx="1010" cy="397" r="7"/></g>
+<!-- Small present silhouettes -->
+<g filter="url(#shadow)">
+ <g transform="translate(360 405)"><rect x="0" y="26" width="92" height="58" rx="5" fill="#fff" stroke="#ddd"/><rect x="38" y="26" width="17" height="58" fill="#d90b20"/><rect x="-5" y="18" width="102" height="14" rx="4" fill="#f8f8f8"/><path d="M46 20 C10 -6 10 24 46 27 C82 -4 82 24 46 27Z" fill="url(#red)"/></g>
+ <g transform="translate(475 422)"><rect x="0" y="20" width="75" height="48" rx="4" fill="url(#red)"/><rect x="30" y="20" width="13" height="48" fill="url(#gold)"/><rect x="-4" y="12" width="83" height="12" rx="4" fill="#ed1a2c"/><path d="M36 13 C8 -9 8 15 36 20 C64 -8 64 15 36 20Z" fill="url(#gold)"/></g>
+ <g transform="translate(650 392)"><rect x="0" y="28" width="116" height="76" rx="5" fill="#d90019"/><rect x="48" y="28" width="20" height="76" fill="url(#gold)"/><rect x="-6" y="18" width="128" height="16" rx="4" fill="#ed1427"/><path d="M58 20 C15 -18 15 20 58 25 C101 -18 101 20 58 25Z" fill="url(#gold)"/></g>
+ <g transform="translate(825 416)"><rect x="0" y="22" width="80" height="55" rx="4" fill="#f6f1e7" stroke="#ddd"/><rect x="33" y="22" width="14" height="55" fill="#cf0b1d"/><rect x="-4" y="14" width="88" height="13" rx="4" fill="#fff"/><path d="M40 15 C10 -9 10 17 40 20 C70 -9 70 17 40 20Z" fill="url(#red)"/></g>
+</g>
+<g fill="#fff" opacity=".98"><path d="M0 485 Q35 458 65 485 Q92 454 120 486 Q155 462 180 490 Q220 455 250 488 Q280 461 312 490 Q345 455 380 488 Q410 460 440 489 Q470 457 505 489 Q535 460 570 490 Q600 456 635 488 Q670 457 700 490 Q735 462 770 489 Q800 456 835 489 Q870 460 900 489 Q930 457 965 490 Q995 461 1030 489 Q1060 455 1095 488 Q1130 462 1200 487 L1200 520 L0 520Z"/></g>
+</svg>
