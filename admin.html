@@ -1493,7 +1493,7 @@ async function renderRequests(type){
           <br>
           Departure: ${dateOnly(row.departure_date)}
           <br>
-          Tour: ${dateOnly(row.preferred_tour_date)}<br>Arrival Flight: ${dateOnly(row.arrival_flight_date)} · Departure Flight: ${dateOnly(row.departure_flight_date)}
+          Tour: ${dateOnly(row.preferred_tour_date)}<br>Arrival Flight: ${dateOnly(row.arrival_flight_date)} · Departure Flight: ${dateOnly(row.departure_flight_date)}<br>Airport Transfer: ${escapeHTML(row.airport_transfer_type || "none")} · Pickup: ${dateOnly(row.airport_pickup_date)} · Drop-off: ${dateOnly(row.airport_dropoff_date)}
         </span>
       `;
 
