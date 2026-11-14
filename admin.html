@@ -1327,7 +1327,11 @@ async function renderOverview(){
 
     ["Paid Bookings",s.paid_booking_verifications || 0,"✓"],
 
-    ["Open Chats",s.open_chats || 0,"✉"]
+    ["Open Chats",s.open_chats || 0,"✉"],
+    ["Flight Requests",s.flight_requests_total || 0,"✈"],
+    ["Stay Requests",s.stay_requests_total || 0,"⌂"],
+    ["Offer Bookings",s.offer_requests_total || 0,"✧"],
+    ["Gift Requests",s.gift_requests_total || 0,"🎁"]
 
   ];
 
@@ -1504,7 +1508,7 @@ async function renderRequests(type){
           ${escapeHTML(row.pickup_location || "—")}
           → ${escapeHTML(row.dropoff_location || "—")}
           <br>
-          Pickup: ${dateOnly(row.pickup_date)}
+          Pickup: ${dateOnly(row.pickup_date)} · Drop-off: ${dateOnly(row.dropoff_date)}
         </span>
       `;
 
