@@ -727,6 +727,7 @@ function toggleChat(which){
  panel.hidden=!panel.hidden;
 }
 const VAYANA_AI_SESSION_KEY = 'vayana_ai_chat_session_v1';
+const VAYANA_AI_PROFILE_KEY = 'vayana_ai_chat_profile_v1';
 
 function getVayanaAISession(){
  try{return JSON.parse(localStorage.getItem(VAYANA_AI_SESSION_KEY)||'null');}
@@ -734,6 +735,13 @@ function getVayanaAISession(){
 }
 function saveVayanaAISession(session){
  localStorage.setItem(VAYANA_AI_SESSION_KEY,JSON.stringify(session));
+}
+function getVayanaAIProfile(){
+ try{return JSON.parse(localStorage.getItem(VAYANA_AI_PROFILE_KEY)||'null');}
+ catch(_){return null;}
+}
+function saveVayanaAIProfile(profile){
+ localStorage.setItem(VAYANA_AI_PROFILE_KEY,JSON.stringify(profile));
 }
 async function callVayanaAI(payload){
  const response=await fetch(VAYANA_API,{
@@ -790,33 +798,45 @@ async function sendAIChat(){
  if(!input||!message||input.disabled)return;
 
  let session=getVayanaAISession();
+ let profile=getVayanaAIProfile();
+ if(session?.full_name&&session?.email)profile={full_name:session.full_name,email:session.email};
+
+ // Ask for the visitor's identity once, then remember it on this device across all VAYANA pages.
+ if(!session?.conversation_id||!session?.access_token){
+  let fullName=profile?.full_name||'';
+  let email=profile?.email||'';
+  if(!fullName){
+   const enteredName=window.prompt('Welcome to VAYANA! Before we start, please enter your full name:');
+   if(!enteredName?.trim())return;
+   fullName=enteredName.trim();
+  }
+  if(!email){
+   const enteredEmail=window.prompt('Please enter your email address. We only need this once to save your conversation:');
+   if(!enteredEmail?.trim())return;
+   email=enteredEmail.trim();
+  }
+  if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){
+   window.alert('Please enter a valid email address.');
+   return;
+  }
+  profile={full_name:fullName,email:email.toLowerCase()};
+  saveVayanaAIProfile(profile);
+ }
+
  addVayanaAIMessage(message,true);
- input.value='';input.disabled=true;
+ input.value='';
+ input.disabled=true;
  if(button){button.disabled=true;button.textContent='Sending…';}
  const typing=addVayanaAIMessage('Vayana AI is thinking…');
 
  try{
   let result;
   if(!session?.conversation_id||!session?.access_token){
-   const fullName=window.prompt('Before we start, what is your name?');
-   if(!fullName?.trim()){
-    typing?.remove();
-    addVayanaAIMessage('Please enter your name to start the conversation.');
-    return;
-   }
-   const contact=window.prompt('Please enter your email address or phone number.');
-   if(!contact?.trim()){
-    typing?.remove();
-    addVayanaAIMessage('Please enter an email address or phone number to start the conversation.');
-    return;
-   }
-   const cleanContact=contact.trim();
-   const isEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanContact);
    result=await callVayanaAI({
     action:'create_chat',
     chat_type:'ai_travel',
-    full_name:fullName.trim(),
-    ...(isEmail?{email:cleanContact}:{phone:cleanContact}),
+    full_name:profile.full_name,
+    email:profile.email,
     message
    });
    const conversation=result.conversation||result.data?.conversation||{};
@@ -825,7 +845,7 @@ async function sendAIChat(){
    if(!conversationId||!accessToken){
     throw new Error('The chat session could not be initialized. Please try again.');
    }
-   session={conversation_id:conversationId,access_token:accessToken};
+   session={conversation_id:conversationId,access_token:accessToken,full_name:profile.full_name,email:profile.email};
    saveVayanaAISession(session);
   }else{
    result=await callVayanaAI({
