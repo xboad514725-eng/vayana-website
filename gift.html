@@ -228,7 +228,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 <button type="button" data-category="balloon">Hot Air Balloon</button><button type="button" data-category="offers">Offers</button><button type="button" data-category="packages">Packages</button><button type="button" data-category="felucca">Felucca Sunset</button><button type="button" data-category="flights">Flight Tickets</button><button type="button" data-category="accommodation">Accommodation</button></div>
 <div class="gift-options" id="giftOptions" hidden><h3 id="giftOptionsTitle">Choose an experience</h3><div id="giftOptionList"></div><a id="giftTourLink" class="gift-tour-link" href="tours.html#packagesPanel" hidden>Explore full tour itineraries ↗</a></div>
 <div class="gift-summary"><h3>Gift Summary</h3><ul id="giftSummaryList"><li>Your selected experiences will appear here.</li></ul></div>
-<form id="giftRequestForm"><h3>Make it personal</h3><div class="field-row"><div class="field"><label for="giftRecipient">Recipient name *</label><input id="giftRecipient" required></div><div class="field"><label for="giftSender">Sender name *</label><input id="giftSender" required></div></div><div class="field" style="margin-top:12px"><label for="giftMessage">Personal message</label><textarea id="giftMessage" rows="3"></textarea></div><div class="field" style="margin-top:12px"><label for="giftDate">Preferred gift / experience date *</label><input id="giftDate" type="date" required></div><div class="field-row" style="margin-top:12px"><div class="field"><label for="giftEmail">Email *</label><input id="giftEmail" type="email" required></div><div class="field"><label for="giftPhone">Phone / WhatsApp *</label><input id="giftPhone" type="tel" required></div></div><button class="submit" type="submit" style="margin-top:18px">Prepare gift enquiry ↗</button></form></div></section></main><footer class="footer" id="contact">
+<form id="giftRequestForm"><h3>Make it personal</h3><div class="field-row"><div class="field"><label for="giftRecipient">Recipient name *</label><input id="giftRecipient" required></div><div class="field"><label for="giftSender">Sender name *</label><input id="giftSender" required></div></div><div class="field" style="margin-top:12px"><label for="giftMessage">Personal message</label><textarea id="giftMessage" rows="3"></textarea></div><div class="gift-date-guidance">Each selected gift has its own required dates and options. Complete them in the Gift Summary below.</div><div class="field-row" style="margin-top:12px"><div class="field"><label for="giftEmail">Email *</label><input id="giftEmail" type="email" required></div><div class="field"><label for="giftPhone">Phone / WhatsApp *</label><input id="giftPhone" type="tel" required></div></div><button class="submit" type="submit" style="margin-top:18px">Prepare gift enquiry ↗</button></form></div></section></main><footer class="footer" id="contact">
 <div><div class="brand"><span class="mark bag-mark"><i></i></span><span>Vayana<small style="color:#aeb4bd">TRAVEL YOUR WAY</small></span></div><p>Discover Egypt, your way.</p></div>
 <div class="footer-links"><a href="tours.html">Tours</a><a href="transportation.html">Transportation</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a><a href="mailto:xboad514725@gmail.com">Email us</a><span>© <span id="year"></span> Vayana</span></div>
 </footer><div class="toast" id="toast" role="status"></div><div class="chat-launchers">
@@ -763,31 +763,51 @@ document.querySelectorAll('[data-category]').forEach(btn=>btn.addEventListener('
   renderGiftSummary();
  }));
 }));
+function giftDateFields(selection){
+ const c=selection.category;
+ const field=(key,label,type='date')=>`<label class="gift-date-field">${label} *<input type="${type}" data-gift-date-field="${key}" data-gift-key="${selection.category}::${selection.item}" ${selection[key]?'value="'+selection[key]+'"':''} required></label>`;
+ if(c==='packages')return field('arrival_date','Accommodation arrival')+field('departure_date','Accommodation departure')+field('preferred_tour_date','Preferred tour date');
+ if(c==='accommodation')return field('check_in_date','Check-in')+field('check_out_date','Check-out')+`<label class="gift-date-field">Meal plan *<select data-gift-date-field="meal_plan" data-gift-key="${c}::${selection.item}" required><option value="">Choose meal plan</option><option value="breakfast_only" ${selection.meal_plan==='breakfast_only'?'selected':''}>Breakfast only</option><option value="half_board" ${selection.meal_plan==='half_board'?'selected':''}>Half board</option><option value="full_board" ${selection.meal_plan==='full_board'?'selected':''}>Full board</option></select></label>`;
+ if(c==='flights')return field('arrival_flight_date','Arrival flight date')+field('departure_flight_date','Departure flight date');
+ if(c==='balloon')return field('experience_date','Balloon flight date');
+ if(c==='felucca')return field('experience_date','Felucca date')+field('experience_time','Preferred time','time');
+ if(c==='offers')return field('arrival_date','Stay arrival')+field('departure_date','Stay departure')+field('pickup_date','Arrival pickup date');
+ return '';
+}
 function renderGiftSummary(){
- const list=document.getElementById('giftSummaryList');
- list.replaceChildren();
+ const list=document.getElementById('giftSummaryList');list.replaceChildren();
  if(!giftSelected.size){const li=document.createElement('li');li.textContent='Your selected experiences will appear here.';list.append(li);return;}
- giftSelected.forEach(selection=>{const li=document.createElement('li');li.textContent=selection.category==='packages'?'Tour package: '+selection.item:selection.item;list.append(li);});
+ giftSelected.forEach(selection=>{
+  const li=document.createElement('li');li.className='gift-summary-item';
+  const heading=document.createElement('strong');heading.textContent=(selection.category==='packages'?'Tour package: ': '')+selection.item;li.append(heading);
+  const fields=document.createElement('div');fields.className='gift-item-dates';fields.innerHTML=giftDateFields(selection);li.append(fields);list.append(li);
+ });
+ list.querySelectorAll('[data-gift-date-field]').forEach(input=>input.addEventListener('change',()=>{
+  const item=giftSelected.get(input.dataset.giftKey);if(item)item[input.dataset.giftDateField]=input.value;
+ }));
 }
 document.getElementById('giftRequestForm')?.addEventListener('submit',async e=>{
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
- const email=v('giftEmail'),phone=v('giftPhone'),recipient=v('giftRecipient'),sender=v('giftSender'),giftDate=v('giftDate');
- if(!isValidVayanaDate(giftDate)){alert('Please choose a valid gift or experience date. Dates cannot be in the past.');return;}
+ const email=v('giftEmail'),phone=v('giftPhone'),recipient=v('giftRecipient'),sender=v('giftSender');
  if(!giftSelected.size){alert('Please select at least one gift experience.');return;}
  if(!recipient||!sender||!email||!phone){alert('Recipient, sender, email and phone / WhatsApp are required.');return;}
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email address.');return;}
+ if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){alert('Please enter a valid email address.');return;}
+ const items=Array.from(giftSelected.values());
+ const dateKeys={packages:['arrival_date','departure_date','preferred_tour_date'],accommodation:['check_in_date','check_out_date','meal_plan'],flights:['arrival_flight_date','departure_flight_date'],balloon:['experience_date'],felucca:['experience_date','experience_time'],offers:['arrival_date','departure_date','pickup_date']};
+ for(const item of items){
+  for(const key of (dateKeys[item.category]||[])){
+   if(!item[key]){alert('Please complete every date and option for: '+item.item);return;}
+   if(key!=='meal_plan'&&key!=='experience_time'&&!isValidVayanaDate(item[key])){alert('Dates must be valid and cannot be in the past.');return;}
+  }
+  if(item.category==='packages'&&(item.departure_date<item.arrival_date||item.preferred_tour_date<item.arrival_date||item.preferred_tour_date>item.departure_date)){alert('For each tour package, the preferred tour date must be between arrival and departure.');return;}
+  if(['accommodation','offers'].includes(item.category)&&item.departure_date<=item.arrival_date){alert('Departure date must be after arrival / check-in date.');return;}
+  if(item.category==='flights'&&item.departure_flight_date<item.arrival_flight_date){alert('Departure flight date cannot be before arrival flight date.');return;}
+ }
  const button=e.currentTarget.querySelector('button[type="submit"]');
  const result=await submitVayanaRequest({
-  request_type:'gift',
-  recipient_name:recipient,
-  sender_name:sender,
-  personal_message:v('giftMessage'),
-  gift_date:giftDate,
-  email,
-  phone,
-  selected_items:Array.from(giftSelected.values()),
-  _requiredDate:giftDate
+  request_type:'gift',recipient_name:recipient,sender_name:sender,
+  personal_message:v('giftMessage'),email,phone,selected_items:items
  },button);
  if(result?.database_saved===true){
   e.currentTarget.reset();giftSelected.clear();renderGiftSummary();
