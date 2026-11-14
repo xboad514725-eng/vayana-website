@@ -1532,7 +1532,7 @@ async function renderRequests(type){
       details = `
         ${escapeHTML(row.trip_type || "Flight enquiry")}
         <br><span class="muted">${escapeHTML(row.departure_city || "—")} → ${escapeHTML(row.arrival_city || "—")}
-        <br>Departure: ${dateOnly(row.departure_date)} · Return: ${dateOnly(row.return_date)}
+        <br>Arrival Flight: ${dateOnly(row.departure_date)} · Departure Flight: ${dateOnly(row.return_date)}
         <br>Passengers: ${Number(row.passengers || 1)} · Cabin: ${escapeHTML(row.cabin_class || "economy")}</span>`;
     }
     if(type==="stay"){
