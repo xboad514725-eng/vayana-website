@@ -14,6 +14,7 @@ alter table public.tour_requests
 
 alter table public.offer_requests
   alter column pickup_date drop not null,
+  alter column pickup_location_type drop not null,
   add column if not exists dropoff_date date,
   add column if not exists dropoff_location_type text,
   add column if not exists airport_transfer_type text;
