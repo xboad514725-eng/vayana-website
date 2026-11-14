@@ -1752,7 +1752,7 @@ async function renderGiftRequests(){
   const rows=(result.gift_requests||[]).map(row=>{
     const items=Array.isArray(row.selected_items)?row.selected_items:[];
     const itemText=items.map(item=>{
-      const dates=Object.entries(item).filter(([key])=>key.endsWith("_date")||key==="experience_date"||key==="experience_time").map(([key,value])=>`${escapeHTML(key.replaceAll("_"," "))}: ${escapeHTML(value)}`).join(" · ");
+      const dates=Object.entries(item).filter(([key])=>key.endsWith("_date")||key==="experience_date"||key==="experience_time"||key==="guide_language"||key==="meal_plan").map(([key,value])=>`${escapeHTML(key.replaceAll("_"," "))}: ${escapeHTML(value)}`).join(" · ");
       return `<div><strong>${escapeHTML(item.item||item.category)}</strong><br><span class="muted">${dates}</span></div>`;
     }).join("<hr>");
     return `<tr><td><strong>${escapeHTML(row.recipient_name)}</strong><br><span class="muted">From: ${escapeHTML(row.sender_name)}<br>${escapeHTML(row.email)}<br>${escapeHTML(row.phone)}</span></td><td>${itemText||"—"}<br>${escapeHTML(row.personal_message||"")}</td><td>${badge(row.status)}</td><td>${dateFormat(row.created_at)}</td><td><div class="action-cell"><select class="status-select" data-gift-status="${escapeHTML(row.id)}">${statusOptions(row.status)}</select><button class="small-btn" data-gift-update="${escapeHTML(row.id)}">Update</button></div></td></tr>`;
