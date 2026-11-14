@@ -523,7 +523,7 @@ function sendTransportationRequest(){
  };
 
  if(service==='airport'){
-  serviceType='airport_transfer';
+  serviceType='airport_transfer_'+transferType;
   const transferType=val('airportTransferType');
   if(!['pickup','dropoff','both'].includes(transferType)){
    alert('Please choose airport pickup, drop-off or both.');return;
@@ -546,8 +546,8 @@ function sendTransportationRequest(){
    if(!required([date,time,address],'Please complete the airport drop-off date, pickup time and pickup address.'))return;
    pickupLocation=address;
    dropoffLocation='Luxor Airport';
-   pickupDate=date;
-   pickupTime=time;
+   dropoffDate=date;
+   dropoffTime=time;
    notes+=`Departure flight number: ${val('departureFlight')||'Not provided'}\n`;
   }
   if(transferType==='both'){
@@ -556,6 +556,8 @@ function sendTransportationRequest(){
    const returnAddress=val('airportDropAddress');
    if(!required([returnDate,returnTime,returnAddress],'Please complete the return airport drop-off date, time and pickup address.'))return;
    if(returnDate<pickupDate){alert('The return airport drop-off date cannot be before the pickup date.');return;}
+   dropoffDate=returnDate;
+   dropoffTime=returnTime;
    notes+=`Return transfer: ${returnAddress} to Luxor Airport; date: ${returnDate}; pickup time: ${returnTime}; departure flight: ${val('departureFlight')||'Not provided'}.\n`;
   }
  }else if(service==='private'){
@@ -606,7 +608,7 @@ function sendTransportationRequest(){
   dropoff_location:dropoffLocation||null,
   pickup_date:pickupDate||null,
   pickup_time:pickupTime||null,
-  dropoff_date:dropoffDate||pickupDate||null,
+  dropoff_date:dropoffDate||null,
   dropoff_time:dropoffTime||null,
   passengers:passengers,
   notes:notes.trim()||null
