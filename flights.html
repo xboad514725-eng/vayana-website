@@ -733,7 +733,7 @@ document.getElementById('flightRequestForm').addEventListener('submit',async e=>
  e.preventDefault();const v=id=>document.getElementById(id).value.trim();
  const trip=v('flightJourneyType'),departure=v('flightDepartureDate'),returnDate=v('flightReturnDate');
  if(!isValidVayanaDate(departure)){alert('Please choose a valid departure flight date.');return;}
- if(trip==='round_trip'&&(!isValidVayanaDate(returnDate)||returnDate<=departure)){alert('Please choose a valid return flight date, after departure.');return;}
+ if(trip==='round_trip'&&(!isValidVayanaDate(returnDate)||returnDate<=departure)){alert('Please choose a valid Departure Flight Date after the arrival flight.');return;}
  const name=v('flightName'),email=v('flightEmail'),phone=v('flightPhone');
  if(!name||!email||!phone){alert('Name, email and phone / WhatsApp are required.');return;}
  if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)){alert('Please enter a valid email address.');return;}
