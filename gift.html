@@ -733,9 +733,62 @@ function getVayanaAIReply(result){
  if(typeof reply==='string')return reply;
  return reply?.message||reply?.content||result?.reply||result?.answer||'';
 }
+function showVayanaAIRegistration(){
+ const box=document.getElementById('aiChatMessages');
+ if(!box||document.getElementById('vayanaAIIdentityForm'))return;
+ const form=document.createElement('form');
+ form.id='vayanaAIIdentityForm';
+ form.className='chat-bubble';
+ Object.assign(form.style,{width:'100%',maxWidth:'100%',boxSizing:'border-box',display:'grid',gap:'9px',padding:'14px'});
+ const intro=document.createElement('p');
+ intro.textContent='Welcome to VAYANA. Please enter your name and email once so we can save all your messages under your details.';
+ intro.style.margin='0 0 3px';
+ const nameLabel=document.createElement('label');
+ nameLabel.textContent='Full name';
+ const nameInput=document.createElement('input');
+ nameInput.type='text';nameInput.name='full_name';nameInput.autocomplete='name';nameInput.required=true;nameInput.maxLength=200;nameInput.placeholder='Your full name';
+ const emailLabel=document.createElement('label');
+ emailLabel.textContent='Email address';
+ const emailInput=document.createElement('input');
+ emailInput.type='email';emailInput.name='email';emailInput.autocomplete='email';emailInput.required=true;emailInput.maxLength=254;emailInput.placeholder='you@example.com';
+ [nameInput,emailInput].forEach(el=>Object.assign(el.style,{width:'100%',boxSizing:'border-box',padding:'11px 12px',border:'1px solid #d8dee5',borderRadius:'10px',background:'#fff',color:'#111820',font:'inherit'}));
+ const submit=document.createElement('button');
+ submit.type='submit';submit.textContent='Start chatting';
+ Object.assign(submit.style,{padding:'11px 16px',border:'0',borderRadius:'10px',background:'#111820',color:'#fff',fontWeight:'600',cursor:'pointer'});
+ form.append(intro,nameLabel,nameInput,emailLabel,emailInput,submit);
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const fullName=nameInput.value.trim();
+  const email=emailInput.value.trim().toLowerCase();
+  if(!fullName||!emailInput.validity.valid){emailInput.reportValidity();if(!fullName)nameInput.focus();return;}
+  saveVayanaAIProfile({full_name:fullName,email});
+  form.remove();
+  const input=document.getElementById('aiChatInput');
+  const button=document.querySelector('#aiChatPanel .chat-compose button');
+  if(input)input.disabled=false;
+  if(button)button.disabled=false;
+  addVayanaAIMessage('Thank you. Your details are saved for this chat. You can now ask me anything about your trip.');
+  input?.focus();
+ });
+ box.appendChild(form);
+ box.scrollTop=box.scrollHeight;
+ const input=document.getElementById('aiChatInput');
+ const button=document.querySelector('#aiChatPanel .chat-compose button');
+ if(input)input.disabled=true;
+ if(button)button.disabled=true;
+}
 async function restoreVayanaAIChat(){
  const session=getVayanaAISession();
- if(!session?.conversation_id||!session?.access_token)return;
+ if(!session?.conversation_id||!session?.access_token){
+  if(!getVayanaAIProfile())showVayanaAIRegistration();
+  else{
+   const input=document.getElementById('aiChatInput');
+   const button=document.querySelector('#aiChatPanel .chat-compose button');
+   if(input)input.disabled=false;
+   if(button)button.disabled=false;
+  }
+  return;
+ }
  try{
   const result=await callVayanaAI({
    action:'get_public_chat',
@@ -743,10 +796,9 @@ async function restoreVayanaAIChat(){
    access_token:session.access_token
   });
   const messages=result.messages||result.data?.messages||[];
-  if(!messages.length)return;
   const box=document.getElementById('aiChatMessages');
   if(!box)return;
-  box.innerHTML='';
+  if(messages.length)box.innerHTML='';
   messages.forEach(item=>{
    const text=item.message||item.content||'';
    if(text)addVayanaAIMessage(text,item.sender_type==='user');
@@ -762,27 +814,9 @@ async function sendAIChat(){
  let session=getVayanaAISession();
  let profile=getVayanaAIProfile();
  if(session?.full_name&&session?.email)profile={full_name:session.full_name,email:session.email};
-
- // Ask for the visitor's identity once, then remember it on this device across all VAYANA pages.
- if(!session?.conversation_id||!session?.access_token){
-  let fullName=profile?.full_name||'';
-  let email=profile?.email||'';
-  if(!fullName){
-   const enteredName=window.prompt('Welcome to VAYANA! Before we start, please enter your full name:');
-   if(!enteredName?.trim())return;
-   fullName=enteredName.trim();
-  }
-  if(!email){
-   const enteredEmail=window.prompt('Please enter your email address. We only need this once to save your conversation:');
-   if(!enteredEmail?.trim())return;
-   email=enteredEmail.trim();
-  }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-   window.alert('Please enter a valid email address.');
-   return;
-  }
-  profile={full_name:fullName,email:email.toLowerCase()};
-  saveVayanaAIProfile(profile);
+ if(!profile?.full_name||!profile?.email){
+  showVayanaAIRegistration();
+  return;
  }
 
  addVayanaAIMessage(message,true);
