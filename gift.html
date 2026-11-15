@@ -376,7 +376,7 @@ img{opacity:1!important}
 <p>Need help choosing a tour, planning your visit or asking a travel question? Our customer service chat is available as a request.</p>
 <div class="service-price"><b>Service fee</b><br/>$2 per day. Free for guests who purchase a Vayana trip. No payment is collected in this preview.</div>
 <label for="serviceHasTrip">Have you purchased a Vayana trip?</label><select id="serviceHasTrip" onchange="updateServicePrice()"><option value="no">No</option><option value="yes">Yes — customer service is free after verification</option></select>
-<div class="hidden" id="serviceBookingCodeField"><label for="serviceBookingCode">Vayana booking code *</label><input id="serviceBookingCode" placeholder="e.g. VAY-XXXXXXXXXX"/></div>
+<div class="hidden" id="serviceBookingCodeField"><label for="serviceBookingCode">Vayana booking code *</label><input id="serviceBookingCode" placeholder="VAY1234567890" maxlength="13" pattern="VAY[0-9]{10}" title="Enter VAY followed by exactly 10 digits" autocapitalize="characters"/></div>
 <label for="serviceStartDate">When should assistance start? *</label><input id="serviceStartDate" required="" type="date"/>
 <label for="serviceDays">How many days do you need assistance?</label><input id="serviceDays" max="30" min="1" oninput="updateServicePrice()" type="number" value="1"/>
 <div class="service-price" id="servicePrice">$2.00 total · $2 per day × 1 day(s).</div>
@@ -890,8 +890,8 @@ function sendServiceChatRequest(){
  const days=Number(document.getElementById('serviceDays').value)||1;
  if(!Number.isInteger(days)||days<1||days>30){alert('Please choose between 1 and 30 days.');return;}
  const bought=document.getElementById('serviceHasTrip').value==='yes';
- const bookingCode=document.getElementById('serviceBookingCode')?.value.trim()||'';
- if(bought&&!bookingCode){alert('Please enter your Vayana booking code to verify your free customer service.');return;}
+ const bookingCode=(document.getElementById('serviceBookingCode')?.value.trim()||'').toUpperCase();
+ if(bought&&!bookingCode){alert('Please enter your Vayana booking code to verify your free customer service.');return;}if(bought&&!/^VAY[0-9]{10}$/.test(bookingCode)){alert('Enter a valid Vayana booking code: VAY followed by 10 digits.');return;}
  const price=bought?'Free — booking code verification required':`$${(days*2).toFixed(2)} ($2 per day)`;
  const details=`Assistance start date: ${serviceDate}\nTrip purchased: ${bought?'Yes':'No'}\nBooking code: ${bookingCode||'Not provided'}\nRequested days: ${days}\nService fee: ${price}\nCustomer question: ${message}`;
  submitVayanaRequest({request_type:'customer_service',full_name:name,email,phone,service_days:days,booking_code:bookingCode,details,_requiredDate:serviceDate},document.querySelector('[onclick="sendServiceChatRequest()"]'));
