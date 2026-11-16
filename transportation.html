@@ -637,11 +637,11 @@ function sendTransportationRequest(){
  };
 
  if(service==='airport'){
-  serviceType='airport_transfer_'+transferType;
   const transferType=val('airportTransferType');
   if(!['pickup','dropoff','both'].includes(transferType)){
    alert('Please choose airport pickup, drop-off or both.');return;
   }
+  serviceType='airport_transfer_'+transferType;
   if(transferType==='pickup'||transferType==='both'){
    const date=val('airportPickupDate');
    const time=val('airportPickupTime');
@@ -650,6 +650,7 @@ function sendTransportationRequest(){
    pickupLocation='Luxor Airport';
    dropoffLocation=destination;
    pickupDate=date;
+   dropoffDate=date;
    pickupTime=time;
    notes+=`Airport pickup flight number: ${val('arrivalFlight')||'Not provided'}\n`;
   }
@@ -660,6 +661,7 @@ function sendTransportationRequest(){
    if(!required([date,time,address],'Please complete the airport drop-off date, pickup time and pickup address.'))return;
    pickupLocation=address;
    dropoffLocation='Luxor Airport';
+   pickupDate=date;
    dropoffDate=date;
    dropoffTime=time;
    notes+=`Departure flight number: ${val('departureFlight')||'Not provided'}\n`;
@@ -679,6 +681,7 @@ function sendTransportationRequest(){
   pickupLocation=val('privateFrom');
   dropoffLocation=val('privateTo');
   pickupDate=val('privateDate');
+  dropoffDate=pickupDate;
   pickupTime=val('privateTime');
   if(!required([pickupLocation,dropoffLocation,pickupDate,pickupTime],'Please complete pickup location, destination, travel date and pickup time.'))return;
  }else if(service==='intercity'){
@@ -686,6 +689,7 @@ function sendTransportationRequest(){
   pickupLocation=val('cityFrom');
   dropoffLocation=val('cityTo');
   pickupDate=val('intercityDate');
+  dropoffDate=pickupDate;
   pickupTime=val('intercityTime');
   if(pickupLocation===dropoffLocation){alert('Please choose two different cities.');return;}
   if(!required([pickupLocation,dropoffLocation,pickupDate,pickupTime],'Please complete both cities, travel date and pickup time.'))return;
@@ -693,6 +697,7 @@ function sendTransportationRequest(){
   serviceType='felucca';
   pickupLocation='Luxor Nile — boarding point to be confirmed';
   pickupDate=val('feluccaDate');
+  dropoffDate=pickupDate;
   if(!pickupDate){alert('Please select your preferred felucca date.');return;}
   notes+='Experience: Sunset felucca on the Nile. Timing to be arranged around sunset.\n';
  
@@ -700,6 +705,9 @@ function sendTransportationRequest(){
   alert('Invalid transportation service.');return;
  }
 
+ if(!pickupDate||!dropoffDate){alert('Both pickup and drop-off dates are required.');return;}
+ if(!isValidVayanaDate(pickupDate)||!isValidVayanaDate(dropoffDate)){alert('Pickup and drop-off dates must be today or a future date.');return;}
+ if(dropoffDate<pickupDate){alert('Drop-off date cannot be before pickup date.');return;}
  if(extraNotes)notes+=`Additional details: ${extraNotes}\n`;
  const payload={
   request_type:'transportation',
