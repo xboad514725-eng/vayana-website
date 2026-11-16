@@ -259,30 +259,6 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 #offerDropoffFields[hidden]{display:none!important;animation:none}
 @keyframes offerDropoffReveal{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.offer-dropoff-toggle,.offer-toggle-track,.offer-toggle-track:after,#offerDropoffFields{transition:none;animation:none}}
-</style><style id="vayana-monochrome-refresh">
-:root{--ink:#111!important;--muted:#666!important;--line:#e5e5e5!important;--paper:#fff!important;--red:#111!important;--blue:#111!important;--green:#111!important;--pink:#111!important;--navy:#111!important;--soft:#f7f7f7!important}
-html,body{background:#fff!important;color:#111!important}
-*:not(img):not(video):not(picture):not(svg):not(.bag-mark):not(.bag-mark *){background-image:none!important;background-color:transparent!important;border-color:#e5e5e5!important;box-shadow:none!important}
-*:before,*:after{background-image:none!important;border-color:#e5e5e5!important;box-shadow:none!important}
-header,nav,.nav,.footer,.site-footer,main,section,.hero,.section,.card,.feature,.tile,.panel,.modal,.dropdown,.menu-panel,.chat-panel,.faq-item,.travel-tips article,.offer-card,.tour-card,.stay-card,.flight-card{background-color:#fff!important}
-body, p, h1,h2,h3,h4,h5,h6,span,label,small,li,a,strong,b,summary{color:#111}
-p,small,.muted,.eyebrow,.hero-note,.section-head p{color:#666!important}
-a:hover,.navlinks a:hover{color:#000!important}
-.nav,.site-header{background:rgba(255,255,255,.97)!important;border-bottom:1px solid #e5e5e5!important;backdrop-filter:blur(14px)}
-.navlinks{color:#222!important}
-.nav-cta,.btn,button[type=submit],.primary,.primary-btn{background:#111!important;color:#fff!important;border:1px solid #111!important}
-.btn.secondary,.secondary,.outline-btn{background:#fff!important;color:#111!important;border:1px solid #111!important}
-input,select,textarea{background:#fff!important;color:#111!important;border:1px solid #d8d8d8!important}
-.hero:before,.hero:after,.float-tag,.hero-note span{display:none!important}
-.mark.bag-mark{display:inline-block!important;position:relative!important;width:36px!important;height:36px!important;min-width:36px!important;border:0!important;border-radius:0!important;background:none!important;animation:none!important}
-.mark.bag-mark:before{content:""!important;position:absolute!important;left:3px!important;right:3px!important;top:11px!important;bottom:2px!important;border:2.5px solid #111!important;border-radius:6px 6px 8px 8px!important;background:transparent!important}
-.mark.bag-mark:after{content:""!important;position:absolute!important;left:12px!important;top:3px!important;width:10px!important;height:10px!important;border:2.5px solid #111!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;background:transparent!important;transform:none!important;inset:auto!important}
-.mark.bag-mark i{display:none!important}
-.brand{display:flex!important;align-items:center!important;gap:10px!important;color:#111!important}
-.brand>span:last-child,.brand-name{color:#111!important}
-.brand small{color:#666!important}
-img,video,picture{filter:none!important}
-img{opacity:1!important}
 </style><style id="vayana-text-only-wordmark">
 .brand{display:flex!important;align-items:center!important;gap:0!important;color:#111!important}
 .brand .mark,.brand .bag-mark{display:none!important}
@@ -369,6 +345,17 @@ img{opacity:1!important}
 }
 .service-price{background:#f5f7fa!important;background-color:#f5f7fa!important;color:#111820!important;border-radius:12px!important;padding:12px!important;font-size:12px!important;line-height:1.6!important;margin:12px 0!important}
 @media(max-width:650px){.chat-panel{right:10px!important;bottom:130px!important}}
+</style>
+
+<style id="vayana-global-contrast-fix">
+/* Global readability: preserve the page's designed surfaces while making form and card copy legible. */
+input,select,textarea{color:#172536!important;caret-color:#172536!important}
+input::placeholder,textarea::placeholder{color:#718096!important;opacity:1!important}
+select option{color:#172536!important;background:#fff!important}
+.field label,.optional-card b,.offer-toggle-copy b,.gift-date-field{color:#172536!important}
+.optional-card small,.offer-toggle-copy small{color:#657386!important}
+.home-service-card b{color:#14243a!important}
+.offer-booking-card.eclipse .field label{color:#fff!important}
 </style>
 </head><body class="page-offers"><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="vayana-word-only">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a href="index.html">Home</a><a href="tours.html">Tours</a><a href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html" class="active">Offers</a><a href="gift.html">Gift</a></nav><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main><section class="standalone-hero offers-hero"><div class="eyebrow">A season worth travelling for</div><h1>Choose your<br>Luxor moment.</h1><p>Explore the VAYANA seasonal offers and open the experience that speaks to you.</p></section><section class="offer-picker-section"><div class="offer-picker-grid">
 <button id="christmas" class="offer-pick christmas-pick" type="button" onclick="chooseOffer('Christmas')"><img src="https://iegypttravels.com/storage/programs/PbxjsNOs78mnP6ufUPouW4cYvRBYwMJcn46Si8al.jpg" loading="lazy" alt="Christmas in Luxor"><span class="offer-snow"></span><span><small>BOOK BY 20 DEC 2026 · STAY 20 DEC 2026 – 7 JAN 2027</small><b>Christmas Offer</b><em>Celebrate Christmas in Luxor.</em><strong>Choose this offer ↗</strong></span></button>
