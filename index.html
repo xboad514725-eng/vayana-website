@@ -240,6 +240,17 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 @media(max-width:700px){.home-offers,.home-services{padding:66px 5%}.home-offer-grid,.home-service-grid{grid-template-columns:1fr}.home-offer-card{height:320px}.home-service-card{min-height:0}.home-service-card>img{height:210px}.home-guide{grid-template-columns:1fr;padding:66px 6%;gap:24px}.home-guide img{height:230px}}
 @media(prefers-reduced-motion:reduce){.home-card-snow{animation:none}.home-offer-card>img,.home-service-card>img{transition:none}}
 </style>
+
+<style id="vayana-global-contrast-fix">
+/* Global readability: preserve the page's designed surfaces while making form and card copy legible. */
+input,select,textarea{color:#172536!important;caret-color:#172536!important}
+input::placeholder,textarea::placeholder{color:#718096!important;opacity:1!important}
+select option{color:#172536!important;background:#fff!important}
+.field label,.optional-card b,.offer-toggle-copy b,.gift-date-field{color:#172536!important}
+.optional-card small,.offer-toggle-copy small{color:#657386!important}
+.home-service-card b{color:#14243a!important}
+.offer-booking-card.eclipse .field label{color:#fff!important}
+</style>
 </head>
 <body>
 <header class="nav">
