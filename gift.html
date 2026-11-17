@@ -413,8 +413,13 @@ async function submitVayanaRequest(data,button){
    const message=result.message||result.error||"Unable to submit your request. Please try again.";
    throw new Error(message);
   }
-  if(result.email_sent===false) showVayanaToast("Your request was saved, but the email notification could not be sent. Vayana has your request.");
-  else showVayanaToast("Your request was sent successfully. Vayana will contact you shortly.");
+  const requestNumber=result.request_number||"";
+  const referenceText=requestNumber?(" Reference: "+requestNumber+"."):"";
+  if(result.customer_email_sent===true){
+   showVayanaToast("Your request is confirmed as received."+referenceText+" A confirmation email has been sent to you.");
+  }else{
+   showVayanaToast("Your request was saved successfully."+referenceText+" However, the confirmation email could not be delivered. Please contact VAYANA if needed.");
+  }
   return result;
  }catch(error){
   console.error("Vayana request error:",error);
