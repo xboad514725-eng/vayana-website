@@ -572,7 +572,7 @@ function updateJourneyTransferFields(){
  const packageChoice=document.querySelector('[data-group="package"] .choice.active')?.dataset.value||"";
  const transferWrap=document.getElementById("journeyAirportTransferWrap");
  const transferSelect=document.getElementById("journeyAirportTransferType");
- const showTransfer=packageChoice!=="Tours Only";
+ const showTransfer=packageChoice==="Stay + Tours + Flights";
  if(transferWrap)transferWrap.classList.toggle("hidden",!showTransfer);
  if(!showTransfer&&transferSelect)transferSelect.value="none";
  const type=showTransfer?(transferSelect?.value||"none"):"none";
