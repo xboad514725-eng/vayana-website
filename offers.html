@@ -431,7 +431,7 @@ async function submitVayanaRequest(data,button){
   return result;
  }catch(error){
   console.error("Vayana request error:",error);
-  showVayanaToast(error.message||"Connection error. Please check your internet and try again.");
+  showVayanaToast("We couldn't submit your request. Please try again.");
   return null;
  }finally{
   if(button){button.disabled=false;button.textContent=button.dataset.originalText||"Send request";}
