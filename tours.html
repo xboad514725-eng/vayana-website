@@ -479,9 +479,7 @@ async function submitVayanaRequest(data,button){
    const message=result.message||result.error||"Unable to submit your request. Please try again.";
    throw new Error(message);
   }
-  const requestNumber=result.request_number||"";
-  const referenceText=requestNumber?(" Reference: "+requestNumber+"."):"";
-  showVayanaToast("Your request has been received successfully."+referenceText);
+  showVayanaToast("Your request has been received successfully.");
   return result;
  }catch(error){
   console.error("Vayana request error:",error);
