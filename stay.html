@@ -409,13 +409,7 @@ async function submitVayanaRequest(data,button){
    const message=result.message||result.error||"Unable to submit your request. Please try again.";
    throw new Error(message);
   }
-  const requestNumber=result.request_number||"";
-  const referenceText=requestNumber?(" Reference: "+requestNumber+"."):"";
-  if(result.customer_email_sent===true){
-   showVayanaToast("Your request is confirmed as received."+referenceText+" A confirmation email has been sent to you.");
-  }else{
-   showVayanaToast("Your request was saved successfully."+referenceText+" However, the confirmation email could not be delivered. Please contact VAYANA if needed.");
-  }
+  showVayanaToast("Your request has been received successfully.");
   return result;
  }catch(error){
   console.error("Vayana request error:",error);
