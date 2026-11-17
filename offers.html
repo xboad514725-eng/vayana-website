@@ -992,7 +992,8 @@ document.getElementById('offerRequestForm')?.addEventListener('submit',async e=>
  e.preventDefault();
  const v=id=>document.getElementById(id).value.trim();
  const arrival=v('offerArrival'),departure=v('offerDeparture'),transferType=v('offerTransferType'),pickup=v('offerPickupDate'),pickupType=v('offerPickupType'),dropoff=v('offerDropoffDate'),dropoffType=v('offerDropoffType');
- const formData=new FormData(e.currentTarget);\n const name=String(formData.get('full_name')||v('offerName')).trim(),email=v('offerEmail'),phone=v('offerPhone');
+ const formData=new FormData(e.currentTarget);
+ const name=String(formData.get('full_name')||v('offerName')).trim(),email=v('offerEmail'),phone=v('offerPhone');
  const groupRequested=v('offerGroupRequested')==='yes',groupDate=v('offerGroupDate'),groupLocation=v('offerGroupLocation');
  if(!activeOffer){alert('Please choose an offer first.');return;}
  if(![arrival,departure].every(isValidVayanaDate)){alert('Arrival and departure dates are required and cannot be in the past.');return;}
