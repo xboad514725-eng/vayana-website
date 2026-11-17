@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xboad514725-eng.github.io/vayana-website/sitemap.xml
+Sitemap: https://vayana-travel.firebaseapp.com/sitemap.xml
