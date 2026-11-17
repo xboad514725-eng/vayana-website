@@ -91,7 +91,7 @@ h2{font-size:clamp(36px,4vw,54px);letter-spacing:-.065em;line-height:1.05;margin
 .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.pill{padding:9px 13px;border:1px solid var(--line);border-radius:99px;font-size:12px;color:#4d5560}
 .footer{padding:42px 7%;background:#11151b;color:white;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .footer p{color:#aeb4bd;font-size:12px;margin:6px 0 0}.footer-links{display:flex;gap:22px;color:#c9cdd3;font-size:12px}
-.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#15191f;color:white;padding:14px 20px;border-radius:14px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:90%;text-align:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:#15191f;color:white;padding:14px 20px;border-radius:14px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:99999!important;max-width:90%;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .hidden{display:none!important}
 @media(max-width:800px){
@@ -536,7 +536,7 @@ function openPackage(i){
 }
 function bankOptions(bank,selected){return Object.keys(places).filter(n=>places[n].bank===bank).map(n=>`<option ${n===selected?"selected":""}>${n}</option>`).join("")}
 function addStop(i){const sel=document.getElementById("replacement"+i);if(!sel.value)return;const bank=places[sel.value].bank;const row=document.createElement("div");row.className="stop-row";row.innerHTML=`<span>+</span><select data-bank="${bank}">${bankOptions(bank,sel.value)}</select><button class="remove" type="button" onclick="this.parentElement.remove()">Remove</button>`;document.getElementById("stops"+i).appendChild(row);sel.value=""}
-function requestPackage(i){
+async function requestPackage(i){
  const card=document.getElementById("itin"+i),v=c=>card.querySelector(c)?.value||"Not specified",checked=c=>card.querySelector(c)?.checked?"Yes":"No";
  const p=pkg[i],shared=p.kind.toLowerCase().includes("shared");
  const stops=shared?p.stops.join(" → "):[...card.querySelectorAll("#stops"+i+" select")].map(x=>x.value).join(" → ");
@@ -555,9 +555,9 @@ Restaurant preference: ${shared?"Not applicable":v(".pkg-restaurant-notes")}
 Balloon: ${shared?"Not available as part of fixed shared tour":checked(".pkg-balloon")}
 Additional requests: ${v(".pkg-notes")}`;
  const button=card.querySelector(".package-request");
- submitVayanaRequest({request_type:"tour",full_name:name,email,phone,package_name:p.title,guests:Number(v(".pkg-guests").replace("+",""))||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:tourDate,preferred_tour_time:v(".pkg-tour-time"),hotel_category:"",comfort_level:"",notes},button);
+ await submitVayanaRequest({request_type:"tour",full_name:name,email,phone,package_name:p.title,guests:Number(v(".pkg-guests").replace("+",""))||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:tourDate,preferred_tour_time:v(".pkg-tour-time"),hotel_category:"",comfort_level:"",notes},button);
 }
-function requestBalloonOnly(){
+async function requestBalloonOnly(){
  const flightDate=document.getElementById('balloonOnlyDate').value;
  if(!isValidVayanaDate(flightDate)){alert('Please choose a valid balloon flight date. A date is required and cannot be in the past.');document.getElementById('balloonOnlyDate').focus();return;}
  const name=prompt("Your name:");if(!name)return;const email=prompt("Your email address:");if(!email)return;const phone=prompt("Your phone / WhatsApp number (include country code):");if(!phone)return;
