@@ -24,7 +24,7 @@ html[data-vayana-theme="dark"] body{
   color:var(--vayana-text)!important;
   transition:background-color .25s ease,color .25s ease;
 }
-html[data-vayana-theme="dark"] body :is(h1,h2,h3,h4,h5,h6,p,li,label,legend,summary,figcaption,dt,dd,.eyebrow,.section-label,.form-footnote,.muted,.text-muted,.field-label,.section-intro,.form-description,.helper-text){
+html[data-vayana-theme="dark"] body :is(h1,h2,h3,h4,h5,h6,p,span,li,label,legend,summary,figcaption,dt,dd,.eyebrow,.section-label,.form-footnote,.muted,.text-muted,.field-label,.section-intro,.form-description,.helper-text){
   color:var(--vayana-text)!important;
 }
 html[data-vayana-theme="dark"] body :is(small,.muted,.text-muted,.form-footnote,.helper-text,.section-intro,.eyebrow){
