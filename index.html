@@ -1238,5 +1238,44 @@ updateFlightFields();
  </div>
 </div>
 <script src="assets/vayana-theme.js" defer></script>
+
+<style id="vayana-dark-package-tab-comparison-fix">
+/* Final high-specificity dark-mode overrides for package navigation and comparison headers. */
+html[data-vayana-theme="dark"] body .wizard-tabs .wiz-tab,
+html[data-vayana-theme="dark"] body .wizard-tabs button.wiz-tab,
+html[data-vayana-theme="dark"] body button.wiz-tab[data-panel="packagesPanel"]{
+  background:#202b36!important;
+  color:#e8edf2!important;
+  border:1px solid #465463!important;
+  opacity:1!important;
+  -webkit-text-fill-color:#e8edf2!important;
+}
+html[data-vayana-theme="dark"] body .wizard-tabs .wiz-tab.active,
+html[data-vayana-theme="dark"] body .wizard-tabs button.wiz-tab.active,
+html[data-vayana-theme="dark"] body button.wiz-tab[data-panel="packagesPanel"].active{
+  background:#31475a!important;
+  color:#ffffff!important;
+  border-color:#8ecdf5!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+html[data-vayana-theme="dark"] body table.comparison thead,
+html[data-vayana-theme="dark"] body table.comparison thead tr,
+html[data-vayana-theme="dark"] body table.comparison thead th{
+  background:#263442!important;
+  color:#ffffff!important;
+  border-color:#526171!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+html[data-vayana-theme="dark"] body table.comparison tbody td{
+  background:#19232d!important;
+  color:#e8edf2!important;
+  border-color:#35414e!important;
+  -webkit-text-fill-color:#e8edf2!important;
+}
+html[data-vayana-theme="dark"] body table.comparison tbody tr:nth-child(even) td{
+  background:#202b36!important;
+}
+</style>
+
 </body>
 </html>
