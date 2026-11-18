@@ -372,13 +372,13 @@ html{scroll-padding-top:110px}img{max-width:100%}a:focus-visible,button:focus-vi
 </footer><div class="toast" id="toast" role="status"></div><div class="chat-launchers">
 <button class="chat-launcher" style="background:#111820!important;color:#fff!important;border:0!important;box-shadow:0 10px 28px #0003!important;border-radius:99px!important" onclick="toggleChat('ai')" type="button">✦ AI Travel Chat</button>
 <button class="chat-launcher service" style="background:#fff!important;color:#111820!important;border:1px solid #dfe3e8!important;box-shadow:0 10px 28px #0002!important;border-radius:99px!important" onclick="toggleChat('service')" type="button">Customer Service</button>
-</div><div class="chat-panel" hidden="" id="aiChatPanel" style="background:#fff!important;background-color:#fff!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important">
+</div><div class="chat-panel" hidden="" id="aiChatPanel" style="background:#fff;background-color:#fff;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none">
 <div class="chat-head"><div><b>Vayana AI Assistant</b><small>AI travel assistant · Connected</small></div><button aria-label="Close" class="chat-close" onclick="toggleChat('ai')">×</button></div>
-<div class="chat-messages" id="aiChatMessages" style="background:#f7f8fa!important;opacity:1!important"><div class="chat-bubble">Hello! I’m Vayana AI. Ask me about Luxor tours, experiences, transportation or planning your visit.</div></div>
-<div class="chat-compose" style="background:#fff!important;opacity:1!important"><input id="aiChatInput" onkeydown="if(event.key==='Enter')sendAIChat()" placeholder="Ask about your trip…"/><button onclick="sendAIChat()">Send</button></div>
-</div><div class="chat-panel" hidden="" id="serviceChatPanel" style="background:#fff!important;background-color:#fff!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important">
+<div class="chat-messages" id="aiChatMessages" style="background:#f7f8fa;opacity:1"><div class="chat-bubble">Hello! I’m Vayana AI. Ask me about Luxor tours, experiences, transportation or planning your visit.</div></div>
+<div class="chat-compose" style="background:#fff;opacity:1"><input id="aiChatInput" onkeydown="if(event.key==='Enter')sendAIChat()" placeholder="Ask about your trip…"/><button onclick="sendAIChat()">Send</button></div>
+</div><div class="chat-panel" hidden="" id="serviceChatPanel" style="background:#fff;background-color:#fff;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none">
 <div class="chat-head"><div><b>Vayana Customer Service</b><small>Tourist advice and assistance</small></div><button aria-label="Close" class="chat-close" onclick="toggleChat('service')">×</button></div>
-<div class="service-chat-body" style="background:#fff!important;background-color:#fff!important;color:#111820!important;opacity:1!important">
+<div class="service-chat-body" style="background:#fff;background-color:#fff;color:#111820;opacity:1">
 <p>Need help choosing a tour, planning your visit or asking a travel question? Our customer service chat is available as a request.</p>
 <div class="service-price"><b>Service fee</b><br/>$2 per day. Free for guests who purchase a Vayana trip. No payment is collected in this preview.</div>
 <label for="serviceHasTrip">Have you purchased a Vayana trip?</label><select id="serviceHasTrip" onchange="updateServicePrice()"><option value="no">No</option><option value="yes">Yes — customer service is free after verification</option></select>

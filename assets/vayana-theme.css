@@ -194,3 +194,152 @@ html[data-vayana-theme="dark"] body :is(.switch,.ios-switch){
 html[data-vayana-theme="dark"] body :is(.switch,.ios-switch):checked{
   background-color:#8ecdf5!important;
 }
+
+
+/* VAYANA visitor theme: complete contrast pass across all shared page components.
+   Admin is excluded because this stylesheet is never loaded by admin.html. */
+html[data-vayana-theme="dark"] body :is(
+  .hero,.standalone-hero,.gift-hero,.standalone-form-section,.standalone-form,
+  .form-shell,.transport-form-shell,.transport-form-heading,.form-card,.booking-card,
+  .choice,.wiz-tab,.optional-card,.stay-benefits,.hotel-grid,.comfort-grid,
+  .feature,.experience-card,.home-service-card,.home-offer-copy,
+  .home-offers,.home-services,.home-guide,.faq-section,.map-info,
+  .travel-tips article,.temple-modal-card,.package-card,.pc-body,.place-detail,
+  .package-booking,.package-request,.offer-picker-section,.offer-detail-section,
+  .offer-booking-card:not(.christmas):not(.eclipse),.offer-availability,
+  .offer-includes span,.offer-choice-list label,.offer-dropoff-toggle,
+  .gift-audience article,.gift-start-section,.gift-start-card,.gift-builder,
+  .gift-summary,.gift-option,.gift-category-grid,.gift-date-guidance,
+  .gift-quick-actions,.gift-balloon-feature,.gift-create-action,
+  .builder-panel,.builder-summary,.estimator-panel,.estimator-result,
+  .tracker-panel,.extra-card,.extra-field,.comparison,.status-step,
+  .moment-card,.gift-card,.journal-card,.lang-switch button,
+  .transport-tags span,.transport-contact,.transport-disclaimer,
+  .sunset-note,.fixed-shared,.package-note,.extra-note,.pill,
+  .chat-panel,.chat-messages,.chat-bubble,.chat-compose,.service-chat-body,
+  .service-price,.chat-compose input,.service-chat-body input,
+  .service-chat-body textarea,.service-chat-body select,
+  #vayanaAIIdentityForm
+){
+  background-color:var(--vayana-surface)!important;
+  border-color:var(--vayana-line)!important;
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .hero,.standalone-hero,.gift-hero,.standalone-form-section,
+  .home-offers,.home-services,.faq-section,.offer-picker-section,
+  .offer-detail-section,.gift-start-section
+){
+  background-image:linear-gradient(135deg,#101820 0%,#17232e 58%,#1b2933 100%)!important;
+  background-color:var(--vayana-page)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .form-shell,.transport-form-shell,.standalone-form,.choice,.wiz-tab,
+  .optional-card,.feature,.experience-card,.home-service-card,.map-info,
+  .travel-tips article,.temple-modal-card,.package-card,.pc-body,
+  .place-detail,.package-booking,.package-request,.offer-booking-card,
+  .offer-availability,.offer-includes span,.offer-choice-list label,
+  .gift-audience article,.gift-start-card,.gift-builder,.gift-summary,
+  .gift-option,.gift-category-grid,.gift-date-guidance,.builder-panel,
+  .builder-summary,.estimator-panel,.estimator-result,.tracker-panel,
+  .extra-card,.extra-field,.comparison,.status-step,.moment-card,
+  .gift-card,.journal-card,.fixed-shared,.sunset-note,.chat-panel,
+  .chat-messages,.chat-bubble,.chat-compose,.service-chat-body,.service-price
+) :is(h1,h2,h3,h4,h5,h6,p,span,strong,b,small,label,li,em,i,legend){
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .hero,.standalone-hero,.gift-hero,.home-guide,.home-offer-card,
+  .temple-showcase,.luxor-panorama,.transportation-hero
+) :is(h1,h2,h3,h4,h5,h6,p,span,strong,b,small,label,li,em){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .hero-copy,.standalone-hero,.gift-hero,.home-guide,.home-offers,
+  .home-services,.faq-section,.offer-picker-section,.offer-detail-section,
+  .gift-start-section,.gift-audience
+) :is(.eyebrow,.section-intro,.form-footnote,.muted,.text-muted,small){
+  color:var(--vayana-muted)!important;
+}
+html[data-vayana-theme="dark"] body :is(.choice,.wiz-tab,.offer-pick,.gift-option,.builder-chip).active,
+html[data-vayana-theme="dark"] body .choice.active{
+  background:#263442!important;
+  color:#ffffff!important;
+  border-color:#8ecdf5!important;
+}
+html[data-vayana-theme="dark"] body :is(.choice,.optional-card,.gift-option,.offer-choice-list label,.offer-includes span) :is(strong,b,small,span,p,label){
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(input,select,textarea,.chat-compose input,.service-chat-body input,.service-chat-body textarea,.service-chat-body select){
+  background-color:var(--vayana-input)!important;
+  color:var(--vayana-text)!important;
+  border-color:var(--vayana-line)!important;
+  color-scheme:dark!important;
+}
+html[data-vayana-theme="dark"] body :is(input,textarea)::placeholder{
+  color:#9aa8b6!important;
+  opacity:1!important;
+}
+html[data-vayana-theme="dark"] body .chat-panel,
+html[data-vayana-theme="dark"] body .chat-messages,
+html[data-vayana-theme="dark"] body .chat-compose,
+html[data-vayana-theme="dark"] body .service-chat-body{
+  background:var(--vayana-surface)!important;
+  background-color:var(--vayana-surface)!important;
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body .chat-bubble{
+  background:#202c38!important;
+  color:#f3f5f7!important;
+  border-color:#3b4a58!important;
+}
+html[data-vayana-theme="dark"] body .chat-bubble.user{
+  background:#263e50!important;
+  color:#ffffff!important;
+}
+html[data-vayana-theme="dark"] body .chat-head,
+html[data-vayana-theme="dark"] body .chat-head :is(b,small),
+html[data-vayana-theme="dark"] body .chat-close{
+  background:#111820!important;
+  color:#ffffff!important;
+}
+html[data-vayana-theme="dark"] body .service-chat-body :is(p,label),
+html[data-vayana-theme="dark"] body #vayanaAIIdentityForm :is(p,label){
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body .service-price,
+html[data-vayana-theme="dark"] body .offer-availability,
+html[data-vayana-theme="dark"] body .fixed-shared,
+html[data-vayana-theme="dark"] body .sunset-note{
+  background:#202c38!important;
+  color:#e8edf2!important;
+  border-color:#3b4a58!important;
+}
+html[data-vayana-theme="dark"] body .chat-launcher.service{
+  background:#263442!important;
+  color:#f3f5f7!important;
+  border-color:#526171!important;
+}
+html[data-vayana-theme="dark"] body .chat-launcher:not(.service),
+html[data-vayana-theme="dark"] body :is(.submit,.package-request,.extra-button:not(.light),.chat-action,.chat-compose button){
+  background:#e8edf2!important;
+  color:#111820!important;
+}
+html[data-vayana-theme="dark"] body .extra-button.light{
+  background:#263442!important;
+  color:#f3f5f7!important;
+  border-color:#526171!important;
+}
+html[data-vayana-theme="dark"] body .hero-balloon-caption,
+html[data-vayana-theme="dark"] body .float-tag{
+  background:#202c38eF!important;
+  color:#f3f5f7!important;
+  border-color:#526171!important;
+}
+html[data-vayana-theme="dark"] body .site-nav.nav-open .navlinks{
+  background:#19212a!important;
+  border-color:#35414e!important;
+}
+html[data-vayana-theme="dark"] body .site-nav.nav-open .navlinks a{
+  color:#f3f5f7!important;
+}
