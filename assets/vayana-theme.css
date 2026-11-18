@@ -1,0 +1,132 @@
+/* VAYANA visitor theme system — admin is intentionally excluded */
+:root{
+  color-scheme:light;
+  --vayana-page:#ffffff;
+  --vayana-surface:#ffffff;
+  --vayana-surface-soft:#f5f7fa;
+  --vayana-text:#111318;
+  --vayana-muted:#6e737d;
+  --vayana-line:#e7e8eb;
+  --vayana-input:#ffffff;
+}
+html[data-vayana-theme="dark"]{
+  color-scheme:dark;
+  --vayana-page:#10151b;
+  --vayana-surface:#19212a;
+  --vayana-surface-soft:#202a35;
+  --vayana-text:#f3f5f7;
+  --vayana-muted:#b3bdc8;
+  --vayana-line:#35414e;
+  --vayana-input:#121a22;
+}
+html[data-vayana-theme="dark"] body{
+  background-color:var(--vayana-page)!important;
+  color:var(--vayana-text)!important;
+  transition:background-color .25s ease,color .25s ease;
+}
+html[data-vayana-theme="dark"] body :is(h1,h2,h3,h4,h5,h6,p,li,label,legend,summary,figcaption,dt,dd,.eyebrow,.section-label,.form-footnote,.muted,.text-muted,.field-label,.section-intro,.form-description,.helper-text){
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(small,.muted,.text-muted,.form-footnote,.helper-text,.section-intro,.eyebrow){
+  color:var(--vayana-muted)!important;
+}
+html[data-vayana-theme="dark"] body a:not(.nav-cta):not(.brand):not(.theme-toggle){
+  color:inherit;
+}
+html[data-vayana-theme="dark"] header.nav,
+html[data-vayana-theme="dark"] .site-nav{
+  background:rgba(18,25,33,.94)!important;
+  border-bottom-color:#ffffff18!important;
+  box-shadow:0 8px 28px #00000020;
+}
+html[data-vayana-theme="dark"] .navlinks a,
+html[data-vayana-theme="dark"] .navlinks a.active{
+  color:#f0f3f6!important;
+}
+html[data-vayana-theme="dark"] .nav-cta{
+  color:#111820!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .form-shell,.transport-form-shell,.standalone-form,.offer-booking-card,
+  .package-card,.optional-card,.wiz-panel,.chat-panel,.extra-card,
+  .home-offer-card,.home-service-card,.temple-tile,.temple-modal-card,
+  .transport-form-heading,.experience-card,.offer-picker-section,
+  .offer-detail-section,.gift-start-section,.form-card,.booking-card,
+  .info-card,.feature-card,.service-card,.modal-card,.chat-window,
+  .chat-widget,.chat-panel-inner,.field,.field-row
+){
+  background-color:var(--vayana-surface)!important;
+  border-color:var(--vayana-line)!important;
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .section,.section-head,.extra-section,.standalone-form-section,
+  .transport-fields,.transport-subfields,.offer-detail-section,
+  .gift-start-section,.home-section,.content-section
+){
+  color:var(--vayana-text)!important;
+  border-color:var(--vayana-line)!important;
+}
+html[data-vayana-theme="dark"] body :is(input,select,textarea){
+  background-color:var(--vayana-input)!important;
+  color:var(--vayana-text)!important;
+  border-color:#465361!important;
+  color-scheme:dark;
+}
+html[data-vayana-theme="dark"] body :is(input,select,textarea)::placeholder{
+  color:#8794a2!important;
+  opacity:1;
+}
+html[data-vayana-theme="dark"] body select option{
+  background:#19212a;
+  color:#f3f5f7;
+}
+html[data-vayana-theme="dark"] body :is(table,th,td){
+  border-color:var(--vayana-line)!important;
+}
+html[data-vayana-theme="dark"] body :is(hr,.divider){
+  border-color:var(--vayana-line)!important;
+}
+html[data-vayana-theme="dark"] body :is(.form-footnote,.notice,.hint,.field-help){
+  background-color:#202a35!important;
+  color:#c3ccd5!important;
+  border-color:#35414e!important;
+}
+html[data-vayana-theme="dark"] body :is(.menu,.modal-close,.chat-close){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body .standalone-hero[style*="linear-gradient"],
+html[data-vayana-theme="dark"] body .transportation-hero[style*="linear-gradient"]{
+  background-image:linear-gradient(120deg,#17212b,#202b35)!important;
+  color:#f3f5f7!important;
+}
+.theme-toggle{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(30,40,50,.2);
+  border-radius:50%;
+  background:rgba(255,255,255,.82);
+  color:#17212b;
+  font-size:19px;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.theme-toggle:hover{transform:translateY(-2px)}
+.theme-toggle:focus-visible{outline:3px solid #8ecdf5;outline-offset:3px}
+html[data-vayana-theme="dark"] .theme-toggle{
+  background:#25313d;
+  color:#ffe3a8;
+  border-color:#526171;
+}
+@media(max-width:900px){
+  .theme-toggle{width:40px;height:40px;flex-basis:40px;margin-left:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .theme-toggle{transition:none}
+}
