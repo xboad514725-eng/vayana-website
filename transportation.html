@@ -366,6 +366,107 @@ select option{color:#172536!important;background:#fff!important}
 html{scroll-padding-top:110px}img{max-width:100%}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #2878b9!important;outline-offset:3px!important}.skip-link{position:fixed;left:12px;top:10px;z-index:9999;padding:12px 16px;background:#111820;color:#fff;border-radius:10px;transform:translateY(-160%);transition:transform .18s}.skip-link:focus{transform:translateY(0)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 <style>.transportation-hero h1{font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.065em;margin:0 0 18px;font-weight:700}</style><link rel="stylesheet" href="assets/vayana-theme.css">
+
+<style id="vayana-transportation-dark-final">
+/* Page-local final override: Transportation has embedded styles after the shared theme.
+   Scope every rule to this page and apply after all embedded page styles. */
+html[data-vayana-theme="dark"] body.page-transportation{
+  background:#10151b!important;color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transportation-page{
+  background:linear-gradient(135deg,#101820 0%,#17232e 55%,#1b2933 100%)!important;
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transportation-page :is(h1,h2,h3,h4,h5,h6,p,span,b,strong,label,small,legend){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transportation-hero :is(.eyebrow,p,.transport-tags span){
+  color:#c2ccd6!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transport-tags span{
+  background:#202c38!important;border-color:#465463!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transport-form-shell,
+html[data-vayana-theme="dark"] body.page-transportation .package-card,
+html[data-vayana-theme="dark"] body.page-transportation .temple-modal-card{
+  background:#19232d!important;background-color:#19232d!important;
+  color:#f3f5f7!important;border-color:#3a4856!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .transport-form-heading :is(h3,p),
+html[data-vayana-theme="dark"] body.page-transportation .transport-form-shell :is(h1,h2,h3,h4,h5,h6,p,label,span,b,strong,small,legend){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(.transport-fields,.transport-subfields,.package-booking,.replace-wrap,.package-note,.package-options,.optional-grid,.itinerary,.pc-body,.place-detail,.stop-row){
+  background:#202c38!important;background-color:#202c38!important;
+  color:#e8edf2!important;border-color:#3b4a58!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(.transport-fields,.transport-subfields,.package-booking,.replace-wrap,.package-note,.package-options,.optional-grid,.itinerary,.pc-body,.place-detail,.stop-row) :is(h3,h4,h5,p,span,b,strong,label,small,li){
+  color:#e8edf2!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(.transport-hint,.transport-disclaimer,.package-intro p,.package-note,.pc-meta,.package-card p,.transport-form-heading p){
+  color:#b7c2cd!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(.field label,.transport-contact label,.package-booking label,.pkg-guide-en,.pkg-guide-fr,.pkg-restaurant,.pkg-balloon){
+  color:#e8edf2!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(input,select,textarea,.stop-row select,.replace-wrap select){
+  background:#111a23!important;background-color:#111a23!important;
+  color:#f3f5f7!important;border:1px solid #465463!important;
+  color-scheme:dark!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation :is(input,textarea)::placeholder{
+  color:#9aa8b6!important;opacity:1!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation select option{
+  background:#19232d!important;color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .sunset-note,
+html[data-vayana-theme="dark"] body.page-transportation .fixed-shared{
+  background:#302b23!important;background-color:#302b23!important;
+  color:#f4e7d2!important;border-color:#65533b!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .sunset-note :is(b,small,span,p),
+html[data-vayana-theme="dark"] body.page-transportation .fixed-shared :is(b,small,span,p){
+  color:#f4e7d2!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .optional-card{
+  background:#202c38!important;color:#f3f5f7!important;border-color:#465463!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .optional-card :is(b,small,span,label){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .ios-switch span{
+  background:#596675!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .ios-switch input:checked+span{
+  background:#8ecdf5!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .package-request,
+html[data-vayana-theme="dark"] body.page-transportation .submit{
+  background:#e8edf2!important;color:#111820!important;border-color:#e8edf2!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .stop-row .remove{
+  background:#344251!important;color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .chat-panel{
+  background:#19232d!important;background-color:#19232d!important;color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .chat-messages,
+html[data-vayana-theme="dark"] body.page-transportation .service-chat-body,
+html[data-vayana-theme="dark"] body.page-transportation .chat-compose{
+  background:#19232d!important;background-color:#19232d!important;color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .chat-bubble{
+  background:#263442!important;color:#f3f5f7!important;border-color:#465463!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .chat-bubble :is(p,span,b,strong){
+  color:#f3f5f7!important;
+}
+html[data-vayana-theme="dark"] body.page-transportation .chat-launcher.service{
+  background:#263442!important;color:#f3f5f7!important;border-color:#526171!important;
+}
+</style>
+
 </head><body class="page-transportation"><a class="skip-link" href="#main-content">Skip to main content</a><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="vayana-word-only">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a href="index.html">Home</a><a href="tours.html">Tours</a><a href="transportation.html" class="active">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a></nav><button class="theme-toggle" type="button" data-vayana-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false">☾</button><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main id="main-content"><section class="transportation-page" id="transportation">
 <div class="transportation-hero">
 <div class="eyebrow">Move around Egypt with ease</div>
