@@ -478,7 +478,7 @@ html{scroll-padding-top:110px}img{max-width:100%}a:focus-visible,button:focus-vi
 <section class="customize" id="customize">
  <div class="form-shell" id="journey">
   <div class="form-title"><div class="eyebrow">Build it your way</div><h2>Create your journey.</h2><p>Choose your experience, then personalize every detail.</p></div>
-  <div class="wizard-tabs"><button class="wiz-tab active" data-panel="journeyPanel">01 · Your journey</button><button class="wiz-tab" data-panel="packagesPanel">02 · Explore packages</button></div>
+  <div class="wizard-tabs"><button class="wiz-tab active" data-panel="journeyPanel">01 · Your journey</button><button id="explorePackagesTab" class="wiz-tab" data-panel="packagesPanel">02 · Explore packages</button></div>
   <div id="journeyPanel" class="wiz-panel active">
    <div class="step"><div class="step-label"><span class="step-number">1</span> What are you looking for?</div>
     <div class="choice-grid" data-group="package">
@@ -1274,6 +1274,46 @@ html[data-vayana-theme="dark"] body table.comparison tbody td{
 }
 html[data-vayana-theme="dark"] body table.comparison tbody tr:nth-child(even) td{
   background:#202b36!important;
+}
+</style>
+
+
+<style id="vayana-home-explore-packages-tab-final">
+/* Home-only, ID-specific contrast override for the Explore Packages tab. */
+html[data-vayana-theme="dark"] body #journey .wizard-tabs > #explorePackagesTab,
+html[data-vayana-theme="dark"] body #journey .wizard-tabs > #explorePackagesTab:not(.active),
+html[data-vayana-theme="dark"] body #journey .wizard-tabs > #explorePackagesTab:focus,
+html[data-vayana-theme="dark"] body #journey .wizard-tabs > #explorePackagesTab:hover {
+  appearance:none!important;
+  background:#263442!important;
+  background-color:#263442!important;
+  color:#f5f7fa!important;
+  -webkit-text-fill-color:#f5f7fa!important;
+  border:1px solid #8ecdf5!important;
+  box-shadow:0 4px 16px rgba(0,0,0,.18)!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+html[data-vayana-theme="dark"] body #journey .wizard-tabs > #explorePackagesTab.active {
+  background:#36536a!important;
+  background-color:#36536a!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border-color:#b4e2ff!important;
+}
+html[data-vayana-theme="light"] body #journey .wizard-tabs > #explorePackagesTab {
+  background:#ffffff!important;
+  background-color:#ffffff!important;
+  color:#17191e!important;
+  -webkit-text-fill-color:#17191e!important;
+  border:1px solid #dfe2e7!important;
+}
+html[data-vayana-theme="light"] body #journey .wizard-tabs > #explorePackagesTab.active {
+  background:#111318!important;
+  background-color:#111318!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border-color:#111318!important;
 }
 </style>
 
