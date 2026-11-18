@@ -1,4 +1,15 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Transportation | Vayana — Travel Your Way</title><style>
+<!doctype html><html lang="en"><head>
+<script>
+try {
+  const savedTheme = localStorage.getItem("vayana-theme");
+  const deviceDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.vayanaTheme =
+    savedTheme === "light" || savedTheme === "dark" ? savedTheme : (deviceDark ? "dark" : "light");
+} catch (_) {
+  document.documentElement.dataset.vayanaTheme =
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Transportation | Vayana — Travel Your Way</title><style>
 :root{
   --ink:#111318; --muted:#6e737d; --line:#e7e8eb; --paper:#fff;
   --red:#e63946; --blue:#8ecdf5; --green:#8ccf9b; --pink:#f2a9c2;
@@ -354,7 +365,8 @@ select option{color:#172536!important;background:#fff!important}
 <style id="vayana-seo-accessibility-performance">
 html{scroll-padding-top:110px}img{max-width:100%}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #2878b9!important;outline-offset:3px!important}.skip-link{position:fixed;left:12px;top:10px;z-index:9999;padding:12px 16px;background:#111820;color:#fff;border-radius:10px;transform:translateY(-160%);transition:transform .18s}.skip-link:focus{transform:translateY(0)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
-<style>.transportation-hero h1{font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.065em;margin:0 0 18px;font-weight:700}</style></head><body class="page-transportation"><a class="skip-link" href="#main-content">Skip to main content</a><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="vayana-word-only">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a href="index.html">Home</a><a href="tours.html">Tours</a><a href="transportation.html" class="active">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a></nav><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main id="main-content"><section class="transportation-page" id="transportation">
+<style>.transportation-hero h1{font-size:clamp(42px,5vw,66px);line-height:1.02;letter-spacing:-.065em;margin:0 0 18px;font-weight:700}</style><link rel="stylesheet" href="assets/vayana-theme.css">
+</head><body class="page-transportation"><a class="skip-link" href="#main-content">Skip to main content</a><header class="nav site-nav"><a class="brand" href="index.html" aria-label="Vayana home"><span class="vayana-word-only">VAYANA<small>TRAVEL YOUR WAY</small></span></a><nav class="navlinks"><a href="index.html">Home</a><a href="tours.html">Tours</a><a href="transportation.html" class="active">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a></nav><button class="theme-toggle" type="button" data-vayana-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false">☾</button><a class="nav-cta" href="offers.html">Explore offers ↗</a><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header><main id="main-content"><section class="transportation-page" id="transportation">
 <div class="transportation-hero">
 <div class="eyebrow">Move around Egypt with ease</div>
 <h1>Transportation &amp;<br/>Flight Booking.</h1>
@@ -988,4 +1000,5 @@ sendTransportationRequest=function(){
 .chat-launchers > button.chat-launcher{font-size:12px!important;font-weight:700!important;padding:13px 17px!important;cursor:pointer!important}
 @media(max-width:700px){.chat-launchers > button.chat-launcher{font-size:11px!important;padding:11px 13px!important}}
 </style>
+<script src="assets/vayana-theme.js" defer></script>
 </body></html>
