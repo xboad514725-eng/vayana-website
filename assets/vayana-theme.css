@@ -133,3 +133,64 @@ html[data-vayana-theme="dark"] .theme-toggle{
 @media(prefers-reduced-motion:reduce){
   .theme-toggle{transition:none}
 }
+
+
+/* Dark-mode contrast repair: cover every shared visitor card/control family. */
+html[data-vayana-theme="dark"] body :is(
+  .choice,.extra,.feature,.moment-card,.builder-panel,.builder-summary,
+  .estimator-panel,.estimator-result,.tracker-panel,.builder-chip,
+  .extra-field,.comparison,.status-step,.optional-card,.optional-grid,
+  .offer-pick,.offer-choice-list,.gift-option,.gift-summary,
+  .gift-summary-item,.gift-audience,.gift-category-grid,.gift-builder,
+  .package-booking,.package-request,.pc-body,.place-detail,.stop-row,
+  .wiz-tab,.offer-includes,.offer-availability,.gift-tour-link,
+  .gift-quick-actions,.gift-balloon-feature,.gift-create-action,
+  .gift-date-guidance,.transport-tags,.transport-contact,
+  .transport-disclaimer,.sunset-note,.package-note,.extra-note,
+  .pill,.guide-placeholder,.review-placeholder,.lang-switch
+){
+  background-color:var(--vayana-surface)!important;
+  color:var(--vayana-text)!important;
+  border-color:var(--vayana-line)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .choice,.extra,.feature,.moment-card,.builder-panel,.builder-summary,
+  .estimator-panel,.estimator-result,.tracker-panel,.builder-chip,
+  .extra-field,.comparison,.status-step,.optional-card,.offer-pick,
+  .gift-option,.gift-summary,.gift-summary-item,.gift-audience,
+  .gift-category-grid,.gift-builder,.package-booking,.package-request,
+  .pc-body,.place-detail,.stop-row,.wiz-tab
+) :is(strong,b,em,i,small,span,p,label){
+  color:var(--vayana-text)!important;
+}
+html[data-vayana-theme="dark"] body :is(
+  .choice,.extra,.feature,.moment-card,.builder-panel,.builder-summary,
+  .estimator-panel,.estimator-result,.tracker-panel,.builder-chip,
+  .extra-field,.comparison,.status-step,.optional-card,.offer-pick,
+  .gift-option,.gift-summary,.gift-summary-item,.gift-audience,
+  .gift-category-grid,.gift-builder,.package-booking,.package-request,
+  .pc-body,.place-detail,.stop-row,.wiz-tab
+) :is(small,.muted,.text-muted,.note,.extra-note,.package-note){
+  color:var(--vayana-muted)!important;
+}
+html[data-vayana-theme="dark"] body .choice.active,
+html[data-vayana-theme="dark"] body .builder-chip.active,
+html[data-vayana-theme="dark"] body .wiz-tab.active,
+html[data-vayana-theme="dark"] body .offer-pick.active,
+html[data-vayana-theme="dark"] body .gift-option.active{
+  background-color:#263442!important;
+  color:#ffffff!important;
+  border-color:#8ecdf5!important;
+}
+html[data-vayana-theme="dark"] body :is(.choice,.extra,.feature,.moment-card,.builder-panel,.builder-summary,.estimator-panel,.estimator-result,.tracker-panel,.builder-chip,.extra-field,.comparison,.status-step,.optional-card,.offer-pick,.gift-option,.gift-summary,.gift-summary-item,.gift-audience,.gift-category-grid,.gift-builder,.package-booking,.package-request,.pc-body,.place-detail,.stop-row,.wiz-tab) :is(button,a){
+  color:inherit;
+}
+html[data-vayana-theme="dark"] body :is(input,select,textarea,button:not(.theme-toggle)){
+  color-scheme:dark;
+}
+html[data-vayana-theme="dark"] body :is(.switch,.ios-switch){
+  background-color:#566270!important;
+}
+html[data-vayana-theme="dark"] body :is(.switch,.ios-switch):checked{
+  background-color:#8ecdf5!important;
+}
