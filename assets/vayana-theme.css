@@ -59,6 +59,9 @@ html[data-vayana-theme="dark"] body :is(
   border-color:var(--vayana-line)!important;
   color:var(--vayana-text)!important;
 }
+html[data-vayana-theme="dark"] body main > section:not([class*="hero"]){
+  background-color:var(--vayana-page)!important;
+}
 html[data-vayana-theme="dark"] body :is(
   .section,.section-head,.extra-section,.standalone-form-section,
   .transport-fields,.transport-subfields,.offer-detail-section,
