@@ -763,6 +763,7 @@ label,.form-label,.field-label{color:#30343a}
       <div class="topbar-right">
         <span class="status-indicator">● System Connected</span>
         <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
+        <button class="refresh-btn" id="enablePushBtn" type="button">Enable Notifications</button>
       </div>
 
     </header>
@@ -801,6 +802,8 @@ const SUPABASE_KEY =
 const API_URL =
 "https://dmkxyfvmyemovuhcyuop.supabase.co/functions/v1/vayana-api";
 
+const VAPID_PUBLIC_KEY = "BGyJi-Y9nTNJNgFoxwptPMKx4poLQQ5tWK06ivMKaCAQQtcPIyLo72T0obEWhduR5PiVHfOjGqp0Bjnj6lKxmAE";
+
 const ADMIN_ID =
 "844e0479-b45c-465f-bc4a-8f42334d673b";
 
@@ -831,6 +834,7 @@ let cachedStats = {};
 let knownCustomerServiceChatIds = null;
 let newCustomerServiceChatCount = 0;
 let customerServiceChatPollTimer = null;
+let notificationAudioContext = null;
 
 
 /* =====================================================
@@ -1086,6 +1090,112 @@ function showLogin(){
 }
 
 
+function decodeVapidKey(value){
+  const padding="=".repeat((4-value.length%4)%4);
+  const base64=(value+padding).replace(/-/g,"+").replace(/_/g,"/");
+  const raw=atob(base64);
+  return Uint8Array.from(raw,char=>char.charCodeAt(0));
+}
+
+function unlockNotificationAudio(){
+  try{
+    const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+    if(!AudioContextClass)return;
+    if(!notificationAudioContext)notificationAudioContext=new AudioContextClass();
+    if(notificationAudioContext.state==="suspended")notificationAudioContext.resume();
+  }catch(error){console.warn("VAYANA_AUDIO_UNLOCK_FAILED",error);}
+}
+
+function playNotificationTone(type){
+  if(!notificationAudioContext||notificationAudioContext.state!=="running")return;
+  const joined=type==="customer_joined";
+  const notes=joined?[880,1174.66,1396.91]:[659.25,523.25,659.25];
+  notes.forEach((frequency,index)=>{
+    const start=notificationAudioContext.currentTime+index*(joined?0.19:0.15);
+    const oscillator=notificationAudioContext.createOscillator();
+    const gain=notificationAudioContext.createGain();
+    oscillator.type="triangle";
+    oscillator.frequency.setValueAtTime(frequency,start);
+    gain.gain.setValueAtTime(0.0001,start);
+    gain.gain.exponentialRampToValueAtTime(0.11,start+0.025);
+    gain.gain.exponentialRampToValueAtTime(0.0001,start+0.14);
+    oscillator.connect(gain);
+    gain.connect(notificationAudioContext.destination);
+    oscillator.start(start);
+    oscillator.stop(start+0.15);
+  });
+}
+
+async function enableAdminPushNotifications(){
+  const button=document.getElementById("enablePushBtn");
+  if(!("Notification" in window)||!("serviceWorker" in navigator)||!("PushManager" in window)){
+    showToast("Push notifications are not supported by this browser.");
+    return;
+  }
+  unlockNotificationAudio();
+  button.disabled=true;
+  button.textContent="Enabling...";
+  try{
+    let permission=Notification.permission;
+    if(permission!=="granted")permission=await Notification.requestPermission();
+    if(permission!=="granted")throw new Error("Please allow notifications in Android/browser settings.");
+    const registration=await navigator.serviceWorker.register("/sw.js",{scope:"/"});
+    await navigator.serviceWorker.ready;
+    let subscription=await registration.pushManager.getSubscription();
+    if(!subscription){
+      subscription=await registration.pushManager.subscribe({
+        userVisibleOnly:true,
+        applicationServerKey:decodeVapidKey(VAPID_PUBLIC_KEY)
+      });
+    }
+    await api("save_push_subscription",{
+      subscription:subscription.toJSON(),
+      device_label:(navigator.userAgent||"Admin device").slice(0,180)
+    });
+    button.textContent="Notifications Enabled";
+    showToast("VAYANA live chat notifications are enabled on this device.");
+  }catch(error){
+    button.textContent="Enable Notifications";
+    showToast(error.message||"Unable to enable notifications.");
+  }finally{
+    button.disabled=false;
+  }
+}
+
+async function syncPushButtonState(){
+  const button=document.getElementById("enablePushBtn");
+  if(!button)return;
+  if(!("Notification" in window)||Notification.permission!=="granted"){
+    button.textContent="Enable Notifications";
+    return;
+  }
+  try{
+    const registration=await navigator.serviceWorker.getRegistration("/");
+    const subscription=registration?await registration.pushManager.getSubscription():null;
+    if(subscription){
+      await api("save_push_subscription",{
+        subscription:subscription.toJSON(),
+        device_label:(navigator.userAgent||"Admin device").slice(0,180)
+      });
+      button.textContent="Notifications Enabled";
+    }else{
+      button.textContent="Enable Notifications";
+    }
+  }catch(error){
+    console.warn("VAYANA_PUSH_STATE_FAILED",error);
+    button.textContent="Enable Notifications";
+  }
+}
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.addEventListener("message",event=>{
+    if(event.data?.type!=="VAYANA_PUSH_NOTIFICATION")return;
+    const payload=event.data.payload||{};
+    playNotificationTone(payload.type);
+    if(payload.title)showToast(payload.title+(payload.body?" · "+payload.body:""));
+  });
+}
+
 function updateNewCustomerChatBadge(){
   const badgeEl=document.getElementById("newCustomerChatBadge");
   if(!badgeEl)return;
@@ -1152,8 +1262,12 @@ async function openDashboard(){
 
   await loadPage("overview");
   startCustomerServiceChatNotifications();
+  await syncPushButtonState();
 
 }
+
+
+document.getElementById("enablePushBtn").addEventListener("click",enableAdminPushNotifications);
 
 
 loginForm.addEventListener("submit",async event=>{
