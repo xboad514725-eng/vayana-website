@@ -269,6 +269,7 @@ select option{color:#172536!important;background:#fff!important}
 <style id="vayana-seo-accessibility-performance">
 html{scroll-padding-top:110px}img{max-width:100%}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #2878b9!important;outline-offset:3px!important}.skip-link{position:fixed;left:12px;top:10px;z-index:9999;padding:12px 16px;background:#111820;color:#fff;border-radius:10px;transform:translateY(-160%);transition:transform .18s}.skip-link:focus{transform:translateY(0)}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
+<link rel="stylesheet" href="assets/vayana-ai-chat.css">
 </head>
 <body><a class="skip-link" href="#home">Skip to main content</a>
 <header class="nav">
@@ -1199,13 +1200,14 @@ updateFlightFields();
 
 
 <div class="chat-launchers">
- <button class="chat-launcher" type="button" onclick="toggleChat('ai')">✦ AI Travel Chat</button>
+ <button class="chat-launcher vayana-ai-launcher" type="button" onclick="toggleChat('ai')" aria-label="Open VAYANA AI Assistant"><span class="ai-launcher-orb">✦</span><span><b>VAYANA AI</b><small>Ask me anything</small></span><span class="ai-launcher-pulse"></span></button>
  <button class="chat-launcher service" type="button" onclick="toggleChat('service')">Customer Service</button>
 </div>
 <div class="chat-panel" id="aiChatPanel" hidden>
- <div class="chat-head"><div><b>Vayana AI Assistant</b><small>AI travel assistant · Connected</small></div><button class="chat-close" onclick="toggleChat('ai')" aria-label="Close">×</button></div>
- <div class="chat-messages" id="aiChatMessages"><div class="chat-bubble">Hello! I’m Vayana AI. Ask me about Luxor tours, experiences, transportation or planning your visit.</div></div>
- <div class="chat-compose"><input id="aiChatInput" placeholder="Ask about your trip…" onkeydown="if(event.key==='Enter')sendAIChat()"><button onclick="sendAIChat()">Send</button></div>
+ <div class="chat-head vayana-ai-head"><div class="vayana-ai-brand"><span class="vayana-ai-avatar">V</span><div><b>VAYANA AI Assistant</b><small>Your personal travel assistant · Online</small></div></div><button class="chat-close" onclick="toggleChat('ai')" aria-label="Close chat">×</button></div>
+ <div class="chat-messages" id="aiChatMessages"><div class="chat-bubble ai-welcome">Hello, traveller! ✨<br>I’m your VAYANA AI Assistant. Ask me anything about discovering Luxor and planning your journey.</div></div>
+ <div class="ai-quick-prompts"><button type="button" onclick="document.getElementById('aiChatInput').value='What are the best places to visit in Luxor?';document.getElementById('aiChatInput').focus()">Best places to visit</button><button type="button" onclick="document.getElementById('aiChatInput').value='Help me plan one day in Luxor.';document.getElementById('aiChatInput').focus()">Plan my day</button><button type="button" onclick="document.getElementById('aiChatInput').value='Tell me about private transportation.';document.getElementById('aiChatInput').focus()">Transportation</button></div>
+<div class="chat-compose"><input id="aiChatInput" placeholder="Ask about your trip…" onkeydown="if(event.key==='Enter')sendAIChat()"><button onclick="sendAIChat()">Send</button></div>
 </div>
 <div class="chat-panel" id="serviceChatPanel" hidden>
  <div class="chat-head"><div><b>Vayana Customer Service</b><small>Tourist advice and assistance</small></div><button class="chat-close" onclick="toggleChat('service')" aria-label="Close">×</button></div>
