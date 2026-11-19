@@ -2207,6 +2207,7 @@ async function renderChats(){
                 </strong>
 
                 <p>${escapeHTML(chat.chat_type || "Chat")}</p>
+                <p style="font-size:11px;color:var(--muted)">${escapeHTML(chat.customers?.email || "")}</p>
 
                 <p>
                   ${badge(chat.status)}
