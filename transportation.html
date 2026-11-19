@@ -1136,7 +1136,7 @@ async function refreshCustomerServiceChat(){
    notice.hidden=false;
    const profile=getCustomerServiceProfile()||{};
    const subject=encodeURIComponent('VAYANA Customer Service');
-   const emailBody=encodeURIComponent('Hello VAYANA Team,\n\nMy name: '+(profile.full_name||session.full_name||'')+'\nMy email: '+(profile.email||session.email||'')+'\n\nI tried to reach your team through Live Chat. Please assist me.\n\nThank you.');
+   const emailBody='Hello VAYANA Team,\n\nMy name: '+(profile.full_name||session.full_name||'')+'\nMy email: '+(profile.email||session.email||'')+'\n\nI tried to reach your team through Live Chat. Please assist me.\n\nThank you.';
    const apology=conversation.closed_reason==='no_agent_response_timeout'
     ? 'Our apologies for the wait. Our Customer Service team is currently assisting other guests.'
     : 'This live chat conversation has been closed.';
@@ -1174,6 +1174,8 @@ async function startCustomerServiceChat(){
   showCustomerServiceChatWindow();
   await refreshCustomerServiceChat();
   stopCustomerServicePolling();
+  const chatForm=document.getElementById('serviceLiveChatForm');
+  if(!chatForm||chatForm.style.display==='none')return;
   const activeSession=getCustomerServiceSession();
   if(activeSession?.created_at){
    const elapsed=Math.max(0,Date.now()-Date.parse(activeSession.created_at));
@@ -1182,7 +1184,6 @@ async function startCustomerServiceChat(){
     try{await refreshCustomerServiceChat();}catch(error){console.warn('Customer service timeout check failed:',error);}
    },remaining);
   }
-  if(!document.getElementById('serviceLiveChatForm')||document.getElementById('serviceLiveChatForm').style.display==='none')return;
   VAYANA_SERVICE_POLL_TIMER=setInterval(async()=>{
    const panel=document.getElementById('serviceChatPanel');
    if(!panel||panel.hidden){stopCustomerServicePolling();return;}
