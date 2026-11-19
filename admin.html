@@ -634,7 +634,15 @@ tr:last-child td{border-bottom:0}
   .topbar-right .status-indicator{display:none}
 }
 
-.mark.bag-mark{animation:none!important;--bag-color:#111!important}.mark.bag-mark:before,.mark.bag-mark:after{border-color:#111!important}</style>
+.mark.bag-mark{animation:none!important;--bag-color:#111!important}.mark.bag-mark:before,.mark.bag-mark:after{border-color:#111!important}
+.notification-prompt{position:fixed;inset:0;background:rgba(8,12,18,.62);z-index:200;display:grid;place-items:center;padding:20px}
+.notification-prompt.hidden{display:none!important}
+.notification-prompt-card{width:min(100%,440px);background:#fff;color:#171717;border-radius:18px;padding:25px;box-shadow:0 20px 70px rgba(0,0,0,.28)}
+.notification-prompt-card h3{font-size:19px;margin-bottom:10px}
+.notification-prompt-card p{font-size:13px;line-height:1.7;color:#5e6670;margin-bottom:20px}
+.notification-prompt-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.notification-prompt-actions .primary-btn{flex:1}
+</style>
 <meta name="robots" content="noindex,nofollow">
 <style id="vayana-admin-contrast-fix">
 /* Admin readability: keep the dark sidebar/actions, strengthen copy and form-field contrast. */
@@ -763,7 +771,7 @@ label,.form-label,.field-label{color:#30343a}
       <div class="topbar-right">
         <span class="status-indicator">● System Connected</span>
         <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
-        <button class="refresh-btn" id="enablePushBtn" type="button">Enable Notifications</button>
+        <button class="refresh-btn" id="enablePushBtn" type="button">Allow Notifications &amp; Sound</button>
       </div>
 
     </header>
@@ -781,6 +789,16 @@ label,.form-label,.field-label{color:#30343a}
 
 
 <div id="toast"></div>
+<div id="notificationAccessPrompt" class="notification-prompt hidden" role="dialog" aria-modal="true" aria-labelledby="notificationPromptTitle">
+  <div class="notification-prompt-card">
+    <h3 id="notificationPromptTitle">Stay updated with VAYANA chats</h3>
+    <p>Allow notifications to receive alerts when a guest starts a live chat or sends a new message. Keep this page open once and tap Enable to activate sound on this device.</p>
+    <div class="notification-prompt-actions">
+      <button type="button" class="primary-btn" id="notificationPromptEnable">Enable Notifications</button>
+      <button type="button" class="small-btn" id="notificationPromptLater">Later</button>
+    </div>
+  </div>
+</div>
 
 
 <script type="module">
@@ -835,6 +853,8 @@ let knownCustomerServiceChatIds = null;
 let newCustomerServiceChatCount = 0;
 let customerServiceChatPollTimer = null;
 let notificationAudioContext = null;
+let activeChatMessagePollTimer = null;
+let knownActiveChatMessageIds = new Set();
 
 
 /* =====================================================
@@ -1107,7 +1127,9 @@ function unlockNotificationAudio(){
 }
 
 function playNotificationTone(type){
-  if(!notificationAudioContext||notificationAudioContext.state!=="running")return;
+  if(!notificationAudioContext)return;
+  if(notificationAudioContext.state==="suspended")notificationAudioContext.resume().catch(()=>{});
+  if(notificationAudioContext.state!=="running")return;
   const joined=type==="customer_joined";
   const notes=joined?[880,1174.66,1396.91]:[659.25,523.25,659.25];
   notes.forEach((frequency,index)=>{
@@ -1153,20 +1175,35 @@ async function enableAdminPushNotifications(){
       device_label:(navigator.userAgent||"Admin device").slice(0,180)
     });
     button.textContent="Notifications Enabled";
-    showToast("VAYANA live chat notifications are enabled on this device.");
+    showToast("Notifications and chat sound are enabled on this device.");
   }catch(error){
-    button.textContent="Enable Notifications";
+    button.textContent="Allow Notifications & Sound";
     showToast(error.message||"Unable to enable notifications.");
   }finally{
     button.disabled=false;
   }
 }
 
+function showNotificationAccessPrompt(){
+  const prompt=document.getElementById("notificationAccessPrompt");
+  if(!prompt||!("Notification" in window))return;
+  if(Notification.permission==="default")prompt.classList.remove("hidden");
+}
+document.getElementById("notificationPromptEnable").addEventListener("click",async()=>{
+  document.getElementById("notificationAccessPrompt").classList.add("hidden");
+  await enableAdminPushNotifications();
+});
+document.getElementById("notificationPromptLater").addEventListener("click",()=>{
+  document.getElementById("notificationAccessPrompt").classList.add("hidden");
+});
+document.addEventListener("click",unlockNotificationAudio,{once:true});
+document.addEventListener("touchstart",unlockNotificationAudio,{once:true,passive:true});
+
 async function syncPushButtonState(){
   const button=document.getElementById("enablePushBtn");
   if(!button)return;
   if(!("Notification" in window)||Notification.permission!=="granted"){
-    button.textContent="Enable Notifications";
+    button.textContent="Allow Notifications & Sound";
     return;
   }
   try{
@@ -1215,6 +1252,7 @@ async function checkForNewCustomerServiceChats(){
     const fresh=conversations.filter(chat=>!knownCustomerServiceChatIds.has(chat.id));
     fresh.forEach(chat=>knownCustomerServiceChatIds.add(chat.id));
     if(fresh.length){
+      playNotificationTone("customer_joined");
       newCustomerServiceChatCount+=fresh.length;
       updateNewCustomerChatBadge();
       const newest=fresh[0];
@@ -1263,6 +1301,7 @@ async function openDashboard(){
   await loadPage("overview");
   startCustomerServiceChatNotifications();
   await syncPushButtonState();
+  showNotificationAccessPrompt();
 
 }
 
@@ -2331,6 +2370,10 @@ function renderPaymentRows(result){
 
 async function renderChats(){
 
+  if(activeChatMessagePollTimer){clearInterval(activeChatMessagePollTimer);activeChatMessagePollTimer=null;}
+  currentChatId=null;
+  knownActiveChatMessageIds=new Set();
+
   const result = await api("list_chats",{
     limit:100,
     offset:0
@@ -2572,6 +2615,30 @@ async function renderChats(){
 }
 
 
+async function pollActiveChatMessages(){
+  if(!currentChatId||currentPage!=="chats")return;
+  const chatId=currentChatId;
+  try{
+    const result=await api("get_chat_messages",{conversation_id:chatId});
+    if(chatId!==currentChatId)return;
+    const messages=result.messages||[];
+    const incoming=messages.filter(message=>message.sender_type==="user"&&!knownActiveChatMessageIds.has(message.id));
+    messages.forEach(message=>knownActiveChatMessageIds.add(message.id));
+    if(incoming.length){
+      playNotificationTone("customer_message");
+      const box=document.getElementById("chatMessages");
+      if(box){
+        box.innerHTML=messages.map(message=>`
+          <div class="message ${message.sender_type==="admin"?"admin":""}">
+            ${escapeHTML(message.message)}
+            <small>${escapeHTML(message.sender_type)} · ${dateFormat(message.created_at)}</small>
+          </div>`).join("");
+        box.scrollTop=box.scrollHeight;
+      }
+    }
+  }catch(error){console.warn("Active chat message check failed:",error);}
+}
+
 async function loadChat(id){
 
   currentChatId = id;
@@ -2602,6 +2669,9 @@ async function loadChat(id){
 
 
     const messages = result.messages || [];
+    knownActiveChatMessageIds = new Set(messages.map(message=>message.id));
+    if(activeChatMessagePollTimer)clearInterval(activeChatMessagePollTimer);
+    activeChatMessagePollTimer=setInterval(pollActiveChatMessages,2500);
 
     messagesBox.innerHTML = messages.length
       ? messages.map(message=>`
