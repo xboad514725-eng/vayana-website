@@ -868,6 +868,7 @@ if(document.readyState==='loading'){
 const VAYANA_SERVICE_PROFILE_KEY='vayana_customer_service_profile_v1';
 const VAYANA_SERVICE_SESSION_KEY='vayana_customer_service_session_v1';
 let VAYANA_SERVICE_POLL_TIMER=null;
+let VAYANA_SERVICE_TIMEOUT_TIMER=null;
 
 function getCustomerServiceProfile(){
  try{return JSON.parse(localStorage.getItem(VAYANA_SERVICE_PROFILE_KEY)||'null');}
@@ -885,6 +886,7 @@ function saveCustomerServiceSession(session){
 }
 function stopCustomerServicePolling(){
  if(VAYANA_SERVICE_POLL_TIMER){clearInterval(VAYANA_SERVICE_POLL_TIMER);VAYANA_SERVICE_POLL_TIMER=null;}
+ if(VAYANA_SERVICE_TIMEOUT_TIMER){clearTimeout(VAYANA_SERVICE_TIMEOUT_TIMER);VAYANA_SERVICE_TIMEOUT_TIMER=null;}
 }
 function toggleChat(which){
  const panel=document.getElementById(which==='ai'?'aiChatPanel':'serviceChatPanel');
@@ -965,7 +967,28 @@ async function refreshCustomerServiceChat(){
  const session=getCustomerServiceSession();
  if(!session?.conversation_id||!session?.access_token)return;
  const result=await callVayanaAI({action:'get_public_chat',conversation_id:session.conversation_id,access_token:session.access_token});
- renderCustomerServiceMessages(result.messages||[]);
+ const conversation=result.conversation||result.data?.conversation||{};
+ if(!session.created_at&&conversation.created_at){
+  session.created_at=conversation.created_at;
+  saveCustomerServiceSession(session);
+ }
+ renderCustomerServiceMessages(result.messages||result.data?.messages||[]);
+ if(conversation.status==='closed'){
+  stopCustomerServicePolling();
+  const form=document.getElementById('serviceLiveChatForm');
+  if(form)form.style.display='none';
+  const notice=document.getElementById('serviceChatClosedNotice');
+  if(notice){
+   notice.hidden=false;
+   const profile=getCustomerServiceProfile()||{};
+   const subject=encodeURIComponent('VAYANA Customer Service');
+   const emailBody=encodeURIComponent('Hello VAYANA Team,\n\nMy name: '+(profile.full_name||session.full_name||'')+'\nMy email: '+(profile.email||session.email||'')+'\n\nI tried to reach your team through Live Chat. Please assist me.\n\nThank you.');
+   const apology=conversation.closed_reason==='no_agent_response_timeout'
+    ? 'Our apologies for the wait. Our Customer Service team is currently assisting other guests.'
+    : 'This live chat conversation has been closed.';
+   notice.innerHTML='<div style="margin-top:12px;padding:14px;border:1px solid #d9e0e8;border-radius:12px;background:#f8fafc"><p style="margin:0 0 10px">'+apology+' You can email us and our team will be happy to help.</p><a class="chat-action" style="display:block;text-align:center;text-decoration:none" href="mailto:vayanatravel1@gmail.com?subject='+subject+'&body='+encodeURIComponent(emailBody)+'">Email VAYANA Team</a></div>';
+  }
+ }
 }
 function showCustomerServiceChatWindow(){
  const body=document.getElementById('serviceChatBody');
@@ -975,7 +998,8 @@ function showCustomerServiceChatWindow(){
  <form id="serviceLiveChatForm" style="display:flex;gap:8px;margin-top:12px">
   <input id="serviceLiveChatInput" type="text" maxlength="3000" required placeholder="Write your message..." style="min-width:0;flex:1">
   <button class="chat-action" type="submit">Send</button>
- </form>`;
+ </form>
+ <div id="serviceChatClosedNotice" hidden></div>`;
  document.getElementById('serviceLiveChatForm').addEventListener('submit',sendCustomerServiceMessage);
 }
 async function startCustomerServiceChat(){
@@ -990,12 +1014,21 @@ async function startCustomerServiceChat(){
    const conversation=result.conversation||{};
    const conversationId=conversation.id||conversation.conversation_id;
    if(!conversationId||!result.access_token)throw new Error('The live chat could not be started. Please try again.');
-   session={conversation_id:conversationId,access_token:result.access_token,full_name:profile.full_name,email:profile.email};
+   session={conversation_id:conversationId,access_token:result.access_token,full_name:profile.full_name,email:profile.email,created_at:conversation.created_at||new Date().toISOString()};
    saveCustomerServiceSession(session);
   }
   showCustomerServiceChatWindow();
   await refreshCustomerServiceChat();
   stopCustomerServicePolling();
+  const activeSession=getCustomerServiceSession();
+  if(activeSession?.created_at){
+   const elapsed=Math.max(0,Date.now()-Date.parse(activeSession.created_at));
+   const remaining=Math.max(0,30000-elapsed);
+   VAYANA_SERVICE_TIMEOUT_TIMER=setTimeout(async()=>{
+    try{await refreshCustomerServiceChat();}catch(error){console.warn('Customer service timeout check failed:',error);}
+   },remaining);
+  }
+  if(!document.getElementById('serviceLiveChatForm')||document.getElementById('serviceLiveChatForm').style.display==='none')return;
   VAYANA_SERVICE_POLL_TIMER=setInterval(async()=>{
    const panel=document.getElementById('serviceChatPanel');
    if(!panel||panel.hidden){stopCustomerServicePolling();return;}
