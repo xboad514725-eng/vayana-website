@@ -735,6 +735,7 @@ label,.form-label,.field-label{color:#30343a}
 
     <button class="nav-btn" data-page="chats">
       <span class="nav-icon">✉</span> Customer Chats
+      <span id="newCustomerChatBadge" style="display:none;margin-left:auto;background:#d73535;color:#fff;border-radius:20px;min-width:20px;height:20px;padding:0 6px;font-size:11px;align-items:center;justify-content:center;font-weight:700">0</span>
     </button>
 
     <div class="sidebar-bottom">
@@ -827,6 +828,9 @@ let currentPage = "overview";
 let currentChatId = null;
 let currentChatStatus = "open";
 let cachedStats = {};
+let knownCustomerServiceChatIds = null;
+let newCustomerServiceChatCount = 0;
+let customerServiceChatPollTimer = null;
 
 
 /* =====================================================
@@ -1082,6 +1086,51 @@ function showLogin(){
 }
 
 
+function updateNewCustomerChatBadge(){
+  const badgeEl=document.getElementById("newCustomerChatBadge");
+  if(!badgeEl)return;
+  badgeEl.textContent=String(newCustomerServiceChatCount);
+  badgeEl.style.display=newCustomerServiceChatCount>0?"inline-flex":"none";
+}
+
+async function checkForNewCustomerServiceChats(){
+  if(!currentSession?.access_token)return;
+  try{
+    const result=await api("list_chats",{limit:100,offset:0});
+    const conversations=(result.conversations||[]).filter(chat=>chat.chat_type==="customer_service");
+    if(knownCustomerServiceChatIds===null){
+      knownCustomerServiceChatIds=new Set(conversations.map(chat=>chat.id));
+      return;
+    }
+    const fresh=conversations.filter(chat=>!knownCustomerServiceChatIds.has(chat.id));
+    fresh.forEach(chat=>knownCustomerServiceChatIds.add(chat.id));
+    if(fresh.length){
+      newCustomerServiceChatCount+=fresh.length;
+      updateNewCustomerChatBadge();
+      const newest=fresh[0];
+      const customerName=newest.customers?.full_name||"A customer";
+      const customerEmail=newest.customers?.email||"";
+      showToast("New Customer Service chat: "+customerName+(customerEmail?" · "+customerEmail:""));
+      if(currentPage==="chats"){
+        await loadPage("chats");
+        newCustomerServiceChatCount=0;
+        updateNewCustomerChatBadge();
+      }
+    }
+  }catch(error){
+    console.warn("Customer Service notification check failed:",error);
+  }
+}
+
+function startCustomerServiceChatNotifications(){
+  if(customerServiceChatPollTimer)clearInterval(customerServiceChatPollTimer);
+  knownCustomerServiceChatIds=null;
+  newCustomerServiceChatCount=0;
+  updateNewCustomerChatBadge();
+  checkForNewCustomerServiceChats();
+  customerServiceChatPollTimer=setInterval(checkForNewCustomerServiceChats,12000);
+}
+
 async function openDashboard(){
 
   const {data,error} = await supabase.auth.getSession();
@@ -1102,6 +1151,7 @@ async function openDashboard(){
     currentSession.user.email || "Administrator";
 
   await loadPage("overview");
+  startCustomerServiceChatNotifications();
 
 }
 
@@ -1241,6 +1291,10 @@ document.getElementById("refreshBtn").addEventListener("click",()=>{
 async function loadPage(page){
 
   currentPage = page;
+  if(page==="chats"){
+    newCustomerServiceChatCount=0;
+    updateNewCustomerChatBadge();
+  }
 
   pageTitle.textContent = pageNames[page] || "Dashboard";
 
