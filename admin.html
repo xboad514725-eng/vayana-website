@@ -2620,21 +2620,31 @@ async function pollActiveChatMessages(){
   const chatId=currentChatId;
   try{
     const result=await api("get_chat_messages",{conversation_id:chatId});
-    if(chatId!==currentChatId)return;
+    if(chatId!==currentChatId||currentPage!=="chats")return;
+
     const messages=result.messages||[];
-    const incoming=messages.filter(message=>message.sender_type==="user"&&!knownActiveChatMessageIds.has(message.id));
-    messages.forEach(message=>knownActiveChatMessageIds.add(message.id));
-    if(incoming.length){
-      playNotificationTone("customer_message");
-      const box=document.getElementById("chatMessages");
-      if(box){
-        box.innerHTML=messages.map(message=>`
-          <div class="message ${message.sender_type==="admin"?"admin":""}">
-            ${escapeHTML(message.message)}
-            <small>${escapeHTML(message.sender_type)} · ${dateFormat(message.created_at)}</small>
-          </div>`).join("");
-        box.scrollTop=box.scrollHeight;
-      }
+    const previousIds=knownActiveChatMessageIds;
+    const incoming=messages.filter(message=>
+      message.sender_type!=="admin"&&!previousIds.has(message.id)
+    );
+    const changed=messages.length!==previousIds.size||
+      messages.some(message=>!previousIds.has(message.id));
+
+    if(!changed)return;
+
+    knownActiveChatMessageIds=new Set(messages.map(message=>message.id));
+
+    if(incoming.length)playNotificationTone("customer_message");
+
+    const box=document.getElementById("chatMessages");
+    if(box){
+      const wasNearBottom=box.scrollHeight-box.scrollTop-box.clientHeight<90;
+      box.innerHTML=messages.length?messages.map(message=>`
+        <div class="message ${message.sender_type==="admin"?"admin":""}">
+          ${escapeHTML(message.message)}
+          <small>${escapeHTML(message.sender_type)} · ${dateFormat(message.created_at)}</small>
+        </div>`).join(""):`<div class="empty">No messages yet.</div>`;
+      if(wasNearBottom||incoming.length)box.scrollTop=box.scrollHeight;
     }
   }catch(error){console.warn("Active chat message check failed:",error);}
 }
