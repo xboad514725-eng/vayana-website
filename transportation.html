@@ -892,6 +892,8 @@ function getVayanaAIReply(result){
 function showVayanaAIRegistration(){
  const box=document.getElementById('aiChatMessages');
  if(!box||document.getElementById('vayanaAIIdentityForm'))return;
+ // Always present the identity step before a new chat; remove the generic greeting behind it.
+ box.innerHTML='';
  const form=document.createElement('form');
  form.id='vayanaAIIdentityForm';
  form.className='chat-bubble';
@@ -936,13 +938,7 @@ function showVayanaAIRegistration(){
 async function restoreVayanaAIChat(){
  const session=getVayanaAISession();
  if(!session?.conversation_id||!session?.access_token){
-  if(!getVayanaAIProfile())showVayanaAIRegistration();
-  else{
-   const input=document.getElementById('aiChatInput');
-   const button=document.querySelector('#aiChatPanel .chat-compose button');
-   if(input)input.disabled=false;
-   if(button)button.disabled=false;
-  }
+  showVayanaAIRegistration();
   return;
  }
  try{
