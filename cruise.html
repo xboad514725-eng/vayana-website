@@ -11,6 +11,39 @@ try {
   const deviceDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
   document.documentElement.dataset.vayanaTheme=savedTheme==="light"||savedTheme==="dark"?savedTheme:(deviceDark?"dark":"light");
 } catch(e) {}
+
+// VAYANA four-night cruise booking request
+const CRUISE_API = "https://dmkxyfvmyemovuhcyuop.supabase.co/functions/v1/vayana-api";
+const CRUISE_API_KEY = "sb_publishable_wujNpox7yzgtSQMludA2qA_6cu2tDHZ";
+document.getElementById("cruiseBookingForm").addEventListener("submit", async function(event){
+ event.preventDefault();
+ const form=this;
+ if(!form.reportValidity()) return;
+ const button=document.getElementById("cruiseSubmit");
+ const message=document.getElementById("cruiseBookingMessage");
+ const payload={
+  request_type:"tour",
+  package_name:"4-Night Nile Cruise",
+  guests:Number(form.elements.guests.value),
+  full_name:form.elements.full_name.value.trim(),
+  email:form.elements.email.value.trim(),
+  phone:form.elements.phone.value.trim(),
+  notes:"Four-night Nile cruise itinerary: Luxor West Bank and East Bank, Edfu, Kom Ombo, Aswan and Abu Simbel. Customer requests contact to confirm dates, availability and arrangements."
+ };
+ button.disabled=true;button.textContent="Sending…";message.textContent="";
+ try{
+  const response=await fetch(CRUISE_API,{method:"POST",headers:{"Content-Type":"application/json","apikey":CRUISE_API_KEY},body:JSON.stringify(payload)});
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok||result.status!=="success"||result.database_saved!==true) throw new Error(result.message||"Unable to send the request. Please try again.");
+  message.textContent="Your request has been received. The VAYANA team will contact you shortly.";
+  form.reset();form.elements.guests.value="2";
+ }catch(error){
+  message.textContent=error.message||"Something went wrong. Please try again.";
+ }finally{
+  button.disabled=false;button.textContent="Send booking request ↗";
+ }
+});
+
 </script>
 <style>
 :root{--ink:#111318;--muted:#68717c;--line:#e7e9ed;--paper:#fff;--soft:#f5f7fa}
@@ -55,6 +88,18 @@ footer{padding:32px 6.5%;border-top:1px solid var(--line);color:var(--muted);fon
 .booking-card .eyebrow{color:#b6c5d0;margin-bottom:12px}.booking-card h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.06em;margin:0 0 12px}.booking-card p{color:#d0d7de;line-height:1.6;margin:0;max-width:620px}
 .booking-cta{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:15px 23px;border-radius:999px;background:#fff;color:#111820;font-weight:750}
 @media(max-width:700px){.itinerary-grid,.cruise-interior-grid{grid-template-columns:1fr}.interior-card img{height:230px}.booking-card{padding:28px 24px;display:block}.booking-cta{margin-top:22px;width:100%}}
+
+
+.booking-form-card{display:grid;grid-template-columns:1fr .85fr;align-items:start}
+.booking-form-intro{padding:8px 0}.booking-route{margin-top:20px!important;font-weight:650;color:#fff!important}
+.cruise-booking-form{display:grid;gap:9px;background:#fff;color:#151a20;border-radius:20px;padding:24px}
+.cruise-booking-form label{font-size:12px;font-weight:700;margin-top:5px}
+.cruise-booking-form input,.cruise-booking-form select{width:100%;min-height:46px;border:1px solid #dfe3e7;border-radius:10px;padding:11px 13px;background:#fff;color:#151a20;font:inherit;font-size:14px;outline:none}
+.cruise-booking-form input:focus,.cruise-booking-form select:focus{border-color:#607d8b;box-shadow:0 0 0 3px #607d8b20}
+.booking-submit{border:0;cursor:pointer;margin-top:8px;font:inherit;font-weight:750;min-height:48px}
+.booking-submit:disabled{opacity:.65;cursor:wait}
+.booking-form-message{margin:2px 0 0!important;font-size:13px;line-height:1.5;color:#263746!important}
+@media(max-width:700px){.booking-form-card{grid-template-columns:1fr}.cruise-booking-form{padding:19px}}
 
 </style>
 </head>
@@ -108,10 +153,23 @@ footer{padding:32px 6.5%;border-top:1px solid var(--line);color:var(--muted);fon
 <figure class="interior-card"><img src="./dining-buffet-03.jpg" alt="Cruise dining area and food" loading="lazy"><figcaption>Dining experience</figcaption></figure>
 </div>
 </section>
-<section class="section" style="padding-top:0">
-<div class="booking-card">
-<div><div class="eyebrow">Reserve your cruise</div><h2>Four nights. One unforgettable Nile journey.</h2><p>Send your booking request for the four-night cruise, including Luxor’s East and West Banks, Edfu, Kom Ombo, Aswan and Abu Simbel. Your preferred dates and availability will be confirmed by the VAYANA team.</p></div>
-<a class="booking-cta" href="tours.html#customize">Book your 4-night cruise ↗</a>
+<section class="section" id="cruise-booking" style="padding-top:0">
+<div class="booking-card booking-form-card">
+<div class="booking-form-intro"><div class="eyebrow">Reserve your cruise</div><h2>Book your 4-night Nile cruise.</h2><p>Just tell us how many guests are travelling and leave your contact details. The VAYANA team will contact you to confirm availability and arrangements.</p><p class="booking-route">West &amp; East Luxor · Edfu · Kom Ombo · Aswan · Abu Simbel</p></div>
+<form id="cruiseBookingForm" class="cruise-booking-form">
+<label for="cruiseGuests">Number of guests</label>
+<select id="cruiseGuests" name="guests" required>
+<option value="1">1 guest</option><option value="2" selected>2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option><option value="6">6 guests</option><option value="7">7 guests</option><option value="8">8 guests</option><option value="9">9 guests</option><option value="10">10 guests</option><option value="11">11 guests</option><option value="12">12 guests</option><option value="13">13 guests</option><option value="14">14 guests</option><option value="15">15 guests</option><option value="16">16 guests</option><option value="17">17 guests</option><option value="18">18 guests</option><option value="19">19 guests</option><option value="20">20 guests</option><option value="21">21 guests</option><option value="22">22 guests</option><option value="23">23 guests</option><option value="24">24 guests</option><option value="25">25 guests</option><option value="26">26 guests</option><option value="27">27 guests</option><option value="28">28 guests</option><option value="29">29 guests</option><option value="30">30 guests</option><option value="31">31 guests</option><option value="32">32 guests</option><option value="33">33 guests</option><option value="34">34 guests</option><option value="35">35 guests</option><option value="36">36 guests</option><option value="37">37 guests</option><option value="38">38 guests</option><option value="39">39 guests</option><option value="40">40 guests</option><option value="41">41 guests</option><option value="42">42 guests</option><option value="43">43 guests</option><option value="44">44 guests</option><option value="45">45 guests</option><option value="46">46 guests</option><option value="47">47 guests</option><option value="48">48 guests</option><option value="49">49 guests</option><option value="50">50 guests</option>
+</select>
+<label for="cruiseFullName">Full name</label>
+<input id="cruiseFullName" name="full_name" type="text" autocomplete="name" placeholder="Your full name" required minlength="2" maxlength="200">
+<label for="cruiseEmail">Email address</label>
+<input id="cruiseEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+<label for="cruisePhone">Phone / WhatsApp</label>
+<input id="cruisePhone" name="phone" type="tel" autocomplete="tel" placeholder="+20..." required minlength="7" maxlength="30">
+<button class="booking-cta booking-submit" id="cruiseSubmit" type="submit">Send booking request ↗</button>
+<p class="booking-form-message" id="cruiseBookingMessage" role="status" aria-live="polite"></p>
+</form>
 </div>
 </section>
 <section class="section" style="padding-top:0"><div class="note"><h3>Make the Nile part of your journey.</h3><p>Explore your stay options separately, then shape the rest of your VAYANA experience around the way you want to travel.</p></div></section>
