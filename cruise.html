@@ -40,6 +40,22 @@ footer{padding:32px 6.5%;border-top:1px solid var(--line);color:var(--muted);fon
 [data-vayana-theme="dark"] .theme-toggle,[data-vayana-theme="dark"] .gallery-controls button{color:var(--ink);background:var(--paper);border-color:var(--line)}
 @media(max-width:900px){.navlinks{gap:10px;font-size:11px}.hero{grid-template-columns:1fr;gap:28px}.hero-image{height:360px}}
 @media(max-width:700px){.site-nav{padding:0 5%;height:68px}.navlinks{display:none;position:absolute;left:0;right:0;top:68px;background:var(--paper);padding:20px 6%;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}.site-nav.nav-open .navlinks{display:flex}.menu{display:block}.hero{padding:58px 6%}.hero-image{height:270px}.section{padding:65px 5%}.gallery-track{grid-auto-columns:88%}.slide{height:270px}footer{flex-direction:column}}
+
+.cruise-itinerary{background:var(--soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.itinerary-grid{max-width:1050px;margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.itinerary-stop{padding:22px 24px;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+.itinerary-stop small{display:block;color:#7b8792;font-size:10px;font-weight:750;letter-spacing:.16em;text-transform:uppercase;margin-bottom:9px}
+.itinerary-stop h3{margin:0 0 8px;font-size:20px;letter-spacing:-.04em}
+.itinerary-stop p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+.cruise-interior-grid{max-width:1250px;margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.interior-card{margin:0;border-radius:20px;overflow:hidden;background:var(--soft);border:1px solid var(--line)}
+.interior-card img{width:100%;height:245px;object-fit:cover;display:block}
+.interior-card figcaption{padding:15px 17px;font-size:14px;font-weight:650}
+.booking-card{max-width:1000px;margin:auto;padding:38px 42px;border-radius:26px;background:#111820;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:30px;box-shadow:0 22px 60px #10182025}
+.booking-card .eyebrow{color:#b6c5d0;margin-bottom:12px}.booking-card h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.06em;margin:0 0 12px}.booking-card p{color:#d0d7de;line-height:1.6;margin:0;max-width:620px}
+.booking-cta{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:15px 23px;border-radius:999px;background:#fff;color:#111820;font-weight:750}
+@media(max-width:700px){.itinerary-grid,.cruise-interior-grid{grid-template-columns:1fr}.interior-card img{height:230px}.booking-card{padding:28px 24px;display:block}.booking-cta{margin-top:22px;width:100%}}
+
 </style>
 </head>
 <body>
@@ -65,6 +81,37 @@ footer{padding:32px 6.5%;border-top:1px solid var(--line);color:var(--muted);fon
 <figure class="slide"><img src="./cruise-ship-aerial-02.jpg" alt="Nile cruise ship exterior and upper deck" loading="lazy"></figure>
 </div>
 <div class="gallery-controls"><button type="button" id="galleryPrev" aria-label="Previous cruise photo">‹</button><button type="button" id="galleryNext" aria-label="Next cruise photo">›</button></div>
+</div>
+</section>
+
+<section class="section cruise-itinerary" id="four-night-itinerary">
+<div class="section-head"><div class="eyebrow">A four-night journey</div><h2>Four nights on the Nile.</h2><p>A focused cruise experience with the great highlights between Luxor and Aswan. The cruise stay is limited to four nights.</p></div>
+<div class="itinerary-grid">
+<article class="itinerary-stop"><small>Luxor · West Bank</small><h3>West Bank visits</h3><p>Discover the remarkable monuments and royal history on Luxor’s West Bank.</p></article>
+<article class="itinerary-stop"><small>Luxor · East Bank</small><h3>East Bank visits</h3><p>Explore the temples and landmarks on the East Bank of Luxor.</p></article>
+<article class="itinerary-stop"><small>Along the Nile</small><h3>Edfu &amp; Kom Ombo</h3><p>Visit the temples of Edfu and Kom Ombo during the Nile cruise journey.</p></article>
+<article class="itinerary-stop"><small>Aswan</small><h3>Aswan &amp; Abu Simbel</h3><p>Discover Aswan and include the unforgettable temples of Abu Simbel.</p></article>
+</div>
+</section>
+<section class="section">
+<div class="section-head"><div class="eyebrow">Inside the cruise</div><h2>Comfort in every detail.</h2><p>Take a look inside the rooms, suites, lounges and dining spaces available on the cruise.</p></div>
+<div class="cruise-interior-grid">
+<figure class="interior-card"><img src="./stay-cruise-suite-01.jpg" alt="Cruise guest suite" loading="lazy"><figcaption>Guest rooms &amp; suites</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-suite-02.jpg" alt="Cruise suite interior" loading="lazy"><figcaption>Suite details</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-suite-03.jpg" alt="Cruise room interior" loading="lazy"><figcaption>Room comfort</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-suite-04.jpg" alt="Cruise cabin interior" loading="lazy"><figcaption>Cabin interiors</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-lobby-01.jpg" alt="Cruise lobby interior" loading="lazy"><figcaption>Lobby</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-lounge-01.jpg" alt="Cruise lounge seating" loading="lazy"><figcaption>Lounge</figcaption></figure>
+<figure class="interior-card"><img src="./stay-cruise-lounge-02.jpg" alt="Cruise indoor sitting area" loading="lazy"><figcaption>Relaxation spaces</figcaption></figure>
+<figure class="interior-card"><img src="./dining-buffet-01.jpg" alt="Cruise restaurant buffet" loading="lazy"><figcaption>Restaurant &amp; buffet</figcaption></figure>
+<figure class="interior-card"><img src="./dining-buffet-02.jpg" alt="Cruise dining buffet selection" loading="lazy"><figcaption>Dining selection</figcaption></figure>
+<figure class="interior-card"><img src="./dining-buffet-03.jpg" alt="Cruise dining area and food" loading="lazy"><figcaption>Dining experience</figcaption></figure>
+</div>
+</section>
+<section class="section" style="padding-top:0">
+<div class="booking-card">
+<div><div class="eyebrow">Reserve your cruise</div><h2>Four nights. One unforgettable Nile journey.</h2><p>Send your booking request for the four-night cruise, including Luxor’s East and West Banks, Edfu, Kom Ombo, Aswan and Abu Simbel. Your preferred dates and availability will be confirmed by the VAYANA team.</p></div>
+<a class="booking-cta" href="tours.html#customize">Book your 4-night cruise ↗</a>
 </div>
 </section>
 <section class="section" style="padding-top:0"><div class="note"><h3>Make the Nile part of your journey.</h3><p>Explore your stay options separately, then shape the rest of your VAYANA experience around the way you want to travel.</p></div></section>
