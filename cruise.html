@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>Nile Cruise | VAYANA — Travel Your Way</title>
+<script>
+try {
+  const savedTheme=localStorage.getItem("vayana-theme");
+  const deviceDark=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.dataset.vayanaTheme=savedTheme==="light"||savedTheme==="dark"?savedTheme:(deviceDark?"dark":"light");
+} catch(e) {}
+</script>
+<style>
+:root{--ink:#111318;--muted:#68717c;--line:#e7e9ed;--paper:#fff;--soft:#f5f7fa}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;letter-spacing:-.025em}
+a{color:inherit;text-decoration:none}.site-nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6.2%;position:sticky;top:0;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);z-index:10;border-bottom:1px solid #0000000d}
+.brand{font-size:25px;font-weight:750;letter-spacing:-.06em}.brand small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#777f89;font-weight:600}
+.navlinks{display:flex;gap:20px;align-items:center;font-size:13px;color:#414650;white-space:nowrap}.navlinks a:hover,.navlinks .active{color:#000;font-weight:700}
+.theme-toggle,.menu{border:1px solid var(--line);background:var(--paper);border-radius:50%;width:38px;height:38px;cursor:pointer}.menu{display:none}
+.hero{padding:70px 6.5% 76px;background:linear-gradient(120deg,#f4f8fa,#eaf2f5);display:grid;grid-template-columns:.82fr 1.18fr;gap:42px;align-items:center;min-height:590px}
+.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:750;color:#687985;margin-bottom:20px}
+h1{font-size:clamp(48px,6.2vw,82px);letter-spacing:-.075em;line-height:.98;margin:0 0 22px}
+.hero-copy p{font-size:18px;line-height:1.65;color:#59636d;max-width:460px;margin:0}
+.hero-image{height:440px;border-radius:30px;overflow:hidden;box-shadow:0 28px 70px #14243a25;background:#d9e5e9}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+.section{padding:88px 6.5%}.section-head{text-align:center;max-width:720px;margin:0 auto 38px}.section-head h2{font-size:clamp(34px,4.5vw,54px);letter-spacing:-.065em;margin:0 0 14px}.section-head p{color:var(--muted);line-height:1.65;margin:0}
+.gallery-wrap{max-width:1250px;margin:auto}.gallery-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(72%,1fr);gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px;scrollbar-width:thin}
+.slide{height:390px;border-radius:24px;overflow:hidden;scroll-snap-align:center;background:#e8edf0;box-shadow:0 12px 35px #14243a12}.slide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s}.slide:hover img{transform:scale(1.035)}
+.gallery-controls{display:flex;justify-content:center;gap:12px;margin-top:18px}.gallery-controls button{width:48px;height:48px;border:1px solid var(--line);border-radius:50%;background:var(--paper);font-size:20px;cursor:pointer}.gallery-controls button:hover{background:#111;color:#fff}
+.note{max-width:900px;margin:0 auto;padding:34px;border:1px solid var(--line);border-radius:24px;text-align:center}.note h3{font-size:24px;margin:0 0 10px}.note p{color:var(--muted);line-height:1.65;margin:0}
+footer{padding:32px 6.5%;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:20px}
+[data-vayana-theme="dark"]{--ink:#f2f4f7;--muted:#aab2bc;--line:#333a43;--paper:#11161d;--soft:#1a222c}
+[data-vayana-theme="dark"] body{background:var(--paper);color:var(--ink)}
+[data-vayana-theme="dark"] .site-nav{background:#11161de8;border-color:#ffffff14}
+[data-vayana-theme="dark"] .navlinks{color:#d5dbe2}
+[data-vayana-theme="dark"] .hero{background:linear-gradient(120deg,#18232d,#202f39)}
+[data-vayana-theme="dark"] .hero-copy p{color:#c0c8d0}
+[data-vayana-theme="dark"] .theme-toggle,[data-vayana-theme="dark"] .gallery-controls button{color:var(--ink);background:var(--paper);border-color:var(--line)}
+@media(max-width:900px){.navlinks{gap:10px;font-size:11px}.hero{grid-template-columns:1fr;gap:28px}.hero-image{height:360px}}
+@media(max-width:700px){.site-nav{padding:0 5%;height:68px}.navlinks{display:none;position:absolute;left:0;right:0;top:68px;background:var(--paper);padding:20px 6%;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}.site-nav.nav-open .navlinks{display:flex}.menu{display:block}.hero{padding:58px 6%}.hero-image{height:270px}.section{padding:65px 5%}.gallery-track{grid-auto-columns:88%}.slide{height:270px}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="site-nav">
+<a class="brand" href="index.html">VAYANA<small>TRAVEL YOUR WAY</small></a>
+<nav class="navlinks">
+<a href="index.html">Home</a><a href="tours.html">Tours</a><a href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="stay.html">Stay – Accommodation</a><a href="cruise.html" class="active">Nile Cruise</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a>
+</nav>
+<button class="theme-toggle" type="button" aria-label="Toggle theme" onclick="toggleTheme()">☾</button>
+<button class="menu" type="button" aria-label="Toggle navigation" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')">☰</button>
+</header>
+<main>
+<section class="hero">
+<div class="hero-copy"><div class="eyebrow">The Nile, from a different perspective</div><h1>Discover the<br>Nile Cruise.</h1><p>Take in the river at a slower pace. Explore the cruise from the outside and enjoy a closer look at life along the Nile.</p></div>
+<div class="hero-image"><img src="./cruise-ship-aerial-02.jpg" alt="Nile cruise ship sailing on the river"></div>
+</section>
+<section class="section">
+<div class="section-head"><div class="eyebrow">A closer look</div><h2>The cruise, from every angle.</h2><p>Browse the exterior views. The gallery moves automatically, and you can also use the arrows or swipe through the images.</p></div>
+<div class="gallery-wrap">
+<div class="gallery-track" id="cruiseGallery">
+<figure class="slide"><img src="./cruise-ship-aerial-01.jpg" alt="Nile cruise ship seen from above" loading="lazy"></figure>
+<figure class="slide"><img src="./cruise-ship-aerial-03.jpg" alt="Nile cruise ship sailing across the river" loading="lazy"></figure>
+<figure class="slide"><img src="./cruise-ship-aerial-02.jpg" alt="Nile cruise ship exterior and upper deck" loading="lazy"></figure>
+</div>
+<div class="gallery-controls"><button type="button" id="galleryPrev" aria-label="Previous cruise photo">‹</button><button type="button" id="galleryNext" aria-label="Next cruise photo">›</button></div>
+</div>
+</section>
+<section class="section" style="padding-top:0"><div class="note"><h3>Make the Nile part of your journey.</h3><p>Explore your stay options separately, then shape the rest of your VAYANA experience around the way you want to travel.</p></div></section>
+</main>
+<footer><span>© VAYANA — Travel Your Way</span><span>Luxor, Egypt</span></footer>
+<script>
+function toggleTheme(){const root=document.documentElement;const next=root.dataset.vayanaTheme==="dark"?"light":"dark";root.dataset.vayanaTheme=next;try{localStorage.setItem("vayana-theme",next)}catch(e){}}
+const gallery=document.getElementById("cruiseGallery");
+function moveGallery(direction){const slide=gallery.querySelector(".slide");if(!slide)return;gallery.scrollBy({left:direction*(slide.getBoundingClientRect().width+18),behavior:"smooth"});}
+document.getElementById("galleryPrev").addEventListener("click",()=>moveGallery(-1));
+document.getElementById("galleryNext").addEventListener("click",()=>moveGallery(1));
+let galleryTimer=setInterval(()=>{if(gallery.scrollLeft+gallery.clientWidth>=gallery.scrollWidth-8)gallery.scrollTo({left:0,behavior:"smooth"});else moveGallery(1)},4800);
+gallery.addEventListener("pointerdown",()=>{clearInterval(galleryTimer);galleryTimer=setInterval(()=>{if(gallery.scrollLeft+gallery.clientWidth>=gallery.scrollWidth-8)gallery.scrollTo({left:0,behavior:"smooth"});else moveGallery(1)},4800)},{passive:true});
+</script>
+</body>
+</html>
