@@ -552,7 +552,6 @@ English guide: ${shared?"Not offered for shared tours":checked(".pkg-guide-en")}
 French guide: ${shared?"Not offered for shared tours":checked(".pkg-guide-fr")}
 Restaurant: ${shared?"Not offered for shared tours":checked(".pkg-restaurant")}
 Restaurant preference: ${shared?"Not applicable":v(".pkg-restaurant-notes")}
-Balloon: ${shared?"Not available as part of fixed shared tour":checked(".pkg-balloon")}
 Additional requests: ${v(".pkg-notes")}`;
  const button=card.querySelector(".package-request");
  await submitVayanaRequest({request_type:"tour",full_name:name,email,phone,package_name:p.title,guests:Number(v(".pkg-guests").replace("+",""))||2,arrival_date:arrival,departure_date:departure,preferred_tour_date:tourDate,preferred_tour_time:v(".pkg-tour-time"),hotel_category:"",comfort_level:"",notes},button);
@@ -620,7 +619,6 @@ document.getElementById("sendJourney")?.addEventListener("click",async(event)=>{
 French-speaking guide: ${document.getElementById("guideFrench").checked?"Yes":"No"}
 Restaurant: ${document.getElementById("restaurant").checked?"Requested":"No"}
 Restaurant preference: ${document.getElementById("restaurantNotes").value}
-Hot air balloon: ${document.getElementById("balloon").checked?"Requested":"No"}
 Budget: ${document.getElementById("budgetAmount").value}
 Duration: ${document.getElementById("days").value}
 Notes: ${document.getElementById("generalNotes").value}\nAirport transfer: ${transferType}\nAirport pickup date: ${airportPickupDate||"Not selected"}\nAirport drop-off date: ${airportDropoffDate||"Not selected"}\nFlight ticket option: ${includeFlights?flightOption:"Not selected"}\nArrival flight date: ${needsArrival?arrivalFlightDate:"Not selected"}\nDeparture flight date: ${needsDeparture?departureFlightDate:"Not selected"}`;
