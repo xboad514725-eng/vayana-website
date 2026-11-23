@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#ffffff">
+<title>Hot Air Balloon | VAYANA — Travel Your Way</title>
+<meta name="description" content="Book your standalone sunrise hot air balloon experience over Luxor with VAYANA.">
+<link rel="stylesheet" href="assets/vayana-theme.css">
+<style>
+:root{--ink:#111318;--muted:#6e737d;--line:#e7e8eb;--paper:#fff;--soft:#f5f7fa}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;letter-spacing:-.025em}a{color:inherit;text-decoration:none}button,input{font:inherit}
+.site-nav{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 6.2%;position:sticky;top:0;background:#ffffffdf;backdrop-filter:blur(18px);z-index:10;border-bottom:1px solid #0000000d}
+.brand{font-size:25px;font-weight:750;letter-spacing:-.06em}.brand small{display:block;font-size:9px;letter-spacing:.16em;color:var(--muted);font-weight:600}
+.navlinks{display:flex;gap:18px;align-items:center;font-size:12px;color:#414650;white-space:nowrap}.navlinks a.active{font-weight:800}
+.theme-toggle,.menu{border:1px solid var(--line);background:white;border-radius:50%;width:40px;height:40px;cursor:pointer}.menu{display:none}
+.hero{min-height:570px;padding:80px 7%;display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;background:linear-gradient(120deg,#f7f9fc,#e8f3f8);overflow:hidden}
+.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#687581;font-weight:750;margin-bottom:18px}
+h1{font-size:clamp(48px,6.5vw,82px);line-height:.98;letter-spacing:-.075em;margin:0 0 22px}
+.hero p{font-size:18px;line-height:1.7;color:#5e6670;max-width:540px}
+.hero img{width:100%;height:440px;object-fit:cover;border-radius:28px;box-shadow:0 25px 70px #1c34452b}
+.section{padding:80px 6%}.section-head{text-align:center;max-width:720px;margin:0 auto 35px}.section-head h2{font-size:clamp(34px,4vw,52px);letter-spacing:-.06em;margin:0 0 12px}.section-head p{color:var(--muted);line-height:1.65}
+.booking{max-width:900px;margin:auto;background:#111820;color:#fff;border-radius:28px;padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:.9fr 1.1fr;gap:35px;box-shadow:0 22px 65px #10182024}
+.booking-copy h2{font-size:38px;letter-spacing:-.06em;margin:0 0 14px}.booking-copy p{color:#d0d7de;line-height:1.7;font-size:14px}
+.form{background:#fff;color:#17191e;border-radius:20px;padding:24px;display:grid;gap:14px}
+.field label{display:block;font-size:12px;font-weight:750;margin:0 0 7px}.field input{width:100%;min-height:48px;border:1px solid #dfe3e7;border-radius:11px;padding:12px 14px;background:white;color:#17191e;outline:none}.field input:focus{border-color:#607d8b;box-shadow:0 0 0 3px #607d8b20}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.submit{border:0;border-radius:999px;background:#111820;color:white;min-height:50px;font-weight:750;cursor:pointer}.submit:disabled{opacity:.6;cursor:wait}
+.message{min-height:20px;margin:0;color:#3b5969;font-size:13px;line-height:1.5}.note{max-width:900px;margin:24px auto 0;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}
+footer{padding:30px 6%;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:12px}
+@media(max-width:1000px){.navlinks{gap:10px;font-size:11px}.hero{gap:28px}}
+@media(max-width:760px){.site-nav{height:auto;min-height:68px;padding:10px 5%;flex-wrap:wrap}.navlinks{display:none;order:3;width:100%;flex-direction:column;align-items:flex-start;padding:16px 0}.site-nav.nav-open .navlinks{display:flex}.menu{display:block}.hero{grid-template-columns:1fr;padding:58px 6%;gap:25px}.hero img{height:290px}.section{padding:62px 5%}.booking{grid-template-columns:1fr;padding:23px}.form{padding:18px}.form-row{grid-template-columns:1fr}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="site-nav"><a class="brand" href="index.html">VAYANA<small>TRAVEL YOUR WAY</small></a>
+<nav class="navlinks"><a href="index.html">Home</a><a href="tours.html">Tours</a><a href="balloon.html" class="active">Hot Air Balloon</a><a href="transportation.html">Transportation</a><a href="flights.html">Flights</a><a href="travel-guide.html">Travel Guide</a><a href="cruise.html">Nile Cruise</a><a href="stay.html">Stay – Accommodation</a><a href="offers.html">Offers</a><a href="gift.html">Gift</a></nav>
+<button class="theme-toggle" type="button" data-vayana-theme-toggle aria-label="Switch theme">☾</button><button class="menu" type="button" onclick="document.querySelector('.site-nav').classList.toggle('nav-open')" aria-label="Toggle navigation">☰</button></header>
+<main>
+<section class="hero"><div><div class="eyebrow">A sunrise above Luxor</div><h1>See Luxor<br>from the sky.</h1><p>Float above the Nile, ancient temples and the West Bank as the first light of day reaches the city. Arrange your hot air balloon flight as a standalone VAYANA experience, separate from sightseeing tours and other bookings.</p></div><img src="./luxor-hot-air-balloons-cropped.jpg" alt="Hot air balloons rising above Luxor at sunrise"></section>
+<section class="section" id="booking"><div class="section-head"><div class="eyebrow">Your balloon experience</div><h2>Book your balloon flight.</h2><p>Send a separate request for your sunrise flight. Our team will contact you to confirm availability and details.</p></div>
+<div class="booking"><div class="booking-copy"><div class="eyebrow">Standalone booking</div><h2>One flight. One request.</h2><p>Choose your flight date and number of guests, then share your contact details. This request is only for the hot air balloon experience and does not include a sightseeing package.</p></div>
+<form class="form" id="balloonBookingForm">
+<div class="field"><label for="flightDate">Preferred flight date *</label><input id="flightDate" name="flight_date" type="date" required></div>
+<div class="field"><label for="guests">Number of guests *</label><input id="guests" name="guests" type="number" min="1" max="50" value="2" required></div>
+<div class="field"><label for="fullName">Full name *</label><input id="fullName" name="full_name" autocomplete="name" required></div>
+<div class="form-row"><div class="field"><label for="email">Email address *</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="field"><label for="phone">Phone / WhatsApp *</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div></div>
+<button class="submit" id="submitBalloon" type="submit">Send balloon booking request ↗</button><p class="message" id="formMessage" role="status" aria-live="polite"></p>
+</form></div><p class="note">Your request is not a confirmed flight. All bookings are subject to operator availability and final confirmation by VAYANA.</p></section>
+</main>
+<footer><span>VAYANA · TRAVEL YOUR WAY</span><span>© <span id="year"></span> VAYANA</span></footer>
+<script>
+const VAYANA_API="https://dmkxyfvmyemovuhcyuop.supabase.co/functions/v1/vayana-api";
+const VAYANA_KEY="sb_publishable_wujNpox7yzgtSQMludA2qA_6cu2tDHZ";
+document.getElementById("year").textContent=new Date().getFullYear();
+const dateInput=document.getElementById("flightDate");
+const today=new Date();dateInput.min=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");
+document.getElementById("balloonBookingForm").addEventListener("submit",async event=>{
+ event.preventDefault();const form=event.currentTarget;const button=document.getElementById("submitBalloon");const message=document.getElementById("formMessage");
+ const flightDate=dateInput.value;const selected=new Date(flightDate+"T00:00:00");const now=new Date();now.setHours(0,0,0,0);
+ if(!flightDate||Number.isNaN(selected.getTime())||selected<now){message.textContent="Please choose a valid flight date that is not in the past.";dateInput.focus();return;}
+ if(!form.reportValidity())return;
+ const data={request_type:"tour",package_name:"Standalone Hot Air Balloon",guests:Number(document.getElementById("guests").value),full_name:document.getElementById("fullName").value.trim(),email:document.getElementById("email").value.trim(),phone:document.getElementById("phone").value.trim(),arrival_date:flightDate,departure_date:flightDate,preferred_tour_date:flightDate,preferred_tour_time:"Sunrise",hotel_category:"",comfort_level:"",notes:"Standalone hot air balloon booking request. Please confirm flight availability and quotation."};
+ button.disabled=true;button.textContent="Sending request…";message.textContent="";
+ try{const response=await fetch(VAYANA_API,{method:"POST",headers:{"Content-Type":"application/json","apikey":VAYANA_KEY},body:JSON.stringify(data)});let result={};try{result=await response.json()}catch(_){}
+ if(!response.ok||result.status!=="success"||result.database_saved!==true)throw new Error(result.message||result.error||"Unable to submit the request.");
+ message.textContent="Your hot air balloon request has been received. Our team will contact you.";form.reset();document.getElementById("guests").value="2";dateInput.min=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");
+ }catch(error){console.error(error);message.textContent="We couldn't submit your request. Please try again."}
+ finally{button.disabled=false;button.textContent="Send balloon booking request ↗"}
+});
+</script>
+<script src="assets/vayana-theme.js"></script>
+</body></html>
